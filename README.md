@@ -5,7 +5,7 @@
 - Garcia Tovar Marlen 
 - Tapia Ramirez Janette Alicia 
 - Reyes Recillas Diego Emiliano
-- Lozanop Villafaña Emiliano
+- Lozano Villafaña Emiliano
 - Sandoval Rueda Kevin Daniel  
 
 ---
