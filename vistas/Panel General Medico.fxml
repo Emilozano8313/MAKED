@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="742.0" style="-fx-background-color: #1E2126;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Circle fill="#323437" layoutX="60.0" layoutY="57.0" radius="29.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+      <ImageView fitHeight="41.0" fitWidth="46.0" layoutX="40.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@person_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="95.0" layoutY="46.0" text="Perfil" textFill="WHITE">
+         <font>
+            <Font name="Berlin Sans FB" size="20.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323437" height="50.0" layoutX="281.0" layoutY="32.0" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="10.0" width="180.0" />
+      <Label layoutX="343.0" layoutY="44.0" text="Menu" textFill="WHITE">
+         <font>
+            <Font name="Berlin Sans FB" size="24.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323437" height="41.0" layoutX="117.0" layoutY="101.0" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="10.0" width="121.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323437" height="41.0" layoutX="509.0" layoutY="101.0" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="10.0" width="121.0" />
+      <Label layoutX="123.0" layoutY="101.0" prefHeight="27.0" prefWidth="68.0" text="Consultas" textFill="WHITE">
+         <font>
+            <Font name="Berlin Sans FB" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="123.0" layoutY="115.0" prefHeight="27.0" prefWidth="80.0" text="Programadas" textFill="WHITE">
+         <font>
+            <Font name="Berlin Sans FB" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="216.0" layoutY="111.0" text="0" textFill="WHITE">
+         <font>
+            <Font name="Berlin Sans FB" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="611.0" layoutY="111.0" text="0" textFill="WHITE">
+         <font>
+            <Font name="Berlin Sans FB" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="517.0" layoutY="101.0" prefHeight="27.0" prefWidth="68.0" text="Consultas" textFill="WHITE">
+         <font>
+            <Font name="Berlin Sans FB" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="517.0" layoutY="115.0" prefHeight="27.0" prefWidth="68.0" text="Canceladas" textFill="WHITE">
+         <font>
+            <Font name="Berlin Sans FB" size="14.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="58.0" fitWidth="99.0" layoutX="660.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Desktop/POO/demoTarea/src/main/resources/images/Captura%20de%20pantalla%202025-06-18%20201812.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323437" height="115.0" layoutX="25.0" layoutY="161.0" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="10.0" width="31.0" />
+      <ImageView fitHeight="22.0" fitWidth="21.0" layoutX="30.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@dehaze_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="27.0" fitWidth="21.0" layoutX="30.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@group_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="22.0" fitWidth="21.0" layoutX="30.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@calendar_month_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#454749" height="226.0" layoutX="81.0" layoutY="153.0" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="10.0" width="585.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323437" height="27.0" layoutX="303.0" layoutY="164.0" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="10.0" width="136.0" />
+      <Label layoutX="324.0" layoutY="164.0" prefHeight="27.0" prefWidth="100.0" text="DATOS DE CITA" textFill="WHITE">
+         <font>
+            <Font name="Berlin Sans FB" size="14.0" />
+         </font>
+      </Label>
+      <TableView layoutX="120.0" layoutY="208.0" prefHeight="133.0" prefWidth="501.0" style="-fx-background-color: #323437;">
+        <columns>
+          <TableColumn prefWidth="68.0" text="N.CITA" />
+          <TableColumn prefWidth="88.0" text="NOMBRE" />
+            <TableColumn prefWidth="122.0" text="T.CONSULTA" />
+            <TableColumn prefWidth="135.0" text="CONSULTORIO" />
+            <TableColumn prefWidth="87.0" text="HORA" />
+        </columns>
+      </TableView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323437" height="22.0" layoutX="123.0" layoutY="348.0" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="10.0" width="80.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#323437" height="22.0" layoutX="537.0" layoutY="348.0" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="10.0" width="80.0" />
+      <Label layoutX="138.0" layoutY="346.0" prefHeight="27.0" prefWidth="50.0" text="Anterior" textFill="WHITE">
+         <font>
+            <Font name="Berlin Sans FB" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="548.0" layoutY="346.0" prefHeight="27.0" prefWidth="58.0" text="Siguiente" textFill="WHITE">
+         <font>
+            <Font name="Berlin Sans FB" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
