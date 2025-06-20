@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="410.0" prefHeight="400.0" prefWidth="190.0" style="-fx-background-color: #1E2126;">
+         <children>
+            <ImageView fitHeight="44.0" fitWidth="40.0" layoutX="76.0" layoutY="14.0">
+               <image>
+                  <Image url="@../../Downloads/pngwing.com.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="66.0" layoutY="71.0" text="Registro" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="103.0" text="ID unico" textFill="WHITE" />
+            <TextField layoutX="14.0" layoutY="120.0" promptText="Ingresar su ID" style="-fx-background-color: #333840;" />
+            <Label layoutX="14.0" layoutY="153.0" text="Correo" textFill="WHITE" />
+            <TextField layoutX="14.0" layoutY="170.0" promptText="Ingresar correo" style="-fx-background-color: #333840;" />
+            <Label layoutX="14.0" layoutY="207.0" text="Contraseña" textFill="WHITE" />
+            <TextField layoutX="14.0" layoutY="224.0" promptText="Ingresar contraseña" style="-fx-background-color: #333840;" />
+            <Label layoutX="14.0" layoutY="258.0" text="Confirmar contraseña" textFill="WHITE" />
+            <TextField layoutX="14.0" layoutY="275.0" promptText="Repetir contraseña" style="-fx-background-color: #333840;" />
+            <Button layoutX="57.0" layoutY="317.0" mnemonicParsing="false" style="-fx-background-color: #3868FB;" text="Registrar" textFill="WHITE" />
+            <Label layoutX="22.0" layoutY="361.0" text="¿Tienes cuenta?" textFill="WHITE">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="97.0" layoutY="361.0" text="¡Da click aqui!" textFill="#3868fb">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+         </children>
+         <effect>
+            <BoxBlur height="5.93" width="8.9" />
+         </effect>
+      </AnchorPane>
+      <ImageView fitHeight="400.0" fitWidth="412.0">
+         <image>
+            <Image url="@../../Downloads/Opera%20Captura%20de%20pantalla_2025-06-19_190244_www.figma.com.png" />
+         </image>
+         <effect>
+            <BoxBlur />
+         </effect>
+      </ImageView>
+      <Rectangle arcHeight="40.0" arcWidth="40.0" fill="WHITE" height="132.0" layoutX="163.0" layoutY="134.0" stroke="BLACK" strokeType="INSIDE" width="310.0">
+         <effect>
+            <DropShadow />
+         </effect></Rectangle>
+      <Label layoutX="253.0" layoutY="146.0" text="Registro exitoso">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="231.0" layoutY="187.0" text="Haga click ">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Hyperlink layoutX="318.0" layoutY="183.0" text="aquí">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Hyperlink>
+      <Label layoutX="369.0" layoutY="187.0" text="para">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="266.0" layoutY="213.0" text="iniciar sesion">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="21.0" fitWidth="22.0" layoutX="394.0" layoutY="149.0">
+         <image>
+            <Image url="@../../Downloads/check-icone-1-scaled.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="22.0" layoutX="220.0" layoutY="149.0">
+         <image>
+            <Image url="@../../Downloads/check-icone-1-scaled.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>

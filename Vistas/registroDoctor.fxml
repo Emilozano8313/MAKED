@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="410.0" prefHeight="400.0" prefWidth="190.0" style="-fx-background-color: #1E2126;">
+         <children>
+            <ImageView fitHeight="44.0" fitWidth="40.0" layoutX="76.0" layoutY="14.0">
+               <image>
+                  <Image url="@../../Downloads/pngwing.com.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="39.0" layoutY="67.0" text="Registro Doctor" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="103.0" text="ID unico" textFill="WHITE" />
+            <TextField layoutX="14.0" layoutY="120.0" promptText="Ingresar un ID" style="-fx-background-color: #333840;" />
+            <Label layoutX="14.0" layoutY="153.0" text="Correo" textFill="WHITE" />
+            <TextField layoutX="14.0" layoutY="170.0" promptText="Ingresar correo" style="-fx-background-color: #333840;" />
+            <Label layoutX="14.0" layoutY="207.0" text="Contraseña" textFill="WHITE" />
+            <TextField layoutX="14.0" layoutY="224.0" promptText="Ingresar contraseña" style="-fx-background-color: #333840;" />
+            <Label layoutX="14.0" layoutY="258.0" text="Confirmar contraseña" textFill="WHITE" />
+            <TextField layoutX="14.0" layoutY="275.0" promptText="Repetir contraseña" style="-fx-background-color: #333840;" />
+            <Button layoutX="57.0" layoutY="317.0" mnemonicParsing="false" style="-fx-background-color: #3868FB;" text="Registrar" textFill="WHITE" />
+            <Label layoutX="22.0" layoutY="361.0" text="¿Tienes cuenta?" textFill="WHITE">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="97.0" layoutY="361.0" text="¡Da click aqui!" textFill="#3868fb">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="400.0" fitWidth="410.0">
+         <image>
+            <Image url="@../../Downloads/Opera%20Captura%20de%20pantalla_2025-06-19_190244_www.figma.com.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>

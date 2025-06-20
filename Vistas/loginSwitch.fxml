@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="410.0">
+         <image>
+            <Image url="@../../Downloads/Opera%20Captura%20de%20pantalla_2025-06-19_170229_www.figma.com.png" />
+         </image>
+         <effect>
+            <MotionBlur />
+         </effect>
+      </ImageView>
+      <AnchorPane layoutX="410.0" prefHeight="400.0" prefWidth="190.0" style="-fx-background-color: #1E2126;">
+         <children>
+            <ImageView fitHeight="47.0" fitWidth="43.0" layoutX="74.0" layoutY="31.0">
+               <image>
+                  <Image url="@../../Downloads/pngwing.com.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="56.0" layoutY="94.0" text="Bienvenido" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Rectangle arcHeight="50.0" arcWidth="50.0" fill="WHITE" height="200.0" layoutX="16.0" layoutY="147.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" width="160.0" />
+            <Label layoutX="51.0" layoutY="164.0" text="¿Que eres?">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button layoutX="57.0" layoutY="200.0" mnemonicParsing="false" style="-fx-background-color: #3868FB;" text="Paciente">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Label layoutX="89.0" layoutY="234.0" text="o" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button layoutX="57.0" layoutY="269.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="76.0" style="-fx-background-color: #3868FB;" text="Doctor">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>
