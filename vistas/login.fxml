@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.0" prefWidth="759.0" style="-fx-background-color: #16191C;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="49.0" fitWidth="68.0" layoutX="607.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Desktop/POO/demoTarea/src/main/resources/images/Captura%20de%20pantalla%202025-06-18%20201812.png" />
+         </image></ImageView>
+      <ImageView fitHeight="422.0" fitWidth="497.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Desktop/POO/demoTarea/src/main/resources/images/ss.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="596.0" layoutY="73.0" prefHeight="25.0" prefWidth="66.0" text="Bienvenido" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="14.0" />
+         </font>
+      </Label>
+      <PasswordField layoutX="550.0" layoutY="225.0" prefHeight="25.0" prefWidth="157.0" style="-fx-background-color: #1E2126;" />
+      <TextField layoutX="550.0" layoutY="155.0" prefHeight="25.0" prefWidth="157.0" style="-fx-background-color: #1E2126;" />
+      <Label layoutX="550.0" layoutY="129.0" prefHeight="25.0" prefWidth="66.0" text="Correo:" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="552.0" layoutY="200.0" prefHeight="25.0" prefWidth="74.0" text="Contrasena:" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="12.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="15.0" fitWidth="16.0" layoutX="676.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Desktop/POO/demoTarea/src/main/resources/images/visibility_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="617.0" layoutY="258.0" prefHeight="25.0" prefWidth="91.0" text="Haz olvidado tu contrasena" textFill="WHITE">
+         <font>
+            <Font name="Calibri Italic" size="8.0" />
+         </font>
+      </Label>
+      <Label layoutX="556.0" layoutY="384.0" prefHeight="25.0" prefWidth="60.0" text="No tienes cuenta?" textFill="WHITE">
+         <font>
+            <Font name="Calibri Italic" size="8.0" />
+         </font>
+      </Label>
+      <Label layoutX="637.0" layoutY="384.0" prefHeight="25.0" prefWidth="60.0" text="!Crea una ahora!" textFill="#3868fb">
+         <font>
+            <Font name="Calibri Italic" size="8.0" />
+         </font>
+      </Label>
+      <Button layoutX="584.0" layoutY="297.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="91.0" style="-fx-background-color: #3868FB;" text="Iniciar Sesion" textFill="WHITE">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
