@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="166.0" prefWidth="385.0" style="-fx-background-color: #2C354B;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <Label prefWidth="150.0" text="¡Registro exitoso!" textFill="WHITE" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </Label>
+   </center>
+   <top>
+      <ImageView fitHeight="43.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@img/Check.png" />
+         </image>
+         <BorderPane.margin>
+            <Insets left="13.0" top="20.0" />
+         </BorderPane.margin></ImageView>
+   </top>
+   <bottom>
+      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="127.0" style="-fx-background-color: #3868FB;" text="Iniciar sesion" textFill="WHITE" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="30.0" />
+         </BorderPane.margin>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+   </bottom>
+</BorderPane>

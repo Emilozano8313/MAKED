@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="773.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+   <right>
+      <Pane prefHeight="400.0" prefWidth="317.0" style="-fx-background-color: #16191C;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="124.0" layoutY="67.0" text="Registro" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Label>
+            <ImageView fitHeight="44.0" fitWidth="45.0" layoutX="133.0" layoutY="14.0" pickOnBounds="true">
+               <image>
+                  <Image url="@img/cross.png" />
+               </image></ImageView>
+            <Label layoutX="14.0" layoutY="108.0" text="Nombre" textFill="WHITE" />
+            <TextField alignment="BOTTOM_LEFT" depthTest="DISABLE" layoutX="15.0" layoutY="128.0" prefHeight="25.0" prefWidth="131.0" promptText="Ingresa tu nombre" style="-fx-background-color: #1E2126;">
+               <font>
+                  <Font size="10.0" />
+               </font>
+               <effect>
+                  <DropShadow blurType="ONE_PASS_BOX" height="5.0" offsetY="2.0" radius="0.75" width="0.0">
+                     <color>
+                        <Color red="0.17105263471603394" green="0.15759015083312988" blue="0.15759015083312988" />
+                     </color></DropShadow>
+               </effect></TextField>
+            <Label layoutX="175.0" layoutY="108.0" text="Apellidos" textFill="WHITE" />
+            <TextField depthTest="DISABLE" layoutX="166.0" layoutY="128.0" prefHeight="25.0" prefWidth="135.0" promptText="Ingresa tus apellidos" style="-fx-background-color: #1E2126;">
+               <font>
+                  <Font size="10.0" />
+               </font>
+               <effect>
+                  <DropShadow blurType="ONE_PASS_BOX" height="5.0" offsetY="2.0" radius="0.75" width="0.0">
+                     <color>
+                        <Color red="0.17105263471603394" green="0.15759015083312988" blue="0.15759015083312988" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </TextField>
+            <Label layoutX="15.0" layoutY="163.0" prefHeight="17.0" prefWidth="141.0" text="Matricula o No. empleado" textFill="WHITE" />
+            <TextField alignment="BOTTOM_LEFT" depthTest="DISABLE" layoutX="15.0" layoutY="180.0" prefHeight="25.0" prefWidth="132.0" promptText=" Ingresa tu matricula o No. de empleado" style="-fx-background-color: #1E2126;">
+               <font>
+                  <Font size="10.0" />
+               </font>
+               <effect>
+                  <DropShadow blurType="ONE_PASS_BOX" height="5.0" offsetY="2.0" radius="0.75" width="0.0">
+                     <color>
+                        <Color red="0.17105263471603394" green="0.15759015083312988" blue="0.15759015083312988" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </TextField>
+            <Label layoutX="172.0" layoutY="163.0" text="CURP" textFill="WHITE" />
+            <TextField depthTest="DISABLE" layoutX="166.0" layoutY="180.0" prefHeight="25.0" prefWidth="135.0" promptText="Ingresa tu CURP" style="-fx-background-color: #1E2126;">
+               <font>
+                  <Font size="10.0" />
+               </font>
+               <effect>
+                  <DropShadow blurType="ONE_PASS_BOX" height="5.0" offsetY="2.0" radius="0.75" width="0.0">
+                     <color>
+                        <Color red="0.17105263471603394" green="0.15759015083312988" blue="0.15759015083312988" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </TextField>
+            <Label layoutX="15.0" layoutY="213.0" prefHeight="17.0" prefWidth="42.0" text="Correo" textFill="WHITE" />
+            <Label layoutX="172.0" layoutY="213.0" text="Telefono" textFill="WHITE" />
+            <TextField alignment="BOTTOM_LEFT" depthTest="DISABLE" layoutX="15.0" layoutY="230.0" prefHeight="25.0" prefWidth="132.0" promptText="Ingrese su correo" style="-fx-background-color: #1E2126;">
+               <font>
+                  <Font size="10.0" />
+               </font>
+               <effect>
+                  <DropShadow blurType="ONE_PASS_BOX" height="5.0" offsetY="2.0" radius="0.75" width="0.0">
+                     <color>
+                        <Color red="0.17105263471603394" green="0.15759015083312988" blue="0.15759015083312988" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </TextField>
+            <TextField alignment="BOTTOM_LEFT" depthTest="DISABLE" layoutX="168.0" layoutY="230.0" prefHeight="25.0" prefWidth="132.0" promptText="Ingrese su telefono" style="-fx-background-color: #1E2126;">
+               <font>
+                  <Font size="10.0" />
+               </font>
+               <effect>
+                  <DropShadow blurType="ONE_PASS_BOX" height="5.0" offsetY="2.0" radius="0.75" width="0.0">
+                     <color>
+                        <Color red="0.17105263471603394" green="0.15759015083312988" blue="0.15759015083312988" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </TextField>
+            <Label layoutX="15.0" layoutY="264.0" prefHeight="17.0" prefWidth="65.0" text="Contraseña" textFill="WHITE" />
+            <Label layoutX="172.0" layoutY="264.0" text="Confirmar contraseña" textFill="WHITE" />
+            <TextField alignment="BOTTOM_LEFT" depthTest="DISABLE" layoutX="14.0" layoutY="281.0" prefHeight="25.0" prefWidth="132.0" promptText="Ingrese su contraseña" style="-fx-background-color: #1E2126;">
+               <font>
+                  <Font size="10.0" />
+               </font>
+               <effect>
+                  <DropShadow blurType="ONE_PASS_BOX" height="5.0" offsetY="2.0" radius="0.75" width="0.0">
+                     <color>
+                        <Color red="0.17105263471603394" green="0.15759015083312988" blue="0.15759015083312988" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </TextField>
+            <TextField alignment="BOTTOM_LEFT" depthTest="DISABLE" layoutX="168.0" layoutY="281.0" prefHeight="25.0" prefWidth="132.0" promptText="Repita su contraseña" style="-fx-background-color: #1E2126;">
+               <font>
+                  <Font size="10.0" />
+               </font>
+               <effect>
+                  <DropShadow blurType="ONE_PASS_BOX" height="5.0" offsetY="2.0" radius="0.75" width="0.0">
+                     <color>
+                        <Color red="0.17105263471603394" green="0.15759015083312988" blue="0.15759015083312988" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </TextField>
+            <Button layoutX="97.0" layoutY="334.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #3868FB;" text="Registrar" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Label layoutX="64.0" layoutY="369.0" textFill="WHITE">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="58.0" layoutY="368.0" text="¿Ya tienes cuenta?   Clickea " textFill="WHITE">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="155.0" layoutY="369.0" textFill="WHITE">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="185.0" layoutY="368.0" text="aqui" textFill="#3868fb">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="214.0" layoutY="368.0" text="para logearte" textFill="WHITE">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+         </children></Pane>
+   </right>
+   <center>
+      <ImageView fitHeight="401.0" fitWidth="460.0" pickOnBounds="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@img/reg.jpg" />
+         </image></ImageView>
+   </center>
+</BorderPane>
