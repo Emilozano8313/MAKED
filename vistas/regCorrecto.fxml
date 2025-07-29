@@ -20,7 +20,7 @@
    <top>
       <ImageView fitHeight="43.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
          <image>
-            <Image url="@img/Check.png" />
+            <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/Check.png" />
          </image>
          <BorderPane.margin>
             <Insets left="13.0" top="20.0" />

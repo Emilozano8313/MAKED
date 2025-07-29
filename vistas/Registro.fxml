@@ -17,7 +17,7 @@
                </font></Label>
             <ImageView fitHeight="44.0" fitWidth="45.0" layoutX="133.0" layoutY="14.0" pickOnBounds="true">
                <image>
-                  <Image url="@img/cross.png" />
+                  <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/cross.png" />
                </image></ImageView>
             <Label layoutX="14.0" layoutY="108.0" text="Nombre" textFill="WHITE" />
             <TextField alignment="BOTTOM_LEFT" depthTest="DISABLE" layoutX="15.0" layoutY="128.0" prefHeight="25.0" prefWidth="131.0" promptText="Ingresa tu nombre" style="-fx-background-color: #1E2126;">
@@ -156,7 +156,7 @@
    <center>
       <ImageView fitHeight="401.0" fitWidth="460.0" pickOnBounds="true" BorderPane.alignment="CENTER">
          <image>
-            <Image url="@img/reg.jpg" />
+            <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/reg.jpg" />
          </image></ImageView>
    </center>
 </BorderPane>

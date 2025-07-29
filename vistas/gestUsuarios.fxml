@@ -13,13 +13,13 @@
          <children>
             <ImageView fitHeight="101.0" fitWidth="73.0" layoutX="14.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/cross.png" />
+                  <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/cross.png" />
                </image></ImageView>
             <Button layoutX="897.0" layoutY="21.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="165.0" style="-fx-background-color: #E7ECF0;">
                <graphic>
                   <ImageView fitHeight="60.0" fitWidth="153.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@img/miPerfil.png" />
+                        <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/miPerfil.png" />
                      </image>
                   </ImageView>
                </graphic></Button>
@@ -66,7 +66,7 @@
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@img/iper.png" />
+                                    <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/iper.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -78,7 +78,7 @@
                            <graphic>
                               <ImageView fitHeight="29.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@img/imed.png" />
+                                    <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/imed.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -90,7 +90,7 @@
                            <graphic>
                               <ImageView fitHeight="26.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@img/ical.png" />
+                                    <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/ical.png" />
                                  </image></ImageView>
                            </graphic>
                            <VBox.margin>
@@ -101,7 +101,7 @@
                            <graphic>
                               <ImageView fitHeight="51.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@img/iexit.png" />
+                                    <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/iexit.png" />
                                  </image>
                               </ImageView>
                            </graphic>
