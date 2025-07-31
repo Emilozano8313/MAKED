@@ -8,16 +8,20 @@ import java.sql.SQLException;
 
 public class Usuario {
     private int id;
+    private String correo;
     private String nombre;
     private String contrasena;
+    private String rol;
 
     public Usuario() {
     }
 
-    public Usuario(int id, String nombre, String contrasena) {
+    public Usuario(int id, String rol, String contrasena, String nombre, String correo) {
         this.id = id;
-        this.nombre = nombre;
+        this.rol = rol;
         this.contrasena = contrasena;
+        this.nombre = nombre;
+        this.correo = correo;
     }
 
     public int getId() {
@@ -26,6 +30,14 @@ public class Usuario {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getNombre() {
@@ -44,17 +56,39 @@ public class Usuario {
         this.contrasena = contrasena;
     }
 
-    public Boolean usuarioValido(String nombre, String contrasena) {
-        try(Connection con=  OracleDatabase.getConnection()){
-            String sql = "SELECT * FROM paciente WHERE correo_electronico = ? AND contrasena = ?";
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, nombre);
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public static Usuario autenticar (String correo, String contrasena) {
+        String query = "SELECT u.id_usuario, u.nombre, r.nombre_rol " +
+                "FROM usuarios u " +
+                "JOIN roles r ON u.id_rol = r.id_rol " +
+                "WHERE u.correo = ? AND u.contrasena = ?";
+        try (Connection conn = OracleDatabase.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, correo);
             stmt.setString(2, contrasena);
             ResultSet rs = stmt.executeQuery();
-            return rs.next();
-        }catch (SQLException e) {
+
+            if (rs.next()) {
+                int id = rs.getInt("id_usuario");
+                String nombre = rs.getString("nombre");
+                String rol = rs.getString("nombre_rol");
+                return new Usuario(id, rol, contrasena, nombre, correo);
+            }
+
+        } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
+
+        return null;
     }
-}
+
+    }
+

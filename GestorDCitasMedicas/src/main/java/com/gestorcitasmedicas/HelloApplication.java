@@ -12,7 +12,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/gestorcitasmedicas/login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 759 , 422);
-        stage.setTitle("Hello world!");
+        stage.setTitle("Bienvenido a tu gestor de citas medicas");
         stage.setScene(scene);
         stage.show();
     }
