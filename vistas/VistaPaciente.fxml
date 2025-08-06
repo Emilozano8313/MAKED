@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: E7ECF0;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <AnchorPane prefHeight="107.0" prefWidth="1080.0" style="-fx-background-color: E7ECF0;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="101.0" fitWidth="73.0" layoutX="14.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/cross.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="768.0" layoutY="28.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="76.0" prefWidth="263.0" style="-fx-background-color: transparent;" text="Mi Perfil" AnchorPane.leftAnchor="768.0" AnchorPane.topAnchor="28.0">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="41.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/icon7.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="345.0" prefWidth="998.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="315.0" left="20.0" right="20.0" />
+         </BorderPane.margin>
+         <children>
+            <ImageView fitHeight="224.0" fitWidth="1017.0" layoutX="-24.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="-24.0" AnchorPane.rightAnchor="-28.0">
+               <viewport>
+                  <Rectangle2D height="225.0" width="1000.0" />
+               </viewport>
+               <effect>
+                  <ColorAdjust brightness="-0.23" contrast="0.09" hue="0.02" saturation="0.09" />
+               </effect>
+               <image>
+                  <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/Ffondo.png" />
+               </image>
+            </ImageView>
+            <HBox layoutX="28.0" layoutY="123.0" prefHeight="222.0" prefWidth="547.0" AnchorPane.topAnchor="123.0">
+               <children>
+                  <VBox prefHeight="204.0" prefWidth="139.0">
+                     <children>
+                        <ImageView fitHeight="128.0" fitWidth="134.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/iimg.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets top="50.0" />
+                           </VBox.margin>
+                        </ImageView>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="80.0" top="15.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <Label prefHeight="52.0" prefWidth="319.0" text="Informacion Personal" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" top="15.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets left="5.0" right="15.0" top="75.0" />
+                     </HBox.margin></Label>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </center>
+   <effect>
+      <ColorAdjust />
+   </effect>
+   <bottom>
+      <Pane prefHeight="0.0" prefWidth="1080.0" BorderPane.alignment="CENTER" />
+   </bottom>
+   <left>
+      <Pane prefHeight="540.0" prefWidth="35.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox layoutX="33.0" layoutY="187.0" prefHeight="307.0" prefWidth="628.0">
+               <children>
+                  <HBox prefHeight="160.0" prefWidth="38.0">
+                     <children>
+                        <Pane prefHeight="202.0" prefWidth="50.0">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3b6f89" height="188.0" stroke="#3b6f89" strokeType="INSIDE" width="37.0" />
+                              <VBox prefHeight="252.0" prefWidth="83.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="38.0" style="-fx-background-color: transparent;">
+                                       <VBox.margin>
+                                          <Insets top="3.0" />
+                                       </VBox.margin>
+                                       <graphic>
+                                          <ImageView fitHeight="18.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/icon1.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="27.0" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/icon2.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <VBox.margin>
+                                          <Insets right="2.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                    <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <ImageView fitHeight="21.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/icon3.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <ImageView fitHeight="22.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/icon4.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <VBox.margin>
+                                          <Insets top="3.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                    <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/icon5.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <ImageView fitHeight="23.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/icon6.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </Pane>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="15.0" top="10.0" />
+                     </HBox.margin>
+                  </HBox>
+                  <VBox prefHeight="68.0" prefWidth="242.0">
+                     <children>
+                        <Label text="Marlen Garcia Tovar">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="CURP:" textFill="#2685d3">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="80.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="GATMO60306MMSVRTH8">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Teléfono:" textFill="#2685d3">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="50.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="77764125937">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="30.0" top="85.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox prefHeight="307.0" prefWidth="277.0">
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="232.0" text="Correo Elctrónico Institucional:" textFill="#2685d3">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="215.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="marlengarciat305@utez.edu.mx">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label prefHeight="20.0" prefWidth="199.0" text="Matrícula o No. de Empleado:" textFill="#2685d3">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="50.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label prefHeight="17.0" prefWidth="104.0" text="20243DS999">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </HBox>
+         </children>
+      </Pane>
+   </left>
+   <right>
+      <Pane prefHeight="604.0" prefWidth="52.0" style="-fx-background-color: WHITE;" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </Pane>
+   </right>
+</BorderPane>
