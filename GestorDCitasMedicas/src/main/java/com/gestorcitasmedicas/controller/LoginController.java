@@ -31,6 +31,41 @@ public class LoginController {
     @FXML
     private void initialize() {
         System.out.println("LoginController inicializado correctamente");
+        
+        // Configurar eventos para los enlaces
+        configurarEventos();
+    }
+    
+    private void configurarEventos() {
+        // Evento para "¿Has olvidado tu contraseña?"
+        olvidoContra.setOnMouseClicked(e -> abrirRecuperarContrasena());
+        
+        // Evento para "¡Crea una ahora!"
+        crearCuenta.setOnMouseClicked(e -> crearCuenta());
+    }
+    
+    @FXML
+    private void abrirRecuperarContrasena() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/recuperarContra.fxml"));
+            Parent recuperarContraRoot = loader.load();
+            
+            Scene nuevaEscena = new Scene(recuperarContraRoot, 1200, 600);
+            Stage currentStage = (Stage) olvidoContra.getScene().getWindow();
+            currentStage.setScene(nuevaEscena);
+            currentStage.setTitle("Recuperar Contraseña - Gestor de Citas Médicas");
+            currentStage.centerOnScreen();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+            mostrarAlerta("Error", "No se pudo cargar la ventana de recuperación", Alert.AlertType.ERROR);
+        }
+    }
+    
+    @FXML
+    private void crearCuenta() {
+        // Aquí se podría navegar a la ventana de registro
+        mostrarAlerta("Información", "Función de crear cuenta en desarrollo", Alert.AlertType.INFORMATION);
     }
 
     @FXML
