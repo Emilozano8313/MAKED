@@ -81,6 +81,8 @@ public class MainRecepcionistaController {
     
     @FXML
     private void initialize() {
+        System.out.println("MainRecepcionistaController inicializando...");
+        
         // Configurar el calendario
         configurarCalendario();
         
@@ -89,20 +91,29 @@ public class MainRecepcionistaController {
         
         // Configurar eventos de botones
         configurarEventosBotones();
+        
+        System.out.println("MainRecepcionistaController inicializado correctamente");
     }
     
     private void configurarCalendario() {
+        System.out.println("Configurando calendario en MainRecepcionistaController...");
+        
         // Establecer fecha actual
         calendario.setValue(LocalDate.now());
         
         // Configurar el evento de cambio de fecha
         calendario.setOnAction(event -> {
             LocalDate fechaSeleccionada = calendario.getValue();
-            cargarConsultasDelDia(fechaSeleccionada);
+            System.out.println("Fecha seleccionada: " + fechaSeleccionada);
+            if (fechaSeleccionada != null) {
+                cargarConsultasDelDia(fechaSeleccionada);
+            }
         });
         
         // Cargar consultas del día actual
         cargarConsultasDelDia(LocalDate.now());
+        
+        System.out.println("Calendario configurado correctamente en MainRecepcionistaController");
     }
     
     private void cargarDatosIniciales() {
@@ -125,7 +136,31 @@ public class MainRecepcionistaController {
         }
     }
     
+    private void actualizarContadoresSegunFecha(LocalDate fecha) {
+        int diaSemana = fecha.getDayOfWeek().getValue();
+        int diaMes = fecha.getDayOfMonth();
+        
+        // Solo mostrar contadores para días laborables (lunes a viernes)
+        if (diaSemana >= 1 && diaSemana <= 5) {
+            if (diaMes % 3 == 0) {
+                // Día con muchas citas
+                actualizarContadores(7, 3, 1);
+            } else if (diaMes % 3 == 1) {
+                // Día con citas moderadas
+                actualizarContadores(4, 2, 0);
+            } else {
+                // Día con pocas citas
+                actualizarContadores(2, 1, 0);
+            }
+        } else {
+            // Fines de semana - sin citas
+            actualizarContadores(0, 0, 0);
+        }
+    }
+    
     private void cargarConsultasDelDia(LocalDate fecha) {
+        System.out.println("Cargando consultas para fecha: " + fecha);
+        
         // Limpiar contenedor
         if (contenedorConsultas != null) {
             contenedorConsultas.getChildren().clear();
@@ -133,30 +168,77 @@ public class MainRecepcionistaController {
         
         // Simular consultas del día
         consultasDelDia = generarConsultasSimuladas(fecha);
+        System.out.println("Consultas generadas: " + consultasDelDia.size());
         
         // Crear y mostrar las consultas
-        for (Consulta consulta : consultasDelDia) {
-            VBox consultaBox = crearConsultaBox(consulta);
+        if (consultasDelDia.isEmpty()) {
+            // Mostrar mensaje cuando no hay citas
+            Label mensajeLabel = new Label("No hay citas programadas para este día");
+            mensajeLabel.setStyle("-fx-font-size: 16; -fx-text-fill: #666; -fx-font-style: italic;");
+            mensajeLabel.setAlignment(javafx.geometry.Pos.CENTER);
             if (contenedorConsultas != null) {
-                contenedorConsultas.getChildren().add(consultaBox);
+                contenedorConsultas.getChildren().add(mensajeLabel);
             }
+            System.out.println("Mostrando mensaje de no hay citas");
+        } else {
+            for (Consulta consulta : consultasDelDia) {
+                VBox consultaBox = crearConsultaBox(consulta);
+                if (contenedorConsultas != null) {
+                    contenedorConsultas.getChildren().add(consultaBox);
+                }
+            }
+            System.out.println("Agregadas " + consultasDelDia.size() + " consultas al contenedor");
         }
+        
+        // Actualizar contadores según las citas del día
+        actualizarContadoresSegunFecha(fecha);
     }
     
     private List<Consulta> generarConsultasSimuladas(LocalDate fecha) {
         List<Consulta> consultas = new ArrayList<>();
         
-        // Consultas simuladas para el día
-        consultas.add(new Consulta("Dr. Juan Pérez", "María García", "Consultorio 1", 
-            LocalTime.of(9, 0), LocalTime.of(9, 30), "Consulta general"));
-        consultas.add(new Consulta("Dra. Ana López", "Carlos Rodríguez", "Consultorio 2", 
-            LocalTime.of(10, 0), LocalTime.of(10, 30), "Revisión"));
-        consultas.add(new Consulta("Dr. Roberto Silva", "Laura Martínez", "Consultorio 3", 
-            LocalTime.of(11, 0), LocalTime.of(11, 30), "Control"));
-        consultas.add(new Consulta("Dra. Patricia Ruiz", "Miguel Torres", "Consultorio 1", 
-            LocalTime.of(14, 0), LocalTime.of(14, 30), "Consulta especializada"));
-        consultas.add(new Consulta("Dr. Fernando Díaz", "Carmen Vega", "Consultorio 2", 
-            LocalTime.of(15, 0), LocalTime.of(15, 30), "Seguimiento"));
+        // Generar citas diferentes según la fecha
+        int diaSemana = fecha.getDayOfWeek().getValue();
+        int diaMes = fecha.getDayOfMonth();
+        
+        // Solo mostrar citas de lunes a viernes (1-5)
+        if (diaSemana >= 1 && diaSemana <= 5) {
+            
+            // Generar citas basadas en el día del mes para simular variación
+            if (diaMes % 3 == 0) {
+                // Día con muchas citas
+                consultas.add(new Consulta("Dr. Juan Pérez", "María García", "Consultorio 1", 
+                    LocalTime.of(8, 0), LocalTime.of(8, 30), "Consulta general"));
+                consultas.add(new Consulta("Dra. Ana López", "Carlos Rodríguez", "Consultorio 2", 
+                    LocalTime.of(9, 0), LocalTime.of(9, 30), "Revisión"));
+                consultas.add(new Consulta("Dr. Roberto Silva", "Laura Martínez", "Consultorio 3", 
+                    LocalTime.of(10, 0), LocalTime.of(10, 30), "Control"));
+                consultas.add(new Consulta("Dra. Patricia Ruiz", "Miguel Torres", "Consultorio 1", 
+                    LocalTime.of(11, 0), LocalTime.of(11, 30), "Consulta especializada"));
+                consultas.add(new Consulta("Dr. Fernando Díaz", "Carmen Vega", "Consultorio 2", 
+                    LocalTime.of(14, 0), LocalTime.of(14, 30), "Seguimiento"));
+                consultas.add(new Consulta("Dra. Carmen Vega", "Roberto Silva", "Consultorio 3", 
+                    LocalTime.of(15, 0), LocalTime.of(15, 30), "Control rutinario"));
+                consultas.add(new Consulta("Dr. Miguel Torres", "Ana López", "Consultorio 1", 
+                    LocalTime.of(16, 0), LocalTime.of(16, 30), "Consulta de urgencia"));
+            } else if (diaMes % 3 == 1) {
+                // Día con citas moderadas
+                consultas.add(new Consulta("Dr. Juan Pérez", "Fernando Díaz", "Consultorio 1", 
+                    LocalTime.of(9, 0), LocalTime.of(9, 30), "Consulta general"));
+                consultas.add(new Consulta("Dra. Ana López", "Patricia Ruiz", "Consultorio 2", 
+                    LocalTime.of(10, 30), LocalTime.of(11, 0), "Revisión"));
+                consultas.add(new Consulta("Dr. Roberto Silva", "Carmen Vega", "Consultorio 3", 
+                    LocalTime.of(14, 0), LocalTime.of(14, 30), "Control"));
+                consultas.add(new Consulta("Dra. Patricia Ruiz", "Miguel Torres", "Consultorio 1", 
+                    LocalTime.of(15, 30), LocalTime.of(16, 0), "Consulta especializada"));
+            } else {
+                // Día con pocas citas
+                consultas.add(new Consulta("Dr. Juan Pérez", "Laura Martínez", "Consultorio 1", 
+                    LocalTime.of(10, 0), LocalTime.of(10, 30), "Consulta general"));
+                consultas.add(new Consulta("Dra. Ana López", "Roberto Silva", "Consultorio 2", 
+                    LocalTime.of(14, 0), LocalTime.of(14, 30), "Revisión"));
+            }
+        }
         
         return consultas;
     }
