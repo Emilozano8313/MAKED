@@ -8,11 +8,11 @@ import oracle.ucp.jdbc.PoolDataSourceFactory;
 import oracle.ucp.jdbc.PoolDataSource;
 
 public class OracleDatabase {
-    final static String WALLET = "C:/Users/Daniel/Downloads/Wallet_PruebaIntegradora";
-    final static String DB_NAME = "pruebaintegradora_high";
+    final static String WALLET = "C:/Users/guemi/Downloads/Wallet_MAKED";
+    final static String DB_NAME = "MAKED";
     final static String DB_URL = "jdbc:oracle:thin:@" + DB_NAME + "?TNS_ADMIN=" + WALLET;
     final static String DB_USER = "ADMIN";
-    final static String DB_PASSWORD = "Oracle#Cloud19";
+    final static String DB_PASSWORD = "MAKEDproject123_";
     final static String CONN_FACTORY_CLASS_NAME = "oracle.jdbc.pool.OracleDataSource";
 
     private static PoolDataSource dataSource;

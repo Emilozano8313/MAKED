@@ -4,58 +4,57 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.0" prefWidth="759.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.LoginController">
-   <children>
-      <ImageView fitHeight="49.0" fitWidth="68.0" layoutX="607.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@img/cross.png" />
-         </image></ImageView>
-      <ImageView fitHeight="422.0" fitWidth="497.0" pickOnBounds="true" preserveRatio="true">
+<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.LoginController" prefHeight="422.0" prefWidth="759.0" minHeight="400" minWidth="600" style="-fx-background-color: #FFFFFF;">
+   <center>
+      <ImageView pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" fitWidth="400" fitHeight="400">
          <image>
             <Image url="@img/log.png" />
-         </image></ImageView>
-      <Label layoutX="596.0" layoutY="73.0" prefHeight="25.0" prefWidth="66.0" text="Bienvenido">
-         <font>
-            <Font name="Calibri Bold" size="14.0" />
-         </font>
-      </Label>
-      <PasswordField fx:id="contraIngresar" layoutX="550.0" layoutY="225.0" prefHeight="25.0" prefWidth="157.0" style="-fx-background-color: #B9C3D5;" />
-      <TextField fx:id="correoIngresar" layoutX="550.0" layoutY="155.0" prefHeight="25.0" prefWidth="157.0" style="-fx-background-color: #B9C3D5;" />
-      <Label layoutX="550.0" layoutY="129.0" prefHeight="25.0" prefWidth="66.0" text="Correo:">
-         <font>
-            <Font name="Calibri Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="552.0" layoutY="200.0" prefHeight="25.0" prefWidth="74.0" text="Contrasena:">
-         <font>
-            <Font name="Calibri Bold" size="12.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="15.0" fitWidth="16.0" layoutX="676.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Desktop/POO/demoTarea/src/main/resources/images/visibility_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png" />
          </image>
       </ImageView>
-      <Label fx:id="olvidoContra" layoutX="617.0" layoutY="258.0" prefHeight="25.0" prefWidth="91.0" style="-fx-text-fill: #3868fb; -fx-underline: true; -fx-cursor: hand;" text="Haz olvidado tu contrasena">
-         <font>
-            <Font name="Calibri Italic" size="8.0" />
-         </font>
-      </Label>
-      <Label layoutX="556.0" layoutY="384.0" prefHeight="25.0" prefWidth="60.0" text="No tienes cuenta?">
-         <font>
-            <Font name="Calibri Italic" size="8.0" />
-         </font>
-      </Label>
-      <Label fx:id="crearCuenta" layoutX="637.0" layoutY="384.0" prefHeight="25.0" prefWidth="60.0" style="-fx-text-fill: #3868fb; -fx-underline: true; -fx-cursor: hand;" text="!Crea una ahora!">
-         <font>
-            <Font name="Calibri Italic" size="8.0" />
-         </font>
-      </Label>
-      <Button fx:id="loginButton" layoutX="584.0" layoutY="297.0" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="15.0" prefWidth="91.0" style="-fx-background-color: #3B6F89;" text="Iniciar Sesion" textFill="WHITE">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Button>
-   </children>
-</AnchorPane>
+   </center>
+   <right>
+      <VBox prefWidth="300" minWidth="250" maxWidth="400" style="-fx-background-color: #FFFFFF;" spacing="15" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets top="30" right="30" bottom="30" left="30" />
+         </padding>
+         <children>
+            <HBox alignment="CENTER">
+               <ImageView fitHeight="49.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@img/cross.png" />
+                  </image>
+               </ImageView>
+            </HBox>
+            <Label text="Bienvenido" alignment="CENTER">
+               <font>
+                  <Font name="Calibri Bold" size="18.0" />
+               </font>
+            </Label>
+            <VBox spacing="8">
+               <Label text="Correo:" />
+               <TextField fx:id="correoIngresar" promptText="Ingresa tu correo" style="-fx-background-color: #B9C3D5; -fx-background-radius: 5;" />
+            </VBox>
+            <VBox spacing="8">
+               <Label text="Contraseña:" />
+               <PasswordField fx:id="contraIngresar" promptText="Ingresa tu contraseña" style="-fx-background-color: #B9C3D5; -fx-background-radius: 5;" />
+            </VBox>
+            <Label fx:id="olvidoContra" style="-fx-text-fill: #3868fb; -fx-underline: true; -fx-cursor: hand;" text="¿Has olvidado tu contraseña?" alignment="CENTER">
+               <font>
+                  <Font name="Calibri Italic" size="10.0" />
+               </font>
+            </Label>
+            <Button fx:id="loginButton" onAction="#iniciarSesion" mnemonicParsing="false" style="-fx-background-color: #3B6F89; -fx-background-radius: 5;" text="Iniciar Sesión" textFill="WHITE">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Button>
+            <HBox alignment="CENTER" spacing="5">
+               <Label text="¿No tienes cuenta?" />
+               <Label fx:id="crearCuenta" text="¡Crea una ahora!" style="-fx-text-fill: #3868fb; -fx-underline: true; -fx-cursor: hand;" />
+            </HBox>
+         </children>
+      </VBox>
+      </right>
+  </BorderPane>
