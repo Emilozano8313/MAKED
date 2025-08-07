@@ -152,7 +152,11 @@
                      <Label text="Calendario de Disponibilidad:" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #3B6F89;" />
                      <HBox spacing="20" alignment="CENTER_LEFT">
                         <VBox spacing="10">
-                           <Label text="Junio 2025" style="-fx-font-weight: bold; -fx-font-size: 18; -fx-text-fill: #3B6F89;" />
+                                                       <HBox spacing="10" alignment="CENTER">
+                               <Button fx:id="btnMesAnterior" text="&lt;" style="-fx-background-color: #3B6F89; -fx-text-fill: white; -fx-font-weight: bold;" />
+                               <Label fx:id="lblTituloCalendario" text="Calendario" style="-fx-font-weight: bold; -fx-font-size: 18; -fx-text-fill: #3B6F89;" />
+                               <Button fx:id="btnMesSiguiente" text="&gt;" style="-fx-background-color: #3B6F89; -fx-text-fill: white; -fx-font-weight: bold;" />
+                            </HBox>
                            <GridPane fx:id="gridCalendario" hgap="2" vgap="2">
                               <!-- Los días se agregarán dinámicamente -->
                            </GridPane>
