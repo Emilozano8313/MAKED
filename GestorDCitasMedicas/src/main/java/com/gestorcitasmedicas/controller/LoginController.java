@@ -1,5 +1,4 @@
 package com.gestorcitasmedicas.controller;
-import com.gestorcitasmedicas.model.Usuario;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,53 +29,36 @@ public class LoginController {
     private Button loginButton;
 
     @FXML
-    private void iniciarSesion(ActionEvent event) {
-        //Accion para el inicio de sesion
-        String correo = correoIngresar.getText();
-        String contra = contraIngresar.getText();
-        System.out.println("Correo ingresado: " + correo);
-        System.out.println("Contraseña ingresada: " + contra);
-
-        // Simulación de autenticación para pruebas
-        Usuario usuario = autenticarSimulado(correo, contra);
-        if (usuario != null) {
-            System.out.println("Inicio de sesión exitoso como " + usuario.getRol());
-            mostrarAlerta("Éxito", "Inicio de sesión exitoso como " + usuario.getRol(), Alert.AlertType.INFORMATION);
-            switch (usuario.getRol()) {
-                case "doctor":
-                    System.out.println("Bienvenido doctor");
-                    //abrirVentana("debes poner la ruta del siguiente fxml", event);
-                    break;
-                case "paciente":
-                    System.out.println("Bienvenido paciente");
-                    //abrirVentana("vistaPaciente.fxml", event);
-                    break;
-                case "recepcionista":
-                    System.out.println("Bienvenido recepcionista");
-                    //abrirVentana("vistaRecepcionista.fxml", event);
-                    break;
-                default:
-                    System.out.println("Rol no reconocido.");
-            }
-        } else {
-            System.out.println("Correo o contraseña incorrectos");
-            mostrarAlerta("Error", "Correo o contraseña incorrectos", Alert.AlertType.ERROR);
-        }
+    private void initialize() {
+        System.out.println("LoginController inicializado correctamente");
     }
 
-    // Método temporal para simular autenticación
-    private Usuario autenticarSimulado(String correo, String contra) {
-        // Datos de prueba
-        if ("admin@test.com".equals(correo) && "admin123".equals(contra)) {
-            return new Usuario(1, "admin", contra, "Administrador", correo);
-        } else if ("doctor@test.com".equals(correo) && "doctor123".equals(contra)) {
-            return new Usuario(2, "doctor", contra, "Dr. Juan Pérez", correo);
-        } else if ("paciente@test.com".equals(correo) && "paciente123".equals(contra)) {
-            return new Usuario(3, "paciente", contra, "María García", correo);
-        } else if ("recepcionista@test.com".equals(correo) && "recepcionista123".equals(contra)) {
-            return new Usuario(4, "recepcionista", contra, "Ana López", correo);
+    @FXML
+    private void iniciarSesion(ActionEvent event) {
+        String correo = correoIngresar.getText();
+        String contra = contraIngresar.getText();
+        
+        System.out.println("Iniciando sesión con: " + correo);
+        
+        // Simulación simple de autenticación
+        if ("recepcionista@test.com".equals(correo) && "recepcionista123".equals(contra)) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/mainRecepcionista.fxml"));
+                Parent root = loader.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.setTitle("Panel Principal - Recepcionista");
+                stage.show();
+
+                // Cerrar la ventana actual
+                ((Node) event.getSource()).getScene().getWindow().hide();
+            } catch (IOException e) {
+                e.printStackTrace();
+                mostrarAlerta("Error", "No se pudo cargar el panel principal", Alert.AlertType.ERROR);
+            }
+        } else {
+            mostrarAlerta("Error", "Credenciales incorrectas", Alert.AlertType.ERROR);
         }
-        return null;
     }
 
     private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
@@ -86,45 +68,4 @@ public class LoginController {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
-
-    @FXML
-    private void initialize(){
-        //Accion para el caso de olvido contrasena
-        olvidoContra.setOnMouseClicked(event -> {
-
-        });
-
-        //Accion para el caso de crear cuenta
-        crearCuenta.setOnMouseClicked(event -> {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/Registro.fxml"));
-                Parent root = loader.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.setTitle("Registro - Gestor de Citas Médicas");
-                stage.show();
-
-                // Cerrar la ventana actual
-                ((Node) event.getSource()).getScene().getWindow().hide();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
-    private void abrirVentana(String rutaFXML, ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(rutaFXML));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-
-            // Cierra la ventana actual
-            ((Node) event.getSource()).getScene().getWindow().hide();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 }

@@ -5,10 +5,8 @@ module com.gestorcitasmedicas.gestorcitasmedicas {
     requires java.sql;
     requires ucp;
 
-
     opens com.gestorcitasmedicas to javafx.fxml;
-    exports com.gestorcitasmedicas.controller;
-
     opens com.gestorcitasmedicas.controller to javafx.fxml;
     exports com.gestorcitasmedicas;
+    exports com.gestorcitasmedicas.controller;
 }

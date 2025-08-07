@@ -61,25 +61,33 @@ public class RegistroController {
 
         // Validar que las contraseñas coincidan
         if (!passwordField.getText().equals(confirmPasswordField.getText())) {
-            mostrarAlerta("Error", "Las contraseñas no coinciden", Alert.AlertType.ERROR);
+            mostrarAlerta("Error de Contraseñas", 
+                "Las contraseñas no coinciden.\n\nPor favor, asegúrese de que ambos campos de contraseña sean idénticos.", 
+                Alert.AlertType.ERROR);
             return;
         }
 
         // Validar formato de correo
         if (!validarEmail(correoField.getText())) {
-            mostrarAlerta("Error", "Formato de correo electrónico inválido", Alert.AlertType.ERROR);
+            mostrarAlerta("Formato de Correo Inválido", 
+                "El formato del correo electrónico no es válido.\n\nEjemplo de formato válido: usuario@dominio.com", 
+                Alert.AlertType.ERROR);
             return;
         }
 
         // Validar formato de CURP
         if (!validarCURP(curpField.getText())) {
-            mostrarAlerta("Error", "Formato de CURP inválido", Alert.AlertType.ERROR);
+            mostrarAlerta("Formato de CURP Inválido", 
+                "El formato del CURP no es válido.\n\nEl CURP debe tener 18 caracteres alfanuméricos.\nEjemplo: ABCD123456HDFGHI01", 
+                Alert.AlertType.ERROR);
             return;
         }
 
         // Validar formato de teléfono
         if (!validarTelefono(telefonoField.getText())) {
-            mostrarAlerta("Error", "Formato de teléfono inválido", Alert.AlertType.ERROR);
+            mostrarAlerta("Formato de Teléfono Inválido", 
+                "El formato del teléfono no es válido.\n\nDebe contener exactamente 10 dígitos numéricos.\nEjemplo: 5512345678", 
+                Alert.AlertType.ERROR);
             return;
         }
 
@@ -99,50 +107,73 @@ public class RegistroController {
             boolean registroExitoso = guardarUsuario(nuevoUsuario);
             
             if (registroExitoso) {
-                mostrarAlerta("Éxito", "Usuario registrado correctamente", Alert.AlertType.INFORMATION);
+                mostrarAlerta("Registro Exitoso", 
+                    "¡Usuario registrado correctamente!\n\n" +
+                    "Nombre: " + nuevoUsuario.getNombre() + " " + nuevoUsuario.getApellidos() + "\n" +
+                    "Correo: " + nuevoUsuario.getCorreo() + "\n\n" +
+                    "Ahora puede iniciar sesión con sus credenciales.", 
+                    Alert.AlertType.INFORMATION);
                 volverAlLogin(event);
             } else {
-                mostrarAlerta("Error", "No se pudo registrar el usuario", Alert.AlertType.ERROR);
+                mostrarAlerta("Error de Registro", 
+                    "No se pudo completar el registro del usuario.\n\n" +
+                    "Por favor, inténtelo nuevamente o contacte al administrador del sistema.", 
+                    Alert.AlertType.ERROR);
             }
 
         } catch (Exception e) {
-            mostrarAlerta("Error", "Error al registrar usuario: " + e.getMessage(), Alert.AlertType.ERROR);
+            mostrarAlerta("Error del Sistema", 
+                "Ocurrió un error inesperado durante el registro:\n\n" + e.getMessage() + "\n\n" +
+                "Por favor, verifique su conexión e inténtelo nuevamente.", 
+                Alert.AlertType.ERROR);
         }
     }
 
     private boolean validarCampos() {
+        StringBuilder camposFaltantes = new StringBuilder();
+        boolean hayErrores = false;
+        
+        // Validar cada campo y acumular errores
         if (nombreField.getText().trim().isEmpty()) {
-            mostrarAlerta("Error", "El nombre es obligatorio", Alert.AlertType.ERROR);
-            return false;
+            camposFaltantes.append("• Nombre\n");
+            hayErrores = true;
         }
         if (apellidosField.getText().trim().isEmpty()) {
-            mostrarAlerta("Error", "Los apellidos son obligatorios", Alert.AlertType.ERROR);
-            return false;
+            camposFaltantes.append("• Apellidos\n");
+            hayErrores = true;
         }
         if (matriculaField.getText().trim().isEmpty()) {
-            mostrarAlerta("Error", "La matrícula es obligatoria", Alert.AlertType.ERROR);
-            return false;
+            camposFaltantes.append("• Matrícula o No. de empleado\n");
+            hayErrores = true;
         }
         if (curpField.getText().trim().isEmpty()) {
-            mostrarAlerta("Error", "El CURP es obligatorio", Alert.AlertType.ERROR);
-            return false;
+            camposFaltantes.append("• CURP\n");
+            hayErrores = true;
         }
         if (correoField.getText().trim().isEmpty()) {
-            mostrarAlerta("Error", "El correo es obligatorio", Alert.AlertType.ERROR);
-            return false;
+            camposFaltantes.append("• Correo electrónico\n");
+            hayErrores = true;
         }
         if (telefonoField.getText().trim().isEmpty()) {
-            mostrarAlerta("Error", "El teléfono es obligatorio", Alert.AlertType.ERROR);
-            return false;
+            camposFaltantes.append("• Teléfono\n");
+            hayErrores = true;
         }
         if (passwordField.getText().trim().isEmpty()) {
-            mostrarAlerta("Error", "La contraseña es obligatoria", Alert.AlertType.ERROR);
-            return false;
+            camposFaltantes.append("• Contraseña\n");
+            hayErrores = true;
         }
         if (confirmPasswordField.getText().trim().isEmpty()) {
-            mostrarAlerta("Error", "Debe confirmar la contraseña", Alert.AlertType.ERROR);
+            camposFaltantes.append("• Confirmar contraseña\n");
+            hayErrores = true;
+        }
+        
+        // Si hay errores, mostrar alerta con todos los campos faltantes
+        if (hayErrores) {
+            String mensaje = "Por favor, complete los siguientes campos obligatorios:\n\n" + camposFaltantes.toString();
+            mostrarAlerta("Campos Requeridos", mensaje, Alert.AlertType.WARNING);
             return false;
         }
+        
         return true;
     }
 

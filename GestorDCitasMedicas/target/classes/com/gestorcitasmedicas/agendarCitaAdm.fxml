@@ -7,151 +7,181 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: #16191C;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: #16191C;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.AgendarCitaController">
    <top>
       <Pane prefHeight="107.0" prefWidth="1080.0" style="-fx-background-color: #E7ECF0;" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="101.0" fitWidth="73.0" layoutX="14.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/cross.png" />
-               </image></ImageView>
-            <Button layoutX="897.0" layoutY="21.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="165.0" style="-fx-background-color: #E7ECF0;">
+                  <Image url="@img/cross.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnPerfil" layoutX="897.0" layoutY="21.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="165.0" style="-fx-background-color: #E7ECF0;" onAction="#abrirPerfil">
                <graphic>
                   <ImageView fitHeight="60.0" fitWidth="153.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/miPerfil.png" />
+                        <Image url="@img/miPerfil.png" />
                      </image>
                   </ImageView>
-               </graphic></Button>
+               </graphic>
+            </Button>
          </children>
       </Pane>
    </top>
-   <center>
-      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" BorderPane.alignment="CENTER">
-         <children>
-            <HBox layoutX="14.0" layoutY="338.0" prefHeight="56.0" prefWidth="647.0">
-               <children>
-                  <VBox prefHeight="203.0" prefWidth="165.0">
-                     <children>
-                        <Label text="Fecha" textFill="#95b3cc">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <DatePicker prefHeight="25.0" prefWidth="154.0" style="-fx-background-color: #7B9DBF;" />
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="100.0" prefWidth="203.0">
-                     <children>
-                        <Label text="Horario" textFill="#95b3cc">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <ChoiceBox prefWidth="150.0" style="-fx-background-color: #B9C3D5;" />
-                     </children>
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox prefHeight="100.0" prefWidth="214.0">
-                     <children>
-                        <Label text="Medico" textFill="#95b3cc">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <ChoiceBox prefWidth="150.0" style="-fx-background-color: #B9C3D5;" />
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <Label layoutX="14.0" layoutY="14.0" text="Agendar cita">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Label>
-            <Button layoutX="695.0" layoutY="536.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="149.0" style="-fx-background-color: #3b6f89;" text="Agendar" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
-            <VBox layoutX="14.0" layoutY="411.0" prefHeight="140.0" prefWidth="337.0">
-               <children>
-                  <Label text="Motivo de la cita" textFill="#95b3cc">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Label>
-                  <TextArea prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #7B9DBF;" />
-               </children></VBox>
-            <Button layoutX="535.0" layoutY="536.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="148.0" style="-fx-background-color: #787A7D;" text="Cancelar" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
-   </center>
    <left>
-      <Pane prefHeight="613.0" prefWidth="123.0" style="-fx-background-color: FFFFFF;" BorderPane.alignment="CENTER">
+      <VBox fx:id="menuLateral" style="-fx-background-color: #3B6F89;" prefWidth="60" minWidth="60" maxWidth="200" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets top="15" right="8" bottom="15" left="8" />
+         </padding>
          <children>
-            <Pane layoutX="41.0" layoutY="173.0" prefHeight="267.0" prefWidth="32.0">
+            <!-- Gestion Usuarios -->
+            <VBox fx:id="menuItemUsuarios" style="-fx-background-color: #3B6F89; -fx-background-radius: 5;" spacing="3" alignment="CENTER">
+               <padding>
+                  <Insets top="8" right="8" bottom="8" left="8" />
+               </padding>
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3b6f89" height="273.0" layoutX="-4.0" layoutY="-2.0" stroke="#3b6f89" strokeLineCap="ROUND" strokeWidth="5.0" width="38.0" />
-                  <VBox layoutX="-3.0" layoutY="-5.0" prefHeight="274.0" prefWidth="40.0">
-                     <children>
-                        <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="18.0" style="-fx-background-color: #3b6f89;">
-                           <graphic>
-                              <ImageView fitHeight="23.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/iper.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <VBox.margin>
-                              <Insets top="25.0" />
-                           </VBox.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="36.0" style="-fx-background-color: #3b6f89;">
-                           <graphic>
-                              <ImageView fitHeight="29.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/imed.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <VBox.margin>
-                              <Insets top="25.0" />
-                           </VBox.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="13.0" prefWidth="1.0" style="-fx-background-color: #3b6f89;">
-                           <graphic>
-                              <ImageView fitHeight="26.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/ical.png" />
-                                 </image></ImageView>
-                           </graphic>
-                           <VBox.margin>
-                              <Insets top="25.0" />
-                           </VBox.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="42.0" style="-fx-background-color: #3b6f89;">
-                           <graphic>
-                              <ImageView fitHeight="51.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/iexit.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <VBox.margin>
-                              <Insets top="20.0" />
-                           </VBox.margin>
-                        </Button>
-                     </children>
+                  <ImageView fitHeight="24" fitWidth="24" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/iper.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Gestion Usuarios" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;" visible="false" managed="false" />
+               </children>
+            </VBox>
+            
+            <!-- Gestion Medicos -->
+            <VBox fx:id="menuItemMedicos" style="-fx-background-color: #3B6F89; -fx-background-radius: 5;" spacing="3" alignment="CENTER">
+               <padding>
+                  <Insets top="8" right="8" bottom="8" left="8" />
+               </padding>
+               <children>
+                  <ImageView fitHeight="24" fitWidth="24" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/imed.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Gestion Medicos" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;" visible="false" managed="false" />
+               </children>
+            </VBox>
+            
+            <!-- Gestion Citas -->
+            <VBox fx:id="menuItemCitas" style="-fx-background-color: #4A7A9A; -fx-background-radius: 5;" spacing="3" alignment="CENTER">
+               <padding>
+                  <Insets top="8" right="8" bottom="8" left="8" />
+               </padding>
+               <children>
+                  <ImageView fitHeight="24" fitWidth="24" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/ical.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Gestion Citas" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;" visible="false" managed="false" />
+               </children>
+            </VBox>
+            
+            <!-- Salir -->
+            <VBox fx:id="menuItemSalir" style="-fx-background-color: #3B6F89; -fx-background-radius: 5;" spacing="3" alignment="CENTER">
+               <padding>
+                  <Insets top="8" right="8" bottom="8" left="8" />
+               </padding>
+               <children>
+                  <ImageView fitHeight="24" fitWidth="24" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/iexit.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Salir" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;" visible="false" managed="false" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox spacing="20" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets top="20" right="20" bottom="20" left="20" />
+         </padding>
+         <children>
+            <!-- Título -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+               <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@img/ical.png" />
+                  </image>
+               </ImageView>
+               <Label fx:id="lblTitulo" text="Agendar Cita Médica" style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #3B6F89;" />
+            </HBox>
+            
+            <!-- Formulario de cita -->
+            <VBox spacing="15" style="-fx-background-color: #F8F9FA; -fx-padding: 20; -fx-background-radius: 10;">
+               <children>
+                  <!-- Primera fila: Paciente y Médico -->
+                  <HBox spacing="20" alignment="CENTER_LEFT">
+                     <VBox spacing="5" prefWidth="300">
+                        <Label text="Paciente:" style="-fx-font-weight: bold; -fx-font-size: 14; -fx-text-fill: #3B6F89;" />
+                        <ComboBox fx:id="comboPaciente" promptText="Seleccionar paciente" prefWidth="280" />
+                     </VBox>
+                     
+                     <VBox spacing="5" prefWidth="300">
+                        <Label text="Médico:" style="-fx-font-weight: bold; -fx-font-size: 14; -fx-text-fill: #3B6F89;" />
+                        <ComboBox fx:id="comboMedico" promptText="Seleccionar médico" prefWidth="280" />
+                     </VBox>
+                  </HBox>
+                  
+                  <!-- Segunda fila: Fecha y Hora -->
+                  <HBox spacing="20" alignment="CENTER_LEFT">
+                     <VBox spacing="5" prefWidth="300">
+                        <Label text="Fecha:" style="-fx-font-weight: bold; -fx-font-size: 14; -fx-text-fill: #3B6F89;" />
+                        <DatePicker fx:id="datePicker" promptText="Seleccionar fecha" prefWidth="280" />
+                     </VBox>
+                     
+                     <VBox spacing="5" prefWidth="300">
+                        <Label text="Horario:" style="-fx-font-weight: bold; -fx-font-size: 14; -fx-text-fill: #3B6F89;" />
+                        <ComboBox fx:id="comboHorario" promptText="Seleccionar horario" prefWidth="280" />
+                     </VBox>
+                  </HBox>
+                  
+                  <!-- Tercera fila: Motivo de la cita -->
+                  <VBox spacing="5">
+                     <Label text="Motivo de la cita:" style="-fx-font-weight: bold; -fx-font-size: 14; -fx-text-fill: #3B6F89;" />
+                     <TextArea fx:id="txtMotivo" promptText="Describa el motivo de la cita..." prefHeight="100" wrapText="true" />
+                  </VBox>
+                  
+                  <!-- Calendario de disponibilidad -->
+                  <VBox spacing="10">
+                     <Label text="Calendario de Disponibilidad:" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #3B6F89;" />
+                     <HBox spacing="20" alignment="CENTER_LEFT">
+                        <VBox spacing="10">
+                           <Label text="Junio 2025" style="-fx-font-weight: bold; -fx-font-size: 18; -fx-text-fill: #3B6F89;" />
+                           <GridPane fx:id="gridCalendario" hgap="2" vgap="2">
+                              <!-- Los días se agregarán dinámicamente -->
+                           </GridPane>
+                        </VBox>
+                        
+                        <!-- Leyenda de disponibilidad -->
+                        <VBox spacing="10" style="-fx-background-color: #E7ECF0; -fx-padding: 15; -fx-background-radius: 5;">
+                           <Label text="Leyenda:" style="-fx-font-weight: bold; -fx-font-size: 14;" />
+                           <HBox spacing="10" alignment="CENTER_LEFT">
+                              <Circle radius="8" fill="#FF6B6B" />
+                              <Label text="Sin disponibilidad" style="-fx-font-size: 12;" />
+                           </HBox>
+                           <HBox spacing="10" alignment="CENTER_LEFT">
+                              <Circle radius="8" fill="#4ECDC4" />
+                              <Label text="Disponible" style="-fx-font-size: 12;" />
+                           </HBox>
+                        </VBox>
+                     </HBox>
                   </VBox>
                </children>
-            </Pane>
-         </children></Pane>
-   </left>
+            </VBox>
+            
+            <!-- Botones de acción -->
+            <HBox spacing="15" alignment="CENTER_RIGHT">
+               <Button fx:id="btnCancelar" text="Cancelar" style="-fx-background-color: #787A7D; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14;" onAction="#cancelarCita" />
+               <Button fx:id="btnActualizar" text="Actualizar" style="-fx-background-color: #28A745; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14;" onAction="#actualizarCita" visible="false" />
+               <Button fx:id="btnAgendar" text="Agendar Cita" style="-fx-background-color: #3B6F89; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14;" onAction="#agendarCita" />
+            </HBox>
+         </children>
+      </VBox>
+   </center>
 </BorderPane>
