@@ -79,17 +79,23 @@ public class AgendarCitaController {
         // Configurar animación del menú
         timelineExpansion = new Timeline();
         
-        // Eventos del menú lateral
-        menuLateral.setOnMouseEntered(e -> expandirMenu());
-        menuLateral.setOnMouseExited(e -> contraerMenu());
-        
-        // Mostrar etiquetas inicialmente
-        mostrarEtiquetasMenu(false);
+        // Verificar que los elementos del menú no sean null antes de configurar eventos
+        if (menuLateral != null) {
+            // Eventos del menú lateral
+            menuLateral.setOnMouseEntered(e -> expandirMenu());
+            menuLateral.setOnMouseExited(e -> contraerMenu());
+            
+            // Mostrar etiquetas inicialmente
+            mostrarEtiquetasMenu(false);
+        }
     }
     
     private void expandirMenu() {
-        if (!menuExpandido) {
+        if (!menuExpandido && menuLateral != null && timelineExpansion != null) {
             menuExpandido = true;
+            
+            // Detener animación anterior si está en curso
+            timelineExpansion.stop();
             
             // Animación de expansión
             KeyValue keyValue = new KeyValue(menuLateral.prefWidthProperty(), 200);
@@ -103,8 +109,11 @@ public class AgendarCitaController {
     }
     
     private void contraerMenu() {
-        if (menuExpandido) {
+        if (menuExpandido && menuLateral != null && timelineExpansion != null) {
             menuExpandido = false;
+            
+            // Detener animación anterior si está en curso
+            timelineExpansion.stop();
             
             // Animación de contracción
             KeyValue keyValue = new KeyValue(menuLateral.prefWidthProperty(), 60);
@@ -119,38 +128,54 @@ public class AgendarCitaController {
     
     private void mostrarEtiquetasMenu(boolean mostrar) {
         // Mostrar/ocultar etiquetas de texto en los elementos del menú
-        for (javafx.scene.Node node : menuItemUsuarios.getChildren()) {
-            if (node instanceof Label) {
-                node.setVisible(mostrar);
-                node.setManaged(mostrar);
+        if (menuItemUsuarios != null) {
+            for (javafx.scene.Node node : menuItemUsuarios.getChildren()) {
+                if (node instanceof Label) {
+                    node.setVisible(mostrar);
+                    node.setManaged(mostrar);
+                }
             }
         }
-        for (javafx.scene.Node node : menuItemMedicos.getChildren()) {
-            if (node instanceof Label) {
-                node.setVisible(mostrar);
-                node.setManaged(mostrar);
+        if (menuItemMedicos != null) {
+            for (javafx.scene.Node node : menuItemMedicos.getChildren()) {
+                if (node instanceof Label) {
+                    node.setVisible(mostrar);
+                    node.setManaged(mostrar);
+                }
             }
         }
-        for (javafx.scene.Node node : menuItemCitas.getChildren()) {
-            if (node instanceof Label) {
-                node.setVisible(mostrar);
-                node.setManaged(mostrar);
+        if (menuItemCitas != null) {
+            for (javafx.scene.Node node : menuItemCitas.getChildren()) {
+                if (node instanceof Label) {
+                    node.setVisible(mostrar);
+                    node.setManaged(mostrar);
+                }
             }
         }
-        for (javafx.scene.Node node : menuItemSalir.getChildren()) {
-            if (node instanceof Label) {
-                node.setVisible(mostrar);
-                node.setManaged(mostrar);
+        if (menuItemSalir != null) {
+            for (javafx.scene.Node node : menuItemSalir.getChildren()) {
+                if (node instanceof Label) {
+                    node.setVisible(mostrar);
+                    node.setManaged(mostrar);
+                }
             }
         }
     }
     
     private void configurarEventosMenuLateral() {
         // Configurar eventos de clic para cada elemento del menú
-        menuItemUsuarios.setOnMouseClicked(e -> abrirGestionUsuarios());
-        menuItemMedicos.setOnMouseClicked(e -> abrirGestionMedicos());
-        menuItemCitas.setOnMouseClicked(e -> abrirGestionCitas());
-        menuItemSalir.setOnMouseClicked(e -> salir());
+        if (menuItemUsuarios != null) {
+            menuItemUsuarios.setOnMouseClicked(e -> abrirGestionUsuarios());
+        }
+        if (menuItemMedicos != null) {
+            menuItemMedicos.setOnMouseClicked(e -> abrirGestionMedicos());
+        }
+        if (menuItemCitas != null) {
+            menuItemCitas.setOnMouseClicked(e -> abrirGestionCitas());
+        }
+        if (menuItemSalir != null) {
+            menuItemSalir.setOnMouseClicked(e -> salir());
+        }
     }
     
     private void abrirGestionUsuarios() {
@@ -501,6 +526,24 @@ public class AgendarCitaController {
         alert.setHeaderText(null);
         alert.setContentText("Función de perfil en desarrollo");
         alert.showAndWait();
+    }
+    
+    @FXML
+    private void volverAlMenuPrincipal() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/mainRecepcionista.fxml"));
+            Parent mainRoot = loader.load();
+            
+            Scene nuevaEscena = new Scene(mainRoot, 1080, 720);
+            Stage currentStage = (Stage) btnAgendar.getScene().getWindow();
+            currentStage.setScene(nuevaEscena);
+            currentStage.setTitle("Panel Principal - Recepcionista");
+            currentStage.centerOnScreen();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+            mostrarAlerta("Error", "No se pudo regresar al menú principal", Alert.AlertType.ERROR);
+        }
     }
     
     // Clase interna para representar una cita

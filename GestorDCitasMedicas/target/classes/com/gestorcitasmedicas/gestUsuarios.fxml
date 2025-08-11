@@ -16,7 +16,7 @@
                <padding>
                   <Insets left="15" />
                </padding>
-               <Label text="Panel elección de gestion de usuario" style="-fx-text-fill: #D3D3D3; -fx-font-size: 12;" />
+               <Label text="Panel de gestión de pacientes" style="-fx-text-fill: #D3D3D3; -fx-font-size: 12;" />
             </HBox>
             
             <!-- Barra principal con logo y título -->
@@ -50,38 +50,40 @@
       </VBox>
    </top>
    <center>
-      <VBox spacing="20" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
-         <padding>
-            <Insets top="20" right="20" bottom="20" left="20" />
-         </padding>
-         <children>
-            <!-- Tabla -->
-            <VBox spacing="10" VBox.vgrow="ALWAYS">
-               <TableView fx:id="tablaUsuarios" VBox.vgrow="ALWAYS" style="-fx-background-color: #E7ECF0;">
-                  <columns>
-                     <TableColumn fx:id="colNombre" text="Nombre" prefWidth="180" />
-                     <TableColumn fx:id="colCurp" text="CURP" prefWidth="160" />
-                     <TableColumn fx:id="colEdad" text="Edad" prefWidth="60" />
-                     <TableColumn fx:id="colPeso" text="Peso" prefWidth="60" />
-                     <TableColumn fx:id="colAltura" text="Altura" prefWidth="60" />
-                     <TableColumn fx:id="colGenero" text="Género" prefWidth="80" />
-                     <TableColumn fx:id="colMatricula" text="Matrícula o N. de empleado" prefWidth="180" />
-                     <TableColumn fx:id="colEstatus" text="Estado" prefWidth="100" />
-                  </columns>
-               </TableView>
+      <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+         <VBox spacing="20" style="-fx-background-color: #FFFFFF;">
+            <padding>
+               <Insets top="20" right="20" bottom="20" left="20" />
+            </padding>
+            <children>
+               <!-- Tabla -->
+               <VBox spacing="10" VBox.vgrow="ALWAYS">
+                  <TableView fx:id="tablaUsuarios" VBox.vgrow="ALWAYS" style="-fx-background-color: #E7ECF0;">
+                     <columns>
+                        <TableColumn fx:id="colNombre" text="Nombre" prefWidth="180" />
+                        <TableColumn fx:id="colCurp" text="CURP" prefWidth="160" />
+                        <TableColumn fx:id="colEdad" text="Edad" prefWidth="60" />
+                        <TableColumn fx:id="colPeso" text="Peso" prefWidth="60" />
+                        <TableColumn fx:id="colAltura" text="Altura" prefWidth="60" />
+                        <TableColumn fx:id="colGenero" text="Género" prefWidth="80" />
+                        <TableColumn fx:id="colMatricula" text="Matrícula o N. de empleado" prefWidth="180" />
+                        <TableColumn fx:id="colEstatus" text="Estado" prefWidth="100" />
+                     </columns>
+                  </TableView>
+                  
+                  <!-- Botón Agregar -->
+                  <HBox alignment="CENTER_RIGHT">
+                     <Button fx:id="btnAgregar" text="Agregar" style="-fx-background-color: #3B6F89; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14;" />
+                  </HBox>
+               </VBox>
                
-               <!-- Botón Agregar -->
-               <HBox alignment="CENTER_RIGHT">
-                  <Button fx:id="btnAgregar" text="Agregar" style="-fx-background-color: #3B6F89; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14;" />
+               <!-- Botón de regreso al final -->
+               <HBox alignment="CENTER_LEFT" spacing="10">
+                  <Button text="← Volver al Menú Principal" style="-fx-background-color: #3B6F89; -fx-text-fill: white; -fx-font-weight: bold;" onAction="#volverAlMenuPrincipal" />
                </HBox>
-            </VBox>
-            
-            <!-- Botón de regreso al final -->
-            <HBox alignment="CENTER_LEFT" spacing="10">
-               <Button text="← Volver al Menú Principal" style="-fx-background-color: #3B6F89; -fx-text-fill: white; -fx-font-weight: bold;" onAction="#volverAlMenuPrincipal" />
-            </HBox>
-         </children>
-      </VBox>
+            </children>
+         </VBox>
+      </ScrollPane>
    </center>
    <left>
       <VBox fx:id="menuLateral" style="-fx-background-color: #3B6F89;" prefWidth="60" minWidth="60" maxWidth="200" BorderPane.alignment="CENTER">

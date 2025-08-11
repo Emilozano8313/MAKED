@@ -260,7 +260,7 @@ public class GestUsuariosController {
     private void configurarEventosMenuLateral() {
         // Evento para gestión de usuarios (ya estamos aquí)
         menuItemUsuarios.setOnMouseClicked(event -> {
-            mostrarAlerta("Gestión de Usuarios", "Ya estás en la gestión de usuarios", Alert.AlertType.INFORMATION);
+            mostrarAlerta("Gestión de Pacientes", "Ya estás en la gestión de pacientes", Alert.AlertType.INFORMATION);
         });
         
         // Evento para gestión de médicos
@@ -303,7 +303,20 @@ public class GestUsuariosController {
     
     @FXML
     private void agregarUsuario(ActionEvent event) {
-        mostrarAlerta("Agregar Usuario", "Función de agregar usuario en desarrollo", Alert.AlertType.INFORMATION);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/agregarUsuario.fxml"));
+            Parent agregarUsuarioRoot = loader.load();
+            
+            Scene nuevaEscena = new Scene(agregarUsuarioRoot, 900, 600);
+            Stage currentStage = (Stage) menuLateral.getScene().getWindow();
+            currentStage.setScene(nuevaEscena);
+            currentStage.setTitle("Agregar Paciente - Gestor de Citas Médicas");
+            currentStage.centerOnScreen();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+            mostrarAlerta("Error", "No se pudo cargar la ventana de agregar usuario", Alert.AlertType.ERROR);
+        }
     }
     
     private void editarUsuario(Usuario usuario) {

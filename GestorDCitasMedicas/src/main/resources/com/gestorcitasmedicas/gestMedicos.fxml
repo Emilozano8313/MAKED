@@ -97,46 +97,48 @@
       </VBox>
    </left>
    <center>
-      <VBox spacing="20" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
-         <padding>
-            <Insets top="20" right="20" bottom="20" left="20" />
-         </padding>
-         <children>
-            <!-- Título -->
-            <HBox spacing="10" alignment="CENTER_LEFT">
-               <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@img/imed.png" />
-                  </image>
-               </ImageView>
-               <Label text="Gestión de Médicos" style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #3B6F89;" />
-            </HBox>
-            
-            <!-- Tabla -->
-            <VBox spacing="10" VBox.vgrow="ALWAYS">
-               <TableView fx:id="tablaMedicos" VBox.vgrow="ALWAYS" style="-fx-background-color: #E7ECF0;">
-                  <columns>
-                     <TableColumn fx:id="colNombre" text="Nombre" prefWidth="200" />
-                     <TableColumn fx:id="colEspecialidad" text="Especialidad" prefWidth="150" />
-                     <TableColumn fx:id="colCedula" text="No. Cédula" prefWidth="150" />
-                     <TableColumn fx:id="colGenero" text="Género" prefWidth="100" />
-                     <TableColumn fx:id="colEdad" text="Edad" prefWidth="80" />
-                     <TableColumn fx:id="colTelefono" text="Teléfono" prefWidth="150" />
-                     <TableColumn fx:id="colEstatus" text="Estatus" prefWidth="100" />
-                  </columns>
-               </TableView>
-               
-               <!-- Botón Agregar -->
-               <HBox alignment="CENTER_RIGHT">
-                  <Button fx:id="btnAgregar" text="Agregar" style="-fx-background-color: #3B6F89; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14;" />
+      <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+         <VBox spacing="20" style="-fx-background-color: #FFFFFF;">
+            <padding>
+               <Insets top="20" right="20" bottom="20" left="20" />
+            </padding>
+            <children>
+               <!-- Título -->
+               <HBox spacing="10" alignment="CENTER_LEFT">
+                  <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/imed.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Gestión de Médicos" style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #3B6F89;" />
                </HBox>
-            </VBox>
-            
-            <!-- Botón de regreso al final -->
-            <HBox alignment="CENTER_LEFT" spacing="10">
-               <Button text="← Volver al Menú Principal" style="-fx-background-color: #3B6F89; -fx-text-fill: white; -fx-font-weight: bold;" onAction="#volverAlMenuPrincipal" />
-            </HBox>
-         </children>
-      </VBox>
+               
+               <!-- Tabla -->
+               <VBox spacing="10" VBox.vgrow="ALWAYS">
+                  <TableView fx:id="tablaMedicos" VBox.vgrow="ALWAYS" style="-fx-background-color: #E7ECF0;">
+                     <columns>
+                        <TableColumn fx:id="colNombre" text="Nombre" prefWidth="200" />
+                        <TableColumn fx:id="colEspecialidad" text="Especialidad" prefWidth="150" />
+                        <TableColumn fx:id="colCedula" text="No. Cédula" prefWidth="150" />
+                        <TableColumn fx:id="colGenero" text="Género" prefWidth="100" />
+                        <TableColumn fx:id="colEdad" text="Edad" prefWidth="80" />
+                        <TableColumn fx:id="colTelefono" text="Teléfono" prefWidth="150" />
+                        <TableColumn fx:id="colEstatus" text="Estatus" prefWidth="100" />
+                     </columns>
+                  </TableView>
+                  
+                  <!-- Botón Agregar -->
+                  <HBox alignment="CENTER_RIGHT">
+                     <Button fx:id="btnAgregar" text="Agregar" style="-fx-background-color: #3B6F89; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14;" />
+                  </HBox>
+               </VBox>
+               
+               <!-- Botón de regreso al final -->
+               <HBox alignment="CENTER_LEFT" spacing="10">
+                  <Button text="← Volver al Menú Principal" style="-fx-background-color: #3B6F89; -fx-text-fill: white; -fx-font-weight: bold;" onAction="#volverAlMenuPrincipal" />
+               </HBox>
+            </children>
+         </VBox>
+      </ScrollPane>
    </center>
 </BorderPane>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.collections.FXCollections?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.AgregarUsuarioController" prefHeight="600.0" prefWidth="900.0" minHeight="500" minWidth="700">
+   <top>
+      <Pane prefHeight="80.0" prefWidth="900.0" style="-fx-background-color: #E7ECF0;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="70.0" fitWidth="50.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/iper.png" />
+               </image>
+            </ImageView>
+                         <Label text="Agregar Nuevo Paciente" layoutX="80.0" layoutY="25.0" style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #3B6F89;" />
+         </children>
+      </Pane>
+   </top>
+   <left>
+      <VBox fx:id="menuLateral" style="-fx-background-color: #3B6F89;" prefWidth="60" minWidth="60" maxWidth="200" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets top="15" right="8" bottom="15" left="8" />
+         </padding>
+         <children>
+            <!-- Gestion Usuarios -->
+            <VBox fx:id="menuItemUsuarios" style="-fx-background-color: #4A7A9A; -fx-background-radius: 5;" spacing="3" alignment="CENTER">
+               <padding>
+                  <Insets top="8" right="8" bottom="8" left="8" />
+               </padding>
+               <children>
+                  <ImageView fitHeight="24" fitWidth="24" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/iper.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Gestion Usuarios" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;" visible="false" managed="false" />
+               </children>
+            </VBox>
+            
+            <!-- Gestion Medicos -->
+            <VBox fx:id="menuItemMedicos" style="-fx-background-color: #3B6F89; -fx-background-radius: 5;" spacing="3" alignment="CENTER">
+               <padding>
+                  <Insets top="8" right="8" bottom="8" left="8" />
+               </padding>
+               <children>
+                  <ImageView fitHeight="24" fitWidth="24" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/imed.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Gestion Medicos" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;" visible="false" managed="false" />
+               </children>
+            </VBox>
+            
+            <!-- Gestion Citas -->
+            <VBox fx:id="menuItemCitas" style="-fx-background-color: #3B6F89; -fx-background-radius: 5;" spacing="3" alignment="CENTER">
+               <padding>
+                  <Insets top="8" right="8" bottom="8" left="8" />
+               </padding>
+               <children>
+                  <ImageView fitHeight="24" fitWidth="24" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/ical.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Gestion Citas" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;" visible="false" managed="false" />
+               </children>
+            </VBox>
+            
+            <!-- Salir -->
+            <VBox fx:id="menuItemSalir" style="-fx-background-color: #3B6F89; -fx-background-radius: 5;" spacing="3" alignment="CENTER">
+               <padding>
+                  <Insets top="8" right="8" bottom="8" left="8" />
+               </padding>
+               <children>
+                  <ImageView fitHeight="24" fitWidth="24" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/iexit.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Salir" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;" visible="false" managed="false" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+         <VBox spacing="20" style="-fx-background-color: #FFFFFF;">
+            <padding>
+               <Insets top="20" right="20" bottom="20" left="20" />
+            </padding>
+            <children>
+               <!-- Título del formulario -->
+               <HBox spacing="10" alignment="CENTER_LEFT">
+                  <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/iper.png" />
+                     </image>
+                  </ImageView>
+                                     <Label text="Información del Paciente" style="-fx-font-weight: bold; -fx-font-size: 20; -fx-text-fill: #3B6F89;" />
+               </HBox>
+               
+               <!-- Formulario de usuario -->
+               <VBox spacing="15" style="-fx-background-color: #F8F9FA; -fx-padding: 20; -fx-background-radius: 10;">
+                  <children>
+                     <!-- Primera fila: Nombre y Apellidos -->
+                     <HBox spacing="20" alignment="CENTER_LEFT">
+                        <VBox spacing="5" prefWidth="300">
+                           <Label text="Nombre:" style="-fx-font-weight: bold; -fx-font-size: 14; -fx-text-fill: #3B6F89;" />
+                           <TextField fx:id="nombreField" promptText="Ingresa el nombre" prefWidth="280" />
+                        </VBox>
+                        
+                        <VBox spacing="5" prefWidth="300">
+                           <Label text="Apellidos:" style="-fx-font-weight: bold; -fx-font-size: 14; -fx-text-fill: #3B6F89;" />
+                           <TextField fx:id="apellidosField" promptText="Ingresa los apellidos" prefWidth="280" />
+                        </VBox>
+                     </HBox>
+                     
+                     <!-- Segunda fila: Matrícula y CURP -->
+                     <HBox spacing="20" alignment="CENTER_LEFT">
+                        <VBox spacing="5" prefWidth="300">
+                           <Label text="Matrícula o No. empleado:" style="-fx-font-weight: bold; -fx-font-size: 14; -fx-text-fill: #3B6F89;" />
+                           <TextField fx:id="matriculaField" promptText="Ingresa la matrícula o No. de empleado" prefWidth="280" />
+                        </VBox>
+                        
+                        <VBox spacing="5" prefWidth="300">
+                           <Label text="CURP:" style="-fx-font-weight: bold; -fx-font-size: 14; -fx-text-fill: #3B6F89;" />
+                           <TextField fx:id="curpField" promptText="Ingresa el CURP" prefWidth="280" />
+                        </VBox>
+                     </HBox>
+                     
+                     <!-- Tercera fila: Correo y Teléfono -->
+                     <HBox spacing="20" alignment="CENTER_LEFT">
+                        <VBox spacing="5" prefWidth="300">
+                           <Label text="Correo:" style="-fx-font-weight: bold; -fx-font-size: 14; -fx-text-fill: #3B6F89;" />
+                           <TextField fx:id="correoField" promptText="Ingresa el correo" prefWidth="280" />
+                        </VBox>
+                        
+                        <VBox spacing="5" prefWidth="300">
+                           <Label text="Teléfono:" style="-fx-font-weight: bold; -fx-font-size: 14; -fx-text-fill: #3B6F89;" />
+                           <TextField fx:id="telefonoField" promptText="Ingresa el teléfono" prefWidth="280" />
+                        </VBox>
+                     </HBox>
+                     
+                     <!-- Cuarta fila: Contraseña y Confirmar contraseña -->
+                     <HBox spacing="20" alignment="CENTER_LEFT">
+                        <VBox spacing="5" prefWidth="300">
+                           <Label text="Contraseña:" style="-fx-font-weight: bold; -fx-font-size: 14; -fx-text-fill: #3B6F89;" />
+                           <PasswordField fx:id="passwordField" promptText="Ingresa la contraseña" prefWidth="280" />
+                        </VBox>
+                        
+                        <VBox spacing="5" prefWidth="300">
+                           <Label text="Confirmar contraseña:" style="-fx-font-weight: bold; -fx-font-size: 14; -fx-text-fill: #3B6F89;" />
+                           <PasswordField fx:id="confirmPasswordField" promptText="Repite la contraseña" prefWidth="280" />
+                        </VBox>
+                     </HBox>
+                     
+                     <!-- Quinta fila: Tipo de Usuario -->
+                     <VBox spacing="5">
+                        <Label text="Tipo de Usuario:" style="-fx-font-weight: bold; -fx-font-size: 14; -fx-text-fill: #3B6F89;" />
+                                                 <ComboBox fx:id="tipoUsuarioCombo" promptText="Seleccionar tipo de usuario" prefWidth="300" />
+                     </VBox>
+                  </children>
+               </VBox>
+               
+                               <!-- Botones de acción -->
+                <HBox spacing="15" alignment="CENTER_RIGHT">
+                   <Button fx:id="btnLimpiar" text="Limpiar Formulario" style="-fx-background-color: #FFA500; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14;" onAction="#limpiarFormulario" />
+                   <Button fx:id="btnCancelar" text="Cancelar" style="-fx-background-color: #787A7D; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14;" onAction="#cancelarAgregar" />
+                   <Button fx:id="btnAgregar" text="Agregar Paciente" style="-fx-background-color: #3B6F89; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14;" onAction="#agregarUsuario" />
+                </HBox>
+               
+                               <!-- Botón de regreso a gestión de pacientes -->
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                   <Button fx:id="btnVolverMenu" text="← Volver a Gestión de Pacientes" 
+                           style="-fx-background-color: #3B6F89; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14; -fx-background-radius: 5; -fx-padding: 10 20;" 
+                           onAction="#volverAGestionPacientes" />
+                </HBox>
+            </children>
+         </VBox>
+      </ScrollPane>
+   </center>
+</BorderPane>
