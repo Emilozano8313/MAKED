@@ -1,202 +1,182 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.collections.FXCollections?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: #16191C;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.RegMedicosController" prefHeight="600.0" prefWidth="900.0" minHeight="500" minWidth="700">
    <top>
-      <Pane prefHeight="107.0" prefWidth="1080.0" style="-fx-background-color: #E7ECF0;" BorderPane.alignment="CENTER">
+      <Pane prefHeight="80.0" prefWidth="900.0" style="-fx-background-color: #E7ECF0;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="101.0" fitWidth="73.0" layoutX="14.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/cross.png" />
-               </image></ImageView>
-            <Button layoutX="897.0" layoutY="21.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="165.0" style="-fx-background-color: #E7ECF0;">
-               <graphic>
-                  <ImageView fitHeight="60.0" fitWidth="153.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/miPerfil.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
+            <Label text="Registro de Médico" layoutX="20.0" layoutY="25.0" style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #3B6F89;" />
          </children>
       </Pane>
    </top>
-   <center>
-      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
-         <children>
-            <Button layoutX="755.0" layoutY="536.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #787A7D;" text="Regresar" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
-            <Label layoutX="14.0" layoutY="14.0" text="Registro Medico">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Label>
-            <Button layoutX="630.0" layoutY="536.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="116.0" style="-fx-background-color: #3B6F89;" text="Registrar" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
-            <ImageView fitHeight="248.0" fitWidth="243.0" layoutX="14.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/profile.png" />
-               </image></ImageView>
-            <HBox layoutX="288.0" layoutY="105.0" prefHeight="200.0" prefWidth="577.0">
-               <children>
-                  <VBox prefHeight="100.0" prefWidth="276.0">
-                     <children>
-                        <Label text="Nombre">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <TextField promptText="Ingrese nombre completo" style="-fx-background-color: #B9C3D5;">
-                           <VBox.margin>
-                              <Insets bottom="15.0" />
-                           </VBox.margin></TextField>
-                        <Label text="Especialidad">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <TextField promptText="Ingrese la especialidad" style="-fx-background-color: B9C3D5;">
-                           <VBox.margin>
-                              <Insets bottom="15.0" />
-                           </VBox.margin></TextField>
-                        <Label text="Cedula">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font></Label>
-                        <TextField promptText="Ingrese la cedula" style="-fx-background-color: B9C3D5;">
-                           <VBox.margin>
-                              <Insets bottom="15.0" />
-                           </VBox.margin></TextField>
-                        <Label text="Correo Institucional">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font></Label>
-                        <TextField promptText="Ingrese correo" style="-fx-background-color: B9C3D5;" />
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="200.0" prefWidth="278.0">
-                     <HBox.margin>
-                        <Insets left="30.0" />
-                     </HBox.margin>
-                     <children>
-                        <Label text="Telefono">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font></Label>
-                        <TextField promptText="Ingrese el telefono" style="-fx-background-color: B9C3D5;">
-                           <VBox.margin>
-                              <Insets bottom="15.0" />
-                           </VBox.margin></TextField>
-                        <Label text="Horario">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <TextField promptText="Ingrese el horario" style="-fx-background-color: B9C3D5;">
-                           <VBox.margin>
-                              <Insets bottom="15.0" />
-                           </VBox.margin></TextField>
-                        <Label text="Consultorio">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <TextField promptText="Ingrese consultorio" style="-fx-background-color: B9C3D5;">
-                           <VBox.margin>
-                              <Insets bottom="15.0" />
-                           </VBox.margin></TextField>
-                        <Label text="Contraseña">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <TextField promptText="Ingrese la contraseña" style="-fx-background-color: B9C3D5;">
-                           <VBox.margin>
-                              <Insets bottom="15.0" />
-                           </VBox.margin></TextField>
-                        <Label text="Confirmar Contraseña">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <TextField promptText="Repita la contraseña" style="-fx-background-color: B9C3D5;" />
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-         </children>
-      </Pane>
-   </center>
    <left>
-      <Pane prefHeight="613.0" prefWidth="123.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+      <VBox fx:id="menuLateral" style="-fx-background-color: #3B6F89;" prefWidth="60" minWidth="60" maxWidth="200" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets top="15" right="8" bottom="15" left="8" />
+         </padding>
          <children>
-            <Pane layoutX="41.0" layoutY="173.0" prefHeight="267.0" prefWidth="32.0">
+            <!-- Gestion Usuarios -->
+            <VBox fx:id="menuItemUsuarios" style="-fx-background-color: #3B6F89; -fx-background-radius: 5;" spacing="3" alignment="CENTER">
+               <padding>
+                  <Insets top="8" right="8" bottom="8" left="8" />
+               </padding>
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3b6f89" height="273.0" layoutX="-4.0" layoutY="-2.0" stroke="#3b6f89" strokeLineCap="ROUND" strokeWidth="5.0" width="38.0" />
-                  <VBox layoutX="-3.0" layoutY="-5.0" prefHeight="274.0" prefWidth="40.0">
-                     <children>
-                        <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="18.0" style="-fx-background-color: #3B6F89;">
-                           <graphic>
-                              <ImageView fitHeight="23.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/iper.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <VBox.margin>
-                              <Insets top="25.0" />
-                           </VBox.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="36.0" style="-fx-background-color: #3B6F89;">
-                           <graphic>
-                              <ImageView fitHeight="29.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/imed.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <VBox.margin>
-                              <Insets top="25.0" />
-                           </VBox.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="13.0" prefWidth="1.0" style="-fx-background-color: #3B6F89;">
-                           <graphic>
-                              <ImageView fitHeight="26.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/ical.png" />
-                                 </image></ImageView>
-                           </graphic>
-                           <VBox.margin>
-                              <Insets top="25.0" />
-                           </VBox.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="31.0" style="-fx-background-color: #3B6F89;">
-                           <graphic>
-                              <ImageView fitHeight="51.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/iexit.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <VBox.margin>
-                              <Insets top="20.0" />
-                           </VBox.margin>
-                        </Button>
-                     </children>
-                  </VBox>
+                  <ImageView fitHeight="24" fitWidth="24" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/iper.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Gestion Usuarios" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;" visible="false" managed="false" />
                </children>
-            </Pane>
-         </children></Pane>
+            </VBox>
+            
+            <!-- Gestion Medicos -->
+            <VBox fx:id="menuItemMedicos" style="-fx-background-color: #4A7A9A; -fx-background-radius: 5;" spacing="3" alignment="CENTER">
+               <padding>
+                  <Insets top="8" right="8" bottom="8" left="8" />
+               </padding>
+               <children>
+                  <ImageView fitHeight="24" fitWidth="24" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/imed.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Gestion Medicos" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;" visible="false" managed="false" />
+               </children>
+            </VBox>
+            
+            <!-- Gestion Citas -->
+            <VBox fx:id="menuItemCitas" style="-fx-background-color: #3B6F89; -fx-background-radius: 5;" spacing="3" alignment="CENTER">
+               <padding>
+                  <Insets top="8" right="8" bottom="8" left="8" />
+               </padding>
+               <children>
+                  <ImageView fitHeight="24" fitWidth="24" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/ical.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Gestion Citas" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;" visible="false" managed="false" />
+               </children>
+            </VBox>
+            
+            <!-- Salir -->
+            <VBox fx:id="menuItemSalir" style="-fx-background-color: #3B6F89; -fx-background-radius: 5;" spacing="3" alignment="CENTER">
+               <padding>
+                  <Insets top="8" right="8" bottom="8" left="8" />
+               </padding>
+               <children>
+                  <ImageView fitHeight="24" fitWidth="24" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/iexit.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Salir" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;" visible="false" managed="false" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
    </left>
+   <center>
+      <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+         <VBox spacing="20" style="-fx-background-color: #FFFFFF;">
+            <padding>
+               <Insets top="20" right="20" bottom="20" left="20" />
+            </padding>
+            <children>
+               <!-- Título del formulario -->
+               <Label text="Registro de Médico" style="-fx-font-weight: bold; -fx-font-size: 20; -fx-text-fill: #3B6F89;" />
+               
+               <!-- Contenido principal -->
+               <HBox spacing="30" alignment="TOP_LEFT">
+                  <!-- Imagen de perfil -->
+                  <VBox alignment="CENTER" spacing="10">
+                     <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@img/profile.png" />
+                        </image>
+                     </ImageView>
+                     <Label text="Foto de Perfil" style="-fx-font-size: 12; -fx-text-fill: #666;" />
+                  </VBox>
+                  
+                  <!-- Formulario -->
+                  <VBox spacing="15" prefWidth="500">
+                     <!-- Primera fila: Nombre y Especialidad -->
+                     <HBox spacing="20" alignment="CENTER_LEFT">
+                        <VBox spacing="5" prefWidth="240">
+                           <Label text="Nombre:" style="-fx-font-weight: bold; -fx-font-size: 14;" />
+                           <TextField fx:id="nombreField" promptText="Ingrese nombre completo" style="-fx-background-color: #F5F5F5; -fx-border-color: #DDD; -fx-border-radius: 3; -fx-background-radius: 3;" />
+                        </VBox>
+                        <VBox spacing="5" prefWidth="240">
+                           <Label text="Especialidad:" style="-fx-font-weight: bold; -fx-font-size: 14;" />
+                           <TextField fx:id="especialidadField" promptText="Ingrese la especialidad" style="-fx-background-color: #F5F5F5; -fx-border-color: #DDD; -fx-border-radius: 3; -fx-background-radius: 3;" />
+                        </VBox>
+                     </HBox>
+                     
+                     <!-- Segunda fila: Cédula y Correo -->
+                     <HBox spacing="20" alignment="CENTER_LEFT">
+                        <VBox spacing="5" prefWidth="240">
+                           <Label text="Cédula:" style="-fx-font-weight: bold; -fx-font-size: 14;" />
+                           <TextField fx:id="cedulaField" promptText="Ingrese la cédula" style="-fx-background-color: #F5F5F5; -fx-border-color: #DDD; -fx-border-radius: 3; -fx-background-radius: 3;" />
+                        </VBox>
+                        <VBox spacing="5" prefWidth="240">
+                           <Label text="Correo Institucional:" style="-fx-font-weight: bold; -fx-font-size: 14;" />
+                           <TextField fx:id="correoField" promptText="Ingrese correo" style="-fx-background-color: #F5F5F5; -fx-border-color: #DDD; -fx-border-radius: 3; -fx-background-radius: 3;" />
+                        </VBox>
+                     </HBox>
+                     
+                     <!-- Tercera fila: Teléfono y Horario -->
+                     <HBox spacing="20" alignment="CENTER_LEFT">
+                        <VBox spacing="5" prefWidth="240">
+                           <Label text="Teléfono:" style="-fx-font-weight: bold; -fx-font-size: 14;" />
+                           <TextField fx:id="telefonoField" promptText="Ingrese el teléfono" style="-fx-background-color: #F5F5F5; -fx-border-color: #DDD; -fx-border-radius: 3; -fx-background-radius: 3;" />
+                        </VBox>
+                        <VBox spacing="5" prefWidth="240">
+                           <Label text="Horario:" style="-fx-font-weight: bold; -fx-font-size: 14;" />
+                           <TextField fx:id="horarioField" promptText="Ingrese el horario" style="-fx-background-color: #F5F5F5; -fx-border-color: #DDD; -fx-border-radius: 3; -fx-background-radius: 3;" />
+                        </VBox>
+                     </HBox>
+                     
+                     <!-- Cuarta fila: Consultorio -->
+                     <HBox spacing="20" alignment="CENTER_LEFT">
+                        <VBox spacing="5" prefWidth="240">
+                           <Label text="Consultorio:" style="-fx-font-weight: bold; -fx-font-size: 14;" />
+                           <TextField fx:id="consultorioField" promptText="Ingrese consultorio" style="-fx-background-color: #F5F5F5; -fx-border-color: #DDD; -fx-border-radius: 3; -fx-background-radius: 3;" />
+                        </VBox>
+                        <VBox spacing="5" prefWidth="240">
+                           <!-- Espacio vacío para mantener alineación -->
+                        </VBox>
+                     </HBox>
+                     
+                     <!-- Quinta fila: Contraseña -->
+                     <HBox spacing="20" alignment="CENTER_LEFT">
+                        <VBox spacing="5" prefWidth="240">
+                           <Label text="Contraseña:" style="-fx-font-weight: bold; -fx-font-size: 14;" />
+                           <PasswordField fx:id="passwordField" promptText="Ingrese la contraseña" style="-fx-background-color: #F5F5F5; -fx-border-color: #DDD; -fx-border-radius: 3; -fx-background-radius: 3;" />
+                        </VBox>
+                        <VBox spacing="5" prefWidth="240">
+                           <Label text="Confirmar Contraseña:" style="-fx-font-weight: bold; -fx-font-size: 14;" />
+                           <PasswordField fx:id="confirmPasswordField" promptText="Repita la contraseña" style="-fx-background-color: #F5F5F5; -fx-border-color: #DDD; -fx-border-radius: 3; -fx-background-radius: 3;" />
+                        </VBox>
+                     </HBox>
+                  </VBox>
+               </HBox>
+               
+               <!-- Botones -->
+               <HBox spacing="15" alignment="CENTER_RIGHT">
+                  <Button fx:id="btnRegresar" text="Regresar" style="-fx-background-color: #787A7D; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" prefHeight="35" prefWidth="100" />
+                  <Button fx:id="btnRegistrar" text="Registrar" style="-fx-background-color: #3B6F89; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" prefHeight="35" prefWidth="100" />
+               </HBox>
+            </children>
+         </VBox>
+      </ScrollPane>
+   </center>
 </BorderPane>
