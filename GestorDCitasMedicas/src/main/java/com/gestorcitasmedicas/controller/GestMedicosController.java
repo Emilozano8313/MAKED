@@ -316,8 +316,13 @@ public class GestMedicosController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/regMedicos.fxml"));
             Parent regMedicosRoot = loader.load();
             
+<<<<<<< HEAD
             Scene nuevaEscena = new Scene(regMedicosRoot, 1080, 720);
             Stage currentStage = (Stage) menuLateral.getScene().getWindow();
+=======
+            Scene nuevaEscena = new Scene(regMedicosRoot, 1200, 600);
+            Stage currentStage = (Stage) btnAgregar.getScene().getWindow();
+>>>>>>> 3ea16f87b533c31ff796f367d2d8cc8f6d7e99d1
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Registro de Médico - Gestor de Citas Médicas");
             currentStage.centerOnScreen();

@@ -7,9 +7,15 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
+<<<<<<< HEAD
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #16191C;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.GestMedicosController">
    <top>
       <Pane prefHeight="107.0" prefWidth="1024.0" style="-fx-background-color: #E7ECF0;" BorderPane.alignment="CENTER">
+=======
+<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.GestMedicosController" prefHeight="600.0" prefWidth="900.0" minHeight="500" minWidth="700">
+   <top>
+      <Pane prefHeight="80.0" prefWidth="900.0" style="-fx-background-color: #E7ECF0;" BorderPane.alignment="CENTER">
+>>>>>>> 3ea16f87b533c31ff796f367d2d8cc8f6d7e99d1
          <children>
             <ImageView fitHeight="101.0" fitWidth="73.0" layoutX="14.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                <image>
