@@ -307,7 +307,20 @@ public class GestMedicosController {
     }
     
     private void agregarMedico() {
-        mostrarAlerta("Agregar Médico", "Función de agregar médico en desarrollo", Alert.AlertType.INFORMATION);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/regMedicos.fxml"));
+            Parent regMedicosRoot = loader.load();
+            
+            Scene nuevaEscena = new Scene(regMedicosRoot, 1080, 720);
+            Stage currentStage = (Stage) menuLateral.getScene().getWindow();
+            currentStage.setScene(nuevaEscena);
+            currentStage.setTitle("Registro de Médico - Gestor de Citas Médicas");
+            currentStage.centerOnScreen();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+            mostrarAlerta("Error", "No se pudo cargar la ventana de registro de médicos", Alert.AlertType.ERROR);
+        }
     }
     
     private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
