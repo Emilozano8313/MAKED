@@ -214,8 +214,20 @@ public class RecuperarContraController {
     
     @FXML
     private void crearCuenta() {
-        // Aquí se podría navegar a la ventana de registro
-        mostrarAlerta("Información", "Función de crear cuenta en desarrollo", Alert.AlertType.INFORMATION);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/Registro.fxml"));
+            Parent registroRoot = loader.load();
+            
+            Scene nuevaEscena = new Scene(registroRoot, 773, 400);
+            Stage currentStage = (Stage) lblCrearCuenta.getScene().getWindow();
+            currentStage.setScene(nuevaEscena);
+            currentStage.setTitle("Registro - Gestor de Citas Médicas");
+            currentStage.centerOnScreen();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+            mostrarAlerta("Error", "No se pudo cargar la ventana de registro", Alert.AlertType.ERROR);
+        }
     }
     
     private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {

@@ -306,6 +306,11 @@ public class GestMedicosController {
         }
     }
     
+    @FXML
+    private void agregarMedico(ActionEvent event) {
+        agregarMedico();
+    }
+    
     private void agregarMedico() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/regMedicos.fxml"));

@@ -7,10 +7,10 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.RecuperarContraController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.RecuperarContraController">
    <children>
       <!-- Lado izquierdo - Imagen de consulta médica -->
-      <VBox prefWidth="600" style="-fx-background-color: #E7ECF0;" alignment="CENTER">
+      <VBox prefWidth="400" style="-fx-background-color: #E7ECF0;" alignment="CENTER">
          <children>
             <ImageView fitHeight="400" fitWidth="500" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -21,10 +21,11 @@
       </VBox>
       
       <!-- Lado derecho - Formulario de recuperación -->
-      <VBox prefWidth="600" spacing="30" alignment="CENTER" style="-fx-background-color: #FFFFFF;">
-         <padding>
-            <Insets top="40" right="60" bottom="40" left="60" />
-         </padding>
+      <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: #FFFFFF;" vbarPolicy="AS_NEEDED" hbarPolicy="NEVER" prefWidth="400">
+         <VBox spacing="30" alignment="CENTER" style="-fx-background-color: #FFFFFF;" minWidth="500">
+            <padding>
+               <Insets top="40" right="60" bottom="40" left="60" />
+            </padding>
          <children>
             <!-- Botón de regreso -->
             <HBox alignment="CENTER_LEFT" spacing="10">
@@ -88,6 +89,7 @@
                        onAction="#regresarALogin" />
             </VBox>
          </children>
-      </VBox>
+         </VBox>
+      </ScrollPane>
    </children>
 </HBox>

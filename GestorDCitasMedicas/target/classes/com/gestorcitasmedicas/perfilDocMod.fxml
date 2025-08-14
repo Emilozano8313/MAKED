@@ -7,19 +7,19 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: #16191C;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #16191C;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.PerfilDocModController">
    <top>
-      <Pane prefHeight="107.0" prefWidth="1080.0" style="-fx-background-color: #E7ECF0;" BorderPane.alignment="CENTER">
+      <Pane prefHeight="107.0" prefWidth="1024.0" style="-fx-background-color: #E7ECF0;" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="101.0" fitWidth="73.0" layoutX="14.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/cross.png" />
+                  <Image url="@img/cross.png" />
                </image></ImageView>
-            <Button layoutX="897.0" layoutY="21.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="165.0" style="-fx-background-color: #E7ECF0;">
+            <Button fx:id="btnVolverMenu" layoutX="841.0" layoutY="21.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="165.0" style="-fx-background-color: #E7ECF0;" onAction="#volverAlMenuPrincipal">
                <graphic>
                   <ImageView fitHeight="60.0" fitWidth="153.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/miPerfil.png" />
+                        <Image url="@img/miPerfil.png" />
                      </image>
                   </ImageView>
                </graphic></Button>
@@ -27,25 +27,34 @@
       </Pane>
    </top>
    <center>
-      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
-         <children>
-            <Button layoutX="587.0" layoutY="536.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="117.0" style="-fx-background-color: #787A7D;" text="Regresar" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
-            <Button layoutX="715.0" layoutY="536.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="116.0" style="-fx-background-color: #3B6F89;" text="Actualizar" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
+      <ScrollPane vbarPolicy="AS_NEEDED" hbarPolicy="NEVER" fitToWidth="true" fitToHeight="true" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+         <content>
+                         <VBox prefHeight="750.0" prefWidth="800.0" spacing="10.0" style="-fx-background-color: #FFFFFF;">
+               <children>
+                                     <Pane prefHeight="650.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;">
+                     <children>
+                        <Button fx:id="btnCancelar" layoutX="587.0" layoutY="536.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="117.0" style="-fx-background-color: #787A7D;" text="Cancelar" textFill="WHITE" onAction="#cancelarCambios">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnGuardar" layoutX="715.0" layoutY="536.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="116.0" style="-fx-background-color: #3B6F89;" text="Guardar" textFill="WHITE" onAction="#guardarCambios">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnRegresarMenu" layoutX="843.0" layoutY="536.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="116.0" style="-fx-background-color: #4CAF50;" text="Regresar al Menú" textFill="WHITE" onAction="#regresarAlMenuPrincipal">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
             <ImageView fitHeight="200.0" fitWidth="850.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/docBack.png" />
+                  <Image url="@img/docBack.png" />
                </image></ImageView>
             <ImageView fitHeight="193.0" fitWidth="179.0" layoutX="14.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/profile.png" />
+                  <Image url="@img/profile.png" />
                </image></ImageView>
             <HBox layoutX="55.0" layoutY="315.0" prefHeight="200.0" prefWidth="778.0">
                <children>
@@ -59,7 +68,7 @@
                               <Insets top="55.0" />
                            </VBox.margin>
                         </Label>
-                        <Label prefHeight="25.0" prefWidth="236.0" text="cedula aqui">
+                        <Label fx:id="lblCedula" prefHeight="25.0" prefWidth="236.0" text="cedula aqui">
                            <font>
                               <Font size="16.0" />
                            </font></Label>
@@ -70,7 +79,7 @@
                            <VBox.margin>
                               <Insets top="30.0" />
                            </VBox.margin></Label>
-                        <TextField prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: #B9C3D5;">
+                        <TextField fx:id="txtEdad" prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: #B9C3D5;">
                            <VBox.margin>
                               <Insets right="120.0" />
                            </VBox.margin></TextField>
@@ -88,7 +97,7 @@
                            <VBox.margin>
                               <Insets top="55.0" />
                            </VBox.margin></Label>
-                        <TextField prefHeight="25.0" prefWidth="8.0" style="-fx-background-color: #B9C3D5;">
+                        <TextField fx:id="txtSexo" prefHeight="25.0" prefWidth="8.0" style="-fx-background-color: #B9C3D5;">
                            <VBox.margin>
                               <Insets right="70.0" />
                            </VBox.margin></TextField>
@@ -100,7 +109,7 @@
                               <Insets top="30.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField style="-fx-background-color: #B9C3D5;" />
+                        <TextField fx:id="txtCorreo" style="-fx-background-color: #B9C3D5;" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="180.0">
@@ -113,7 +122,7 @@
                               <Insets top="55.0" />
                            </VBox.margin>
                         </Label>
-                        <Label prefHeight="25.0" prefWidth="152.0" text="curp">
+                        <Label fx:id="lblCurp" prefHeight="25.0" prefWidth="152.0" text="curp">
                            <font>
                               <Font size="16.0" />
                            </font></Label>
@@ -124,7 +133,7 @@
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font></Label>
-                        <TextField prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #B9C3D5;">
+                        <TextField fx:id="txtHorario" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #B9C3D5;">
                            <VBox.margin>
                               <Insets right="30.0" />
                            </VBox.margin>
@@ -141,7 +150,7 @@
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <TextField style="-fx-background-color: #B9C3D5;">
+                        <TextField fx:id="txtTelefono" style="-fx-background-color: #B9C3D5;">
                            <VBox.margin>
                               <Insets right="20.0" />
                            </VBox.margin>
@@ -154,19 +163,23 @@
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <TextField style="-fx-background-color: #B9C3D5;" />
+                        <TextField fx:id="txtConsultorio" style="-fx-background-color: #B9C3D5;" />
                      </children>
                   </VBox>
                </children>
             </HBox>
-            <Label layoutX="213.0" layoutY="220.0" prefHeight="27.0" prefWidth="319.0" text="nombre">
+            <Label fx:id="lblNombre" layoutX="213.0" layoutY="220.0" prefHeight="27.0" prefWidth="319.0" text="nombre">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-         </children>
-      </Pane>
-   </center>
+                        </children>
+                     </Pane>
+                  </children>
+               </VBox>
+            </content>
+         </ScrollPane>
+      </center>
    <left>
       <Pane prefHeight="613.0" prefWidth="123.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
          <children>
@@ -175,11 +188,11 @@
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3b6f89" height="236.0" layoutX="-6.0" layoutY="-4.0" stroke="#3b6f89" strokeLineCap="ROUND" strokeWidth="5.0" width="43.0" />
                   <VBox layoutX="-3.0" layoutY="-5.0" prefHeight="231.0" prefWidth="40.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="18.0" style="-fx-background-color: #3B6F89;">
+                        <Button fx:id="btnCitas" mnemonicParsing="false" prefHeight="34.0" prefWidth="18.0" style="-fx-background-color: #3B6F89;" onAction="#abrirCitas">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/ical.png" />
+                                    <Image url="@img/ical.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -187,11 +200,11 @@
                               <Insets top="30.0" />
                            </VBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="36.0" style="-fx-background-color: #3B6F89;">
+                        <Button fx:id="btnExpedientes" mnemonicParsing="false" prefHeight="34.0" prefWidth="36.0" style="-fx-background-color: #3B6F89;" onAction="#abrirExpedientes">
                            <graphic>
                               <ImageView fitHeight="29.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/exp.png" />
+                                    <Image url="@img/exp.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -199,11 +212,11 @@
                               <Insets top="30.0" />
                            </VBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="31.0" style="-fx-background-color: #3B6F89;">
+                        <Button fx:id="btnSalir" mnemonicParsing="false" prefHeight="34.0" prefWidth="31.0" style="-fx-background-color: #3B6F89;" onAction="#salir">
                            <graphic>
                               <ImageView fitHeight="51.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../GestorDCitasMedicas/src/main/resources/com/gestorcitasmedicas/img/iexit.png" />
+                                    <Image url="@img/iexit.png" />
                                  </image>
                               </ImageView>
                            </graphic>

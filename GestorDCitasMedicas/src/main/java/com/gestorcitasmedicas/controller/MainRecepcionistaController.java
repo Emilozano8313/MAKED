@@ -273,16 +273,21 @@ public class MainRecepcionistaController {
     }
     
     private void configurarEventosBotones() {
+        System.out.println("Configurando eventos de botones...");
+        
         // Evento para el botón de perfil
         if (btnPerfil != null) {
             btnPerfil.setOnAction(this::abrirPerfil);
+            System.out.println("Botón de perfil configurado");
         }
         
         // Configurar menú expandible
         configurarMenuExpandible();
+        System.out.println("Menú expandible configurado");
         
         // Configurar eventos del menú lateral
         configurarEventosMenuLateral();
+        System.out.println("Eventos del menú lateral configurados");
     }
     
     private void configurarMenuExpandible() {
@@ -372,28 +377,104 @@ public class MainRecepcionistaController {
     private void configurarEventosMenuLateral() {
         // Evento para gestión de usuarios
         menuItemUsuarios.setOnMouseClicked(event -> {
+            System.out.println("Click en Gestión de Usuarios");
             abrirGestionPacientes();
         });
         
         // Evento para gestión de médicos
         menuItemMedicos.setOnMouseClicked(event -> {
+            System.out.println("Click en Gestión de Médicos");
             abrirGestionMedicos();
         });
         
         // Evento para agendar citas
         menuItemCitas.setOnMouseClicked(event -> {
+            System.out.println("Click en Agendar Citas");
             abrirGestionCitas();
         });
         
         // Evento para cerrar sesión
         menuItemSalir.setOnMouseClicked(event -> {
+            System.out.println("Click en Cerrar Sesión");
             salir();
+        });
+        
+        // Efectos de hover para mejor feedback visual
+        configurarEfectosHover();
+    }
+    
+    private void configurarEfectosHover() {
+        // Efectos para Gestión de Usuarios
+        menuItemUsuarios.setOnMouseEntered(event -> {
+            menuItemUsuarios.setStyle("-fx-background-color: #4A7A9A; -fx-background-radius: 5; -fx-cursor: hand;");
+        });
+        menuItemUsuarios.setOnMouseExited(event -> {
+            menuItemUsuarios.setStyle("-fx-background-color: #3B6F89; -fx-background-radius: 5; -fx-cursor: hand;");
+        });
+        
+        // Efectos para Gestión de Médicos
+        menuItemMedicos.setOnMouseEntered(event -> {
+            menuItemMedicos.setStyle("-fx-background-color: #4A7A9A; -fx-background-radius: 5; -fx-cursor: hand;");
+        });
+        menuItemMedicos.setOnMouseExited(event -> {
+            menuItemMedicos.setStyle("-fx-background-color: #3B6F89; -fx-background-radius: 5; -fx-cursor: hand;");
+        });
+        
+        // Efectos para Agendar Citas
+        menuItemCitas.setOnMouseEntered(event -> {
+            menuItemCitas.setStyle("-fx-background-color: #4A7A9A; -fx-background-radius: 5; -fx-cursor: hand;");
+        });
+        menuItemCitas.setOnMouseExited(event -> {
+            menuItemCitas.setStyle("-fx-background-color: #3B6F89; -fx-background-radius: 5; -fx-cursor: hand;");
+        });
+        
+        // Efectos para Cerrar Sesión
+        menuItemSalir.setOnMouseEntered(event -> {
+            menuItemSalir.setStyle("-fx-background-color: #4A7A9A; -fx-background-radius: 5; -fx-cursor: hand;");
+        });
+        menuItemSalir.setOnMouseExited(event -> {
+            menuItemSalir.setStyle("-fx-background-color: #3B6F89; -fx-background-radius: 5; -fx-cursor: hand;");
         });
     }
     
     @FXML
     private void abrirPerfil(ActionEvent event) {
-        mostrarAlerta("Perfil", "Función de perfil en desarrollo", Alert.AlertType.INFORMATION);
+        try {
+            System.out.println("Abriendo ventana de perfil...");
+            
+            // Verificar si el archivo existe
+            java.net.URL resourceUrl = getClass().getResource("/com/gestorcitasmedicas/perfilAdmMod.fxml");
+            if (resourceUrl == null) {
+                throw new IOException("No se pudo encontrar el archivo perfilAdmMod.fxml en el classpath");
+            }
+            System.out.println("Archivo FXML encontrado en: " + resourceUrl);
+            
+            // Cargar la ventana de perfil
+            FXMLLoader loader = new FXMLLoader(resourceUrl);
+            
+            Parent perfilRoot = loader.load();
+            System.out.println("FXML cargado exitosamente");
+            
+            // Crear nueva escena
+            Scene nuevaEscena = new Scene(perfilRoot, 1200, 800);
+            
+            // Obtener la ventana actual y reemplazarla
+            Stage currentStage = (Stage) menuLateral.getScene().getWindow();
+            currentStage.setScene(nuevaEscena);
+            currentStage.setTitle("Mi Perfil - Gestor de Citas Médicas");
+            currentStage.centerOnScreen();
+            
+            System.out.println("Ventana de perfil abierta exitosamente");
+            
+        } catch (IOException e) {
+            System.err.println("Error al cargar perfilAdmMod.fxml: " + e.getMessage());
+            e.printStackTrace();
+            mostrarAlerta("Error", "No se pudo cargar la ventana de perfil: " + e.getMessage(), Alert.AlertType.ERROR);
+        } catch (Exception e) {
+            System.err.println("Error inesperado al cargar perfilAdmMod.fxml: " + e.getMessage());
+            e.printStackTrace();
+            mostrarAlerta("Error", "Error inesperado al cargar la ventana de perfil: " + e.getMessage(), Alert.AlertType.ERROR);
+        }
     }
     
     @FXML
@@ -429,9 +510,20 @@ public class MainRecepcionistaController {
     
     private void abrirGestionMedicos() {
         try {
+            System.out.println("Intentando cargar gestMedicos.fxml...");
+            
+            // Verificar si el archivo existe
+            java.net.URL resourceUrl = getClass().getResource("/com/gestorcitasmedicas/gestMedicos.fxml");
+            if (resourceUrl == null) {
+                throw new IOException("No se pudo encontrar el archivo gestMedicos.fxml en el classpath");
+            }
+            System.out.println("Archivo FXML encontrado en: " + resourceUrl);
+            
             // Cargar la nueva ventana completa
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/gestMedicos.fxml"));
+            FXMLLoader loader = new FXMLLoader(resourceUrl);
+            
             Parent gestMedicosRoot = loader.load();
+            System.out.println("FXML cargado exitosamente");
             
             // Crear nueva escena
             Scene nuevaEscena = new Scene(gestMedicosRoot, 1200, 800);
@@ -442,9 +534,16 @@ public class MainRecepcionistaController {
             currentStage.setTitle("Gestión de Médicos - Gestor de Citas Médicas");
             currentStage.centerOnScreen();
             
+            System.out.println("Ventana de gestión de médicos abierta exitosamente");
+            
         } catch (IOException e) {
+            System.err.println("Error al cargar gestMedicos.fxml: " + e.getMessage());
             e.printStackTrace();
-            mostrarAlerta("Error", "No se pudo cargar la gestión de médicos", Alert.AlertType.ERROR);
+            mostrarAlerta("Error", "No se pudo cargar la gestión de médicos: " + e.getMessage(), Alert.AlertType.ERROR);
+        } catch (Exception e) {
+            System.err.println("Error inesperado al cargar gestMedicos.fxml: " + e.getMessage());
+            e.printStackTrace();
+            mostrarAlerta("Error", "Error inesperado al cargar la gestión de médicos: " + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
     
@@ -455,9 +554,20 @@ public class MainRecepcionistaController {
     
     private void abrirGestionCitas() {
         try {
+            System.out.println("Intentando cargar agendarCitaAdm.fxml...");
+            
+            // Verificar si el archivo existe
+            java.net.URL resourceUrl = getClass().getResource("/com/gestorcitasmedicas/agendarCitaAdm.fxml");
+            if (resourceUrl == null) {
+                throw new IOException("No se pudo encontrar el archivo agendarCitaAdm.fxml en el classpath");
+            }
+            System.out.println("Archivo FXML encontrado en: " + resourceUrl);
+            
             // Cargar la ventana de agendar citas
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/agendarCitaAdm.fxml"));
+            FXMLLoader loader = new FXMLLoader(resourceUrl);
+            
             Parent agendarCitaRoot = loader.load();
+            System.out.println("FXML cargado exitosamente");
             
             // Crear nueva escena
             Scene nuevaEscena = new Scene(agendarCitaRoot, 1200, 800);
@@ -468,9 +578,16 @@ public class MainRecepcionistaController {
             currentStage.setTitle("Agendar Cita Médica - Gestor de Citas Médicas");
             currentStage.centerOnScreen();
             
+            System.out.println("Ventana de agendar citas abierta exitosamente");
+            
         } catch (IOException e) {
+            System.err.println("Error al cargar agendarCitaAdm.fxml: " + e.getMessage());
             e.printStackTrace();
-            mostrarAlerta("Error", "No se pudo cargar la ventana de agendar citas", Alert.AlertType.ERROR);
+            mostrarAlerta("Error", "No se pudo cargar la ventana de agendar citas: " + e.getMessage(), Alert.AlertType.ERROR);
+        } catch (Exception e) {
+            System.err.println("Error inesperado al cargar agendarCitaAdm.fxml: " + e.getMessage());
+            e.printStackTrace();
+            mostrarAlerta("Error", "Error inesperado al cargar la ventana de agendar citas: " + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
     

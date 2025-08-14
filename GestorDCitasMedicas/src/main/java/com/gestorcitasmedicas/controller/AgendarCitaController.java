@@ -15,6 +15,7 @@ import javafx.util.Duration;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -543,6 +544,22 @@ public class AgendarCitaController {
         } catch (IOException e) {
             e.printStackTrace();
             mostrarAlerta("Error", "No se pudo regresar al menú principal", Alert.AlertType.ERROR);
+        }
+    }
+    
+    @FXML
+    private void mesAnterior(ActionEvent event) {
+        if (fechaCalendario != null) {
+            fechaCalendario = fechaCalendario.minusMonths(1);
+            generarCalendario();
+        }
+    }
+    
+    @FXML
+    private void mesSiguiente(ActionEvent event) {
+        if (fechaCalendario != null) {
+            fechaCalendario = fechaCalendario.plusMonths(1);
+            generarCalendario();
         }
     }
     

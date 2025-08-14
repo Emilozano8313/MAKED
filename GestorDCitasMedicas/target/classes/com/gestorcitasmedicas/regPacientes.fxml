@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: #16191C;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #16191C;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.RegPacientesController">
    <top>
       <Pane prefHeight="107.0" prefWidth="1080.0" style="-fx-background-color: #E7ECF0;" BorderPane.alignment="CENTER">
          <children>
@@ -29,7 +29,7 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="755.0" layoutY="536.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #787A7D;" text="Regresar" textFill="WHITE">
+            <Button fx:id="btnRegresar" layoutX="755.0" layoutY="536.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #787A7D;" text="Regresar" textFill="WHITE" onAction="#regresar">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -39,7 +39,7 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Button layoutX="630.0" layoutY="536.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="116.0" style="-fx-background-color: #3B6F89;" text="Registrar" textFill="WHITE">
+            <Button fx:id="btnRegistrar" layoutX="630.0" layoutY="536.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="116.0" style="-fx-background-color: #3B6F89;" text="Registrar" textFill="WHITE" onAction="#registrar">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -57,7 +57,7 @@
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <TextField promptText="Ingrese nombre completo" style="-fx-background-color: #B9C3D5;">
+                        <TextField fx:id="txtNombre" promptText="Ingrese nombre completo" style="-fx-background-color: #B9C3D5;">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin></TextField>
@@ -66,7 +66,7 @@
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <TextField promptText="Ingrese el CURP" style="-fx-background-color: B9C3D5;">
+                        <TextField fx:id="txtCurp" promptText="Ingrese el CURP" style="-fx-background-color: B9C3D5;">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin></TextField>
@@ -74,7 +74,7 @@
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font></Label>
-                        <TextField promptText="Ingrese la cedula" style="-fx-background-color: B9C3D5;">
+                        <TextField fx:id="txtTelefono" promptText="Ingrese el teléfono" style="-fx-background-color: B9C3D5;">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin></TextField>
@@ -89,7 +89,7 @@
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font></Label>
-                        <TextField promptText="Ingresa tu matricula" style="-fx-background-color: B9C3D5;">
+                        <TextField fx:id="txtMatricula" promptText="Ingresa tu matricula" style="-fx-background-color: B9C3D5;">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin></TextField>
@@ -98,7 +98,7 @@
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <TextField promptText="Ingrese el correo" style="-fx-background-color: B9C3D5;">
+                        <TextField fx:id="txtCorreo" promptText="Ingrese el correo" style="-fx-background-color: B9C3D5;">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin></TextField>
@@ -107,7 +107,7 @@
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <TextField promptText="Ingrese la contraseña" style="-fx-background-color: B9C3D5;">
+                        <TextField fx:id="txtContrasena" promptText="Ingrese la contraseña" style="-fx-background-color: B9C3D5;">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin></TextField>
@@ -116,7 +116,7 @@
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <TextField promptText="Repita la contraseña" style="-fx-background-color: B9C3D5;" />
+                        <TextField fx:id="txtConfirmarContrasena" promptText="Repita la contraseña" style="-fx-background-color: B9C3D5;" />
                      </children>
                   </VBox>
                </children>

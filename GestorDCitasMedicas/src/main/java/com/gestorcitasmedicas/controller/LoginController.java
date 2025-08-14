@@ -64,8 +64,20 @@ public class LoginController {
     
     @FXML
     private void crearCuenta() {
-        // Aquí se podría navegar a la ventana de registro
-        mostrarAlerta("Información", "Función de crear cuenta en desarrollo", Alert.AlertType.INFORMATION);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/Registro.fxml"));
+            Parent registroRoot = loader.load();
+            
+            Scene nuevaEscena = new Scene(registroRoot, 773, 400);
+            Stage currentStage = (Stage) crearCuenta.getScene().getWindow();
+            currentStage.setScene(nuevaEscena);
+            currentStage.setTitle("Registro - Gestor de Citas Médicas");
+            currentStage.centerOnScreen();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+            mostrarAlerta("Error", "No se pudo cargar la ventana de registro", Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
@@ -75,13 +87,14 @@ public class LoginController {
         
         System.out.println("Iniciando sesión con: " + correo);
         
-        // Simulación simple de autenticación
+        // Simulación de autenticación para diferentes roles
         if ("recepcionista@test.com".equals(correo) && "recepcionista123".equals(contra)) {
+            // Autenticación como recepcionista
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/mainRecepcionista.fxml"));
                 Parent root = loader.load();
                 Stage stage = new Stage();
-                stage.setScene(new Scene(root));
+                stage.setScene(new Scene(root, 1200, 800));
                 stage.setTitle("Panel Principal - Recepcionista");
                 stage.show();
 
@@ -89,7 +102,39 @@ public class LoginController {
                 ((Node) event.getSource()).getScene().getWindow().hide();
             } catch (IOException e) {
                 e.printStackTrace();
-                mostrarAlerta("Error", "No se pudo cargar el panel principal", Alert.AlertType.ERROR);
+                mostrarAlerta("Error", "No se pudo cargar el panel principal del recepcionista", Alert.AlertType.ERROR);
+            }
+        } else if ("doctor@test.com".equals(correo) && "doctor123".equals(contra)) {
+            // Autenticación como médico
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/mainDoctor.fxml"));
+                Parent root = loader.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root, 1200, 800));
+                stage.setTitle("Panel Principal - Médico");
+                stage.show();
+
+                // Cerrar la ventana actual
+                ((Node) event.getSource()).getScene().getWindow().hide();
+            } catch (IOException e) {
+                e.printStackTrace();
+                mostrarAlerta("Error", "No se pudo cargar el panel principal del médico", Alert.AlertType.ERROR);
+            }
+        } else if ("paciente@test.com".equals(correo) && "paciente123".equals(contra)) {
+            // Autenticación como paciente
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/VistaPaciente.fxml"));
+                Parent root = loader.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root, 1024, 768));
+                stage.setTitle("Panel Principal - Paciente");
+                stage.show();
+
+                // Cerrar la ventana actual
+                ((Node) event.getSource()).getScene().getWindow().hide();
+            } catch (IOException e) {
+                e.printStackTrace();
+                mostrarAlerta("Error", "No se pudo cargar el panel principal del paciente", Alert.AlertType.ERROR);
             }
         } else {
             mostrarAlerta("Error", "Credenciales incorrectas", Alert.AlertType.ERROR);
