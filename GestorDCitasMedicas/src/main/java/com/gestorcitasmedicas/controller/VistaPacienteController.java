@@ -5,8 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import javafx.animation.Timeline;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -15,8 +20,7 @@ public class VistaPacienteController {
     @FXML
     private Button btnMiPerfil;
     
-    @FXML
-    private Button btnMiPerfilHeader;
+
     
     @FXML
     private Button btnHistorialCitas;
@@ -32,15 +36,123 @@ public class VistaPacienteController {
     
     @FXML
     private Button btnSalir;
+    
+    // Elementos del menú expandible
+    @FXML private VBox menuLateral;
+    @FXML private VBox menuItemMiPerfil;
+    @FXML private VBox menuItemHistorialCitas;
+    @FXML private VBox menuItemEditarInformacion;
+    @FXML private VBox menuItemCancelarCita;
+    @FXML private VBox menuItemReprogramarCita;
+    @FXML private VBox menuItemSalir;
+    
+    // Variables para el menú expandible
+    private Timeline timelineExpansion;
+    private boolean menuExpandido = false;
 
     @FXML
     private void initialize() {
         System.out.println("VistaPacienteController inicializando...");
         
+        // Configurar menú expandible
+        configurarMenuExpandible();
+        
         // Configurar efectos hover para los botones del menú lateral
         configurarEfectosHover();
         
         System.out.println("VistaPacienteController inicializado correctamente");
+    }
+    
+    private void configurarMenuExpandible() {
+        // Configurar animación del menú
+        timelineExpansion = new Timeline();
+
+        // Verificar que los elementos del menú no sean null antes de configurar eventos
+        if (menuLateral != null) {
+            // Eventos del menú lateral
+            menuLateral.setOnMouseEntered(e -> expandirMenu());
+            menuLateral.setOnMouseExited(e -> contraerMenu());
+
+            // Mostrar etiquetas inicialmente
+            mostrarEtiquetasMenu(false);
+        }
+    }
+
+    private void expandirMenu() {
+        if (!menuExpandido && menuLateral != null && timelineExpansion != null) {
+            menuExpandido = true;
+
+            // Detener animación anterior si está en curso
+            timelineExpansion.stop();
+
+            // Hacer que el menú aparezca por encima del contenido
+            menuLateral.toFront();
+
+            // Animación de expansión
+            KeyValue keyValue = new KeyValue(menuLateral.prefWidthProperty(), 200);
+            KeyFrame keyFrame = new KeyFrame(Duration.millis(300), keyValue);
+            timelineExpansion.getKeyFrames().clear();
+            timelineExpansion.getKeyFrames().add(keyFrame);
+
+            // Mostrar etiquetas durante la expansión
+            mostrarEtiquetasMenu(true);
+
+            timelineExpansion.play();
+        }
+    }
+
+    private void contraerMenu() {
+        if (menuExpandido && menuLateral != null && timelineExpansion != null) {
+            menuExpandido = false;
+
+            // Detener animación anterior si está en curso
+            timelineExpansion.stop();
+
+            // Animación de contracción
+            KeyValue keyValue = new KeyValue(menuLateral.prefWidthProperty(), 60);
+            KeyFrame keyFrame = new KeyFrame(Duration.millis(300), keyValue);
+            timelineExpansion.getKeyFrames().clear();
+            timelineExpansion.getKeyFrames().add(keyFrame);
+
+            // Ocultar etiquetas durante la contracción
+            mostrarEtiquetasMenu(false);
+
+            timelineExpansion.play();
+        }
+    }
+
+    private void mostrarEtiquetasMenu(boolean mostrar) {
+        // Mostrar u ocultar etiquetas de texto en los elementos del menú
+        if (menuItemMiPerfil != null) {
+            menuItemMiPerfil.getChildren().stream()
+                .filter(node -> node instanceof Label)
+                .forEach(node -> node.setVisible(mostrar));
+        }
+        if (menuItemHistorialCitas != null) {
+            menuItemHistorialCitas.getChildren().stream()
+                .filter(node -> node instanceof Label)
+                .forEach(node -> node.setVisible(mostrar));
+        }
+        if (menuItemEditarInformacion != null) {
+            menuItemEditarInformacion.getChildren().stream()
+                .filter(node -> node instanceof Label)
+                .forEach(node -> node.setVisible(mostrar));
+        }
+        if (menuItemCancelarCita != null) {
+            menuItemCancelarCita.getChildren().stream()
+                .filter(node -> node instanceof Label)
+                .forEach(node -> node.setVisible(mostrar));
+        }
+        if (menuItemReprogramarCita != null) {
+            menuItemReprogramarCita.getChildren().stream()
+                .filter(node -> node instanceof Label)
+                .forEach(node -> node.setVisible(mostrar));
+        }
+        if (menuItemSalir != null) {
+            menuItemSalir.getChildren().stream()
+                .filter(node -> node instanceof Label)
+                .forEach(node -> node.setVisible(mostrar));
+        }
     }
     
     private void configurarEfectosHover() {
@@ -50,22 +162,15 @@ public class VistaPacienteController {
         
         for (Button boton : botonesMenu) {
             boton.setOnMouseEntered(e -> {
-                boton.setStyle("-fx-background-color: rgba(255, 255, 255, 0.2); -fx-background-radius: 30; -fx-cursor: hand;");
+                boton.setStyle("-fx-background-color: rgba(255, 255, 255, 0.2); -fx-background-radius: 20; -fx-cursor: hand;");
             });
             
             boton.setOnMouseExited(e -> {
-                boton.setStyle("-fx-background-color: transparent; -fx-background-radius: 30;");
+                boton.setStyle("-fx-background-color: transparent; -fx-background-radius: 20;");
             });
         }
         
-        // Efecto hover para el botón del header
-        btnMiPerfilHeader.setOnMouseEntered(e -> {
-            btnMiPerfilHeader.setStyle("-fx-background-color: #2C5A7A; -fx-background-radius: 30; -fx-cursor: hand;");
-        });
-        
-        btnMiPerfilHeader.setOnMouseExited(e -> {
-            btnMiPerfilHeader.setStyle("-fx-background-color: #3B6F89; -fx-background-radius: 30;");
-        });
+
     }
 
     @FXML

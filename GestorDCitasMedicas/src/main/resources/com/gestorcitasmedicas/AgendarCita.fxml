@@ -106,18 +106,7 @@
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3b6f89" height="361.0" layoutX="-5.0" layoutY="-87.0" stroke="#3b6f89" strokeLineCap="ROUND" strokeWidth="5.0" width="42.0" />
                         <VBox layoutX="-3.0" layoutY="-84.0" prefHeight="353.0" prefWidth="40.0">
                             <children>
-                                <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="18.0" style="-fx-background-color: #3b6f89;">
-                                    <graphic>
-                                        <ImageView fitHeight="23.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../../../Documents/FXMLS/FXML1/src/main/resources/img/Menu.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic>
-                                    <VBox.margin>
-                                        <Insets top="25.0" />
-                                    </VBox.margin>
-                                </Button>
+
                                 <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="40.0" style="-fx-background-color: #3b6f89;">
                                     <graphic>
                                         <ImageView fitHeight="20.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">

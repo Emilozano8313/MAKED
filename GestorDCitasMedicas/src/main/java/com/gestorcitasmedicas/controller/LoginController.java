@@ -68,17 +68,10 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/Registro.fxml"));
             Parent registroRoot = loader.load();
             
-<<<<<<< HEAD
-            Scene nuevaEscena = new Scene(registroRoot, 773, 400);
-            Stage currentStage = (Stage) crearCuenta.getScene().getWindow();
-            currentStage.setScene(nuevaEscena);
-            currentStage.setTitle("Registro - Gestor de Citas Médicas");
-=======
-            Scene nuevaEscena = new Scene(registroRoot, 1200, 600);
+            Scene nuevaEscena = new Scene(registroRoot, 800, 600);
             Stage currentStage = (Stage) crearCuenta.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Registro de Usuario - Gestor de Citas Médicas");
->>>>>>> 3ea16f87b533c31ff796f367d2d8cc8f6d7e99d1
             currentStage.centerOnScreen();
             
         } catch (IOException e) {

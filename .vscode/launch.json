@@ -14,8 +14,17 @@
             "type": "java",
             "name": "App",
             "request": "launch",
-            "mainClass": "com.gestorcitasmedicas.gestorcitasmedicas/com.gestorcitasmedicas.App",
-            "projectName": "gestor-citas-medicas"
+            "mainClass": "com.gestorcitasmedicas.App",
+            "projectName": "gestor-citas-medicas",
+            "vmArgs": "--module-path ${workspaceFolder}/GestorDCitasMedicas/javafx-sdk-21/lib --add-modules javafx.controls,javafx.fxml --add-opens javafx.graphics/javafx.scene=ALL-UNNAMED"
+        },
+        {
+            "type": "java",
+            "name": "App (Direct)",
+            "request": "launch",
+            "mainClass": "com.gestorcitasmedicas.App",
+            "classPaths": ["${workspaceFolder}/GestorDCitasMedicas/target/classes"],
+            "vmArgs": "--module-path ${workspaceFolder}/GestorDCitasMedicas/javafx-sdk-21/lib --add-modules javafx.controls,javafx.fxml --add-opens javafx.graphics/javafx.scene=ALL-UNNAMED"
         }
     ]
 }

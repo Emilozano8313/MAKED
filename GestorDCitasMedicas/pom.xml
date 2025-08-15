@@ -71,7 +71,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.gestorcitasmedicas.gestorcitasmedicas/com.gestorcitasmedicas.App
+                                com.gestorcitasmedicas.App
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
