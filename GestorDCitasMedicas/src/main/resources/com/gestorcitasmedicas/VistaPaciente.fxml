@@ -8,23 +8,25 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #F5F7FA;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.VistaPacienteController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600" minWidth="1000" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #F5F7FA;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.VistaPacienteController">
    <top>
-      <AnchorPane prefHeight="107.0" prefWidth="1024.0" style="-fx-background-color: #FFFFFF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" BorderPane.alignment="CENTER">
+      <HBox prefHeight="107.0" style="-fx-background-color: #FFFFFF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" alignment="CENTER_LEFT" spacing="20">
+         <padding>
+            <Insets top="20" right="20" bottom="20" left="20" />
+         </padding>
          <children>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                        <Image url="@img/cross.png" />
+                  <Image url="@img/cross.png" />
                </image>
             </ImageView>
-            <Label layoutX="100.0" layoutY="30.0" text="Sistema de Gestión de Citas Médicas" textFill="#3B6F89">
+            <Label text="Sistema de Gestión de Citas Médicas" textFill="#3B6F89">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            
          </children>
-      </AnchorPane>
+      </HBox>
    </top>
    <center>
       <AnchorPane prefHeight="661.0" prefWidth="998.0" BorderPane.alignment="CENTER">

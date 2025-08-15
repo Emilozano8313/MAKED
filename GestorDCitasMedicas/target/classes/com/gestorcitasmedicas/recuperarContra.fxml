@@ -7,10 +7,10 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.RecuperarContraController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600" minWidth="800" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.RecuperarContraController">
    <children>
       <!-- Lado izquierdo - Imagen de consulta médica -->
-      <VBox prefWidth="400" style="-fx-background-color: #E7ECF0;" alignment="CENTER">
+      <VBox prefWidth="400" minWidth="300" maxWidth="500" style="-fx-background-color: #E7ECF0;" alignment="CENTER">
          <children>
             <ImageView fitHeight="400" fitWidth="500" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -21,7 +21,7 @@
       </VBox>
       
       <!-- Lado derecho - Formulario de recuperación -->
-      <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: #FFFFFF;" vbarPolicy="AS_NEEDED" hbarPolicy="NEVER" prefWidth="400">
+      <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: #FFFFFF;" vbarPolicy="AS_NEEDED" hbarPolicy="NEVER" HBox.hgrow="ALWAYS">
          <VBox spacing="30" alignment="CENTER" style="-fx-background-color: #FFFFFF;" minWidth="500">
             <padding>
                <Insets top="40" right="60" bottom="40" left="60" />

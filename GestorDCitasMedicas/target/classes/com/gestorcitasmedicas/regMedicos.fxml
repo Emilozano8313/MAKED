@@ -9,8 +9,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.collections.FXCollections?>
 
-<<<<<<< HEAD
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #16191C;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.RegMedicosController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #16191C;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.RegMedicosController">
    <top>
       <VBox style="-fx-background-color: #8B4513;" BorderPane.alignment="CENTER">
          <children>
@@ -171,7 +170,6 @@
          </children>
       </Pane>
    </top>
->>>>>>> 3ea16f87b533c31ff796f367d2d8cc8f6d7e99d1
    <left>
       <VBox fx:id="menuLateral" style="-fx-background-color: #3B6F89;" prefWidth="60" minWidth="60" maxWidth="200" BorderPane.alignment="CENTER">
          <padding>

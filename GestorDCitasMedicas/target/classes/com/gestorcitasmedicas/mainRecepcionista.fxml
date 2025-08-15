@@ -7,39 +7,46 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #16191C;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.MainRecepcionistaController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600" minWidth="1000" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #16191C;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.MainRecepcionistaController">
    <top>
-      <Pane prefHeight="107.0" prefWidth="1024.0" style="-fx-background-color: #E7ECF0;" BorderPane.alignment="CENTER">
+      <HBox prefHeight="107.0" style="-fx-background-color: #E7ECF0;" alignment="CENTER_LEFT" spacing="20">
+         <padding>
+            <Insets top="10" right="20" bottom="10" left="20" />
+         </padding>
          <children>
-            <ImageView fitHeight="101.0" fitWidth="73.0" layoutX="14.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="87.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/cross.png" />
-               </image></ImageView>
-            <Button fx:id="btnPerfil" layoutX="841.0" layoutY="21.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="165.0" style="-fx-background-color: #E7ECF0;" onAction="#abrirPerfil">
+               </image>
+            </ImageView>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="btnPerfil" mnemonicParsing="false" prefHeight="66.0" prefWidth="165.0" style="-fx-background-color: #E7ECF0;" onAction="#abrirPerfil">
                <graphic>
                   <ImageView fitHeight="60.0" fitWidth="153.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/miPerfil.png" />
                      </image>
                   </ImageView>
-               </graphic></Button>
+               </graphic>
+            </Button>
          </children>
-      </Pane>
+      </HBox>
    </top>
    <center>
-      <VBox spacing="20" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
-         <padding>
-            <Insets top="20" right="20" bottom="20" left="20" />
-         </padding>
-         <children>
-            <!-- Panel de control con contadores -->
-            <VBox spacing="15">
-               <Label text="Panel de control" style="-fx-font-weight: bold; -fx-font-size: 20;" />
-               
-               <!-- Contadores -->
-               <HBox spacing="20">
-                  <!-- Consultas Programadas -->
-                  <VBox style="-fx-background-color: #7b9dbf; -fx-background-radius: 5;" prefWidth="280" prefHeight="70">
+      <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: transparent;">
+         <VBox spacing="20" style="-fx-background-color: #FFFFFF;" alignment="TOP_CENTER">
+            <padding>
+               <Insets top="20" right="20" bottom="20" left="20" />
+            </padding>
+            <children>
+               <!-- Panel de control con contadores -->
+               <VBox spacing="15" maxWidth="1200">
+                  <Label text="Panel de control" style="-fx-font-weight: bold; -fx-font-size: 20;" />
+                  
+                  <!-- Contadores -->
+                  <HBox spacing="20" alignment="CENTER">
+                     <!-- Consultas Programadas -->
+                     <VBox style="-fx-background-color: #7b9dbf; -fx-background-radius: 5;" prefWidth="280" prefHeight="70" minWidth="250">
                      <padding>
                         <Insets top="10" right="15" bottom="10" left="15" />
                      </padding>
@@ -59,7 +66,7 @@
                   </VBox>
                   
                   <!-- Consultas Concluidas -->
-                  <VBox style="-fx-background-color: #7b9dbf; -fx-background-radius: 5;" prefWidth="280" prefHeight="70">
+                  <VBox style="-fx-background-color: #7b9dbf; -fx-background-radius: 5;" prefWidth="280" prefHeight="70" minWidth="250">
                      <padding>
                         <Insets top="10" right="15" bottom="10" left="15" />
                      </padding>
@@ -79,7 +86,7 @@
                   </VBox>
                   
                   <!-- Consultas Reprogramadas -->
-                  <VBox style="-fx-background-color: #7b9dbf; -fx-background-radius: 5;" prefWidth="280" prefHeight="70">
+                  <VBox style="-fx-background-color: #7b9dbf; -fx-background-radius: 5;" prefWidth="280" prefHeight="70" minWidth="250">
                      <padding>
                         <Insets top="10" right="15" bottom="10" left="15" />
                      </padding>
@@ -101,15 +108,15 @@
             </VBox>
             
             <!-- Calendario -->
-            <HBox spacing="20" alignment="CENTER_LEFT">
+            <HBox spacing="20" alignment="CENTER_LEFT" maxWidth="1200">
                <Label text="Calendario:" style="-fx-font-weight: bold; -fx-font-size: 16;" />
                <DatePicker fx:id="calendario" promptText="Seleccionar fecha" />
             </HBox>
             
             <!-- Área de consultas del día -->
-            <VBox spacing="10">
+            <VBox spacing="10" maxWidth="1200">
                <Label text="Consultas del día:" style="-fx-font-weight: bold; -fx-font-size: 16;" />
-               <ScrollPane fitToWidth="true" prefViewportHeight="400">
+               <ScrollPane fitToWidth="true" prefViewportHeight="400" style="-fx-background-color: transparent;">
                   <VBox fx:id="contenedorConsultas" spacing="10" />
                </ScrollPane>
             </VBox>

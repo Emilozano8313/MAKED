@@ -8,9 +8,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #F5F7FA;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.HistCitasController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #F5F7FA;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.HistCitasController">
    <top>
-      <AnchorPane prefHeight="107.0" prefWidth="1024.0" style="-fx-background-color: #FFFFFF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" BorderPane.alignment="CENTER">
+             <AnchorPane prefHeight="107.0" prefWidth="1366.0" style="-fx-background-color: #FFFFFF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                <image>

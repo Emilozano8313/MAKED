@@ -9,9 +9,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.collections.FXCollections?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.AgregarUsuarioController" prefHeight="600.0" prefWidth="900.0" minHeight="500" minWidth="700">
+<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.AgregarUsuarioController" prefHeight="768.0" prefWidth="1366.0" minHeight="768" minWidth="1366">
    <top>
-      <Pane prefHeight="80.0" prefWidth="900.0" style="-fx-background-color: #E7ECF0;" BorderPane.alignment="CENTER">
+      <Pane prefHeight="107.0" prefWidth="1366.0" style="-fx-background-color: #E7ECF0;" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="70.0" fitWidth="50.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                <image>
