@@ -456,12 +456,14 @@ public class MainRecepcionistaController {
             System.out.println("FXML cargado exitosamente");
             
             // Crear nueva escena
-            Scene nuevaEscena = new Scene(perfilRoot, 1200, 800);
+            Scene nuevaEscena = new Scene(perfilRoot);
             
             // Obtener la ventana actual y reemplazarla
             Stage currentStage = (Stage) menuLateral.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Mi Perfil - Gestor de Citas Médicas");
+            currentStage.setMaximized(true);
+            currentStage.show();
             currentStage.centerOnScreen();
             
             System.out.println("Ventana de perfil abierta exitosamente");
