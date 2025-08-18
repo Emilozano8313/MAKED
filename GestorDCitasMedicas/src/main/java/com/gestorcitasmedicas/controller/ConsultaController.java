@@ -151,10 +151,12 @@ public class ConsultaController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/expedientesDoctor.fxml"));
             Parent expedientesRoot = loader.load();
             
-            Scene nuevaEscena = new Scene(expedientesRoot, 1200, 800);
+            Scene nuevaEscena = new Scene(expedientesRoot);
             Stage currentStage = (Stage) btnRegresar.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Expedientes Médicos");
+            currentStage.setMaximized(true);
+            currentStage.show();
             currentStage.centerOnScreen();
             
         } catch (IOException e) {
@@ -172,10 +174,12 @@ public class ConsultaController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/perfilDocMod.fxml"));
             Parent perfilRoot = loader.load();
             
-            Scene nuevaEscena = new Scene(perfilRoot, 1200, 800);
+            Scene nuevaEscena = new Scene(perfilRoot);
             Stage currentStage = (Stage) btnPerfil.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Mi Perfil - Médico");
+            currentStage.setMaximized(true);
+            currentStage.show();
             currentStage.centerOnScreen();
             
         } catch (IOException e) {
@@ -192,10 +196,12 @@ public class ConsultaController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/citasDoctor.fxml"));
             Parent citasRoot = loader.load();
             
-            Scene nuevaEscena = new Scene(citasRoot, 1200, 800);
+            Scene nuevaEscena = new Scene(citasRoot);
             Stage currentStage = (Stage) btnCitas.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Gestión de Citas - Médico");
+            currentStage.setMaximized(true);
+            currentStage.show();
             currentStage.centerOnScreen();
             
         } catch (IOException e) {
@@ -212,10 +218,12 @@ public class ConsultaController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/expedientesDoctor.fxml"));
             Parent expedientesRoot = loader.load();
             
-            Scene nuevaEscena = new Scene(expedientesRoot, 1200, 800);
+            Scene nuevaEscena = new Scene(expedientesRoot);
             Stage currentStage = (Stage) btnExpedientes.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Expedientes Médicos");
+            currentStage.setMaximized(true);
+            currentStage.show();
             currentStage.centerOnScreen();
             
         } catch (IOException e) {
@@ -237,8 +245,9 @@ public class ConsultaController {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/login.fxml"));
                     Parent root = loader.load();
                     Stage stage = new Stage();
-                    stage.setScene(new Scene(root, 759, 422));
+                    stage.setScene(new Scene(root));
                     stage.setTitle("Bienvenido a tu gestor de citas medicas");
+                    stage.setMaximized(true);
                     stage.show();
 
                     Stage currentStage = (Stage) btnSalir.getScene().getWindow();
