@@ -211,7 +211,7 @@ public class GestMedicosController {
     }
     
     private void configurarEventosBotones() {
-        btnAgregar.setOnAction(event -> agregarMedico());
+        btnAgregar.setOnAction(event -> abrirRegistroMedico());
     }
     
     @FXML
@@ -310,10 +310,10 @@ public class GestMedicosController {
     
     @FXML
     private void agregarMedico(ActionEvent event) {
-        agregarMedico();
+        abrirRegistroMedico();
     }
     
-    private void agregarMedico() {
+    private void abrirRegistroMedico() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/regMedicos.fxml"));
             Parent regMedicosRoot = loader.load();

@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.Node;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -14,6 +15,7 @@ import javafx.util.Duration;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 
 import java.io.IOException;
 import java.util.regex.Pattern;
@@ -447,5 +449,23 @@ public class RegMedicosController {
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
+    }
+    
+    @FXML
+    private void volverAlMenuPrincipal(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/mainRecepcionista.fxml"));
+            Parent mainRecepcionistaRoot = loader.load();
+            
+            Scene nuevaEscena = new Scene(mainRecepcionistaRoot, 1200, 800);
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.setScene(nuevaEscena);
+            currentStage.setTitle("Panel Principal - Gestor de Citas Médicas");
+            currentStage.centerOnScreen();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+            mostrarAlerta("Error", "No se pudo volver al menú principal", Alert.AlertType.ERROR);
+        }
     }
 }
