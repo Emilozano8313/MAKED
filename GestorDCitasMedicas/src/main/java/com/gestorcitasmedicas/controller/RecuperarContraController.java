@@ -199,12 +199,12 @@ public class RecuperarContraController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/login.fxml"));
             Parent loginRoot = loader.load();
-            
-            Scene nuevaEscena = new Scene(loginRoot, 759, 422);
+            Scene nuevaEscena = new Scene(loginRoot);
             Stage currentStage = (Stage) btnRegresar.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Bienvenido a tu gestor de citas medicas");
-            currentStage.centerOnScreen();
+            currentStage.setMaximized(true);
+            currentStage.show();
             
         } catch (IOException e) {
             e.printStackTrace();
@@ -217,11 +217,12 @@ public class RecuperarContraController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/Registro.fxml"));
             Parent registroRoot = loader.load();
-            
-            Scene nuevaEscena = new Scene(registroRoot, 773, 400);
+            Scene nuevaEscena = new Scene(registroRoot);
             Stage currentStage = (Stage) lblCrearCuenta.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Registro - Gestor de Citas Médicas");
+            currentStage.setMaximized(true);
+            currentStage.show();
             currentStage.centerOnScreen();
             
         } catch (IOException e) {

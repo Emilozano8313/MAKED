@@ -33,7 +33,7 @@
       </HBox>
    </top>
    <center>
-      <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: transparent;">
+      <ScrollPane fitToWidth="True" fitToHeight="True" style="-fx-background-color: transparent;"/>
          <VBox spacing="20" style="-fx-background-color: #FFFFFF;" alignment="TOP_CENTER">
             <padding>
                <Insets top="20" right="20" bottom="20" left="20" />

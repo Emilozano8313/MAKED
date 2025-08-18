@@ -5,9 +5,8 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #16191C;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.MainDoctorController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600" minWidth="1000" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #16191C;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.MainDoctorController">
    <top>
       <Pane prefHeight="107.0" prefWidth="1366.0" style="-fx-background-color: #E7ECF0;" BorderPane.alignment="CENTER">
          <children>
@@ -15,25 +14,23 @@
                <image>
                   <Image url="@img/cross.png" />
                </image></ImageView>
-            <Button fx:id="btnPerfil" layoutX="1183.0" layoutY="21.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="165.0" style="-fx-background-color: #E7ECF0;" onAction="#abrirPerfil">
-               <graphic>
-                  <ImageView fitHeight="60.0" fitWidth="153.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/miPerfil.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
+            <Button fx:id="btnPerfil" layoutX="1091.0" layoutY="21.0" mnemonicParsing="false" onAction="#abrirPerfil" prefHeight="66.0" prefWidth="165.0" style="-fx-background-color: #E7ECF0;" />
+            <ImageView fitHeight="60.0" fitWidth="153.0" layoutX="1103.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/miPerfil.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </top>
    <center>
-      <ScrollPane vbarPolicy="AS_NEEDED" hbarPolicy="NEVER" fitToWidth="true" fitToHeight="true" style="-fx-background-color: FFFFFF;" BorderPane.alignment="CENTER">
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: FFFFFF;" vbarPolicy="AS_NEEDED" BorderPane.alignment="CENTER">
          <content>
                          <VBox prefHeight="650.0" prefWidth="800.0" spacing="10.0" style="-fx-background-color: FFFFFF;">
                <children>
-                  <Label text="Citas de hoy" style="-fx-font-weight: bold; -fx-font-size: 20px;">
+                  <Label style="-fx-font-weight: bold; -fx-font-size: 20px;" text="Citas de hoy">
                      <VBox.margin>
-                        <Insets top="20.0" left="20.0" bottom="10.0" />
+                        <Insets bottom="10.0" left="20.0" top="20.0" />
                      </VBox.margin>
                   </Label>
                                      <TableView fx:id="tablaCitas" prefHeight="550.0" prefWidth="780.0" style="-fx-background-color: #7B9DBF;">
@@ -45,7 +42,7 @@
                         <TableColumn fx:id="colConsultorio" prefWidth="136.0" text="Consultorio" />
                     </columns>
                     <VBox.margin>
-                       <Insets left="20.0" right="20.0" bottom="20.0" />
+                       <Insets bottom="20.0" left="20.0" right="20.0" />
                     </VBox.margin>
                   </TableView>
                </children>
@@ -61,7 +58,7 @@
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3b6f89" height="239.0" layoutX="-8.0" layoutY="-6.0" stroke="#3b6f89" strokeLineCap="ROUND" strokeWidth="5.0" width="48.0" />
                   <VBox layoutX="-3.0" layoutY="-5.0" prefHeight="236.0" prefWidth="40.0">
                      <children>
-                        <Button fx:id="btnCitas" mnemonicParsing="false" prefHeight="34.0" prefWidth="36.0" style="-fx-background-color: #3b6f89;" onAction="#abrirCitas">
+                        <Button fx:id="btnCitas" mnemonicParsing="false" onAction="#abrirCitas" prefHeight="34.0" prefWidth="36.0" style="-fx-background-color: #3b6f89;">
                            <graphic>
                               <ImageView fitHeight="29.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -73,7 +70,7 @@
                               <Insets top="30.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="btnExpedientes" mnemonicParsing="false" prefHeight="13.0" prefWidth="1.0" style="-fx-background-color: #3b6f89;" onAction="#abrirExpedientes">
+                        <Button fx:id="btnExpedientes" mnemonicParsing="false" onAction="#abrirExpedientes" prefHeight="13.0" prefWidth="1.0" style="-fx-background-color: #3b6f89;">
                            <graphic>
                               <ImageView fitHeight="26.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -84,7 +81,7 @@
                               <Insets top="30.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="btnSalir" mnemonicParsing="false" prefHeight="38.0" prefWidth="31.0" style="-fx-background-color: #3b6f89;" onAction="#salir">
+                        <Button fx:id="btnSalir" mnemonicParsing="false" onAction="#salir" prefHeight="38.0" prefWidth="31.0" style="-fx-background-color: #3b6f89;">
                            <graphic>
                               <ImageView fitHeight="51.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

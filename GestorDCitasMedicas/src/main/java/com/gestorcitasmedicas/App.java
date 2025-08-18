@@ -13,7 +13,8 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/com/gestorcitasmedicas/login.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 759 , 422);
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setMaximized(true);
             stage.setTitle("Bienvenido a tu gestor de citas medicas");
             stage.setScene(scene);
             stage.show();

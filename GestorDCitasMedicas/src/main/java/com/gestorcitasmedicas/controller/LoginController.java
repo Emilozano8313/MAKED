@@ -49,11 +49,13 @@ public class LoginController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/recuperarContra.fxml"));
             Parent recuperarContraRoot = loader.load();
-            
-            Scene nuevaEscena = new Scene(recuperarContraRoot, 1200, 600);
+
+            Scene nuevaEscena = new Scene(recuperarContraRoot);
             Stage currentStage = (Stage) olvidoContra.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Recuperar Contraseña - Gestor de Citas Médicas");
+            currentStage.setMaximized(true);
+            currentStage.show();
             currentStage.centerOnScreen();
             
         } catch (IOException e) {
@@ -68,10 +70,12 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/Registro.fxml"));
             Parent registroRoot = loader.load();
             
-            Scene nuevaEscena = new Scene(registroRoot, 800, 600);
+            Scene nuevaEscena = new Scene(registroRoot);
             Stage currentStage = (Stage) crearCuenta.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Registro de Usuario - Gestor de Citas Médicas");
+            currentStage.setMaximized(true);
+            currentStage.show();
             currentStage.centerOnScreen();
             
         } catch (IOException e) {
@@ -94,8 +98,10 @@ public class LoginController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/mainRecepcionista.fxml"));
                 Parent root = loader.load();
                 Stage stage = new Stage();
-                stage.setScene(new Scene(root, 1200, 800));
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
                 stage.setTitle("Panel Principal - Recepcionista");
+                stage.setMaximized(true);
                 stage.show();
 
                 // Cerrar la ventana actual
@@ -110,8 +116,10 @@ public class LoginController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/mainDoctor.fxml"));
                 Parent root = loader.load();
                 Stage stage = new Stage();
-                stage.setScene(new Scene(root, 1200, 800));
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
                 stage.setTitle("Panel Principal - Médico");
+                stage.setMaximized(true);
                 stage.show();
 
                 // Cerrar la ventana actual
@@ -126,8 +134,10 @@ public class LoginController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/VistaPaciente.fxml"));
                 Parent root = loader.load();
                 Stage stage = new Stage();
-                stage.setScene(new Scene(root, 1024, 768));
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
                 stage.setTitle("Panel Principal - Paciente");
+                stage.setMaximized(true);
                 stage.show();
 
                 // Cerrar la ventana actual

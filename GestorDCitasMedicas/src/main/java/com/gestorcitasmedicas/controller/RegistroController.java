@@ -205,7 +205,10 @@ public class RegistroController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/login.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Bienvenido a tu gestor de citas medicas");
+            stage.setMaximized(true);
             stage.show();
 
             // Cerrar la ventana actual
