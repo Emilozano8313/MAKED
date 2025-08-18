@@ -1,6 +1,6 @@
 package com.gestorcitasmedicas.controller;
 
-import com.gestorcitasmedicas.model.Usuario;
+import com.gestorcitasmedicas.model.Paciente;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -92,31 +92,53 @@ public class RegistroController {
         }
 
         try {
-            // Crear nuevo usuario
-            Usuario nuevoUsuario = new Usuario();
-            nuevoUsuario.setNombre(nombreField.getText());
-            nuevoUsuario.setApellidos(apellidosField.getText());
-            nuevoUsuario.setMatricula(matriculaField.getText());
-            nuevoUsuario.setCurp(curpField.getText());
-            nuevoUsuario.setCorreo(correoField.getText());
-            nuevoUsuario.setTelefono(telefonoField.getText());
-            nuevoUsuario.setContrasena(passwordField.getText());
-            nuevoUsuario.setRol("paciente"); // Por defecto se registra como paciente
+            // Verificar si el correo ya existe
+            if (Paciente.correoExiste(correoField.getText().trim())) {
+                mostrarAlerta("Error", "El correo electrónico ya está registrado en el sistema", Alert.AlertType.ERROR);
+                correoField.requestFocus();
+                return;
+            }
+            
+            // Verificar si el CURP ya existe
+            if (Paciente.curpExiste(curpField.getText().trim())) {
+                mostrarAlerta("Error", "El CURP ya está registrado en el sistema", Alert.AlertType.ERROR);
+                curpField.requestFocus();
+                return;
+            }
+            
+            // Verificar si la matrícula ya existe
+            if (Paciente.matriculaExiste(matriculaField.getText().trim())) {
+                mostrarAlerta("Error", "La matrícula ya está registrada en el sistema", Alert.AlertType.ERROR);
+                matriculaField.requestFocus();
+                return;
+            }
+            
+            // Crear nuevo paciente
+            Paciente nuevoPaciente = new Paciente(
+                nombreField.getText().trim() + " " + apellidosField.getText().trim(),
+                curpField.getText().trim(),
+                telefonoField.getText().trim(),
+                matriculaField.getText().trim(),
+                correoField.getText().trim(),
+                passwordField.getText()
+            );
 
-            // Aquí se guardaría en la base de datos
-            boolean registroExitoso = guardarUsuario(nuevoUsuario);
+            // Guardar en la base de datos
+            boolean registroExitoso = nuevoPaciente.guardar();
             
             if (registroExitoso) {
                 mostrarAlerta("Registro Exitoso", 
-                    "¡Usuario registrado correctamente!\n\n" +
-                    "Nombre: " + nuevoUsuario.getNombre() + " " + nuevoUsuario.getApellidos() + "\n" +
-                    "Correo: " + nuevoUsuario.getCorreo() + "\n\n" +
+                    "¡Paciente registrado correctamente!\n\n" +
+                    "Nombre: " + nuevoPaciente.getNombre() + "\n" +
+                    "CURP: " + nuevoPaciente.getCurp() + "\n" +
+                    "Matrícula: " + nuevoPaciente.getMatricula() + "\n" +
+                    "Correo: " + nuevoPaciente.getCorreo() + "\n\n" +
                     "Ahora puede iniciar sesión con sus credenciales.", 
                     Alert.AlertType.INFORMATION);
                 volverAlLogin(event);
             } else {
                 mostrarAlerta("Error de Registro", 
-                    "No se pudo completar el registro del usuario.\n\n" +
+                    "No se pudo completar el registro del paciente.\n\n" +
                     "Por favor, inténtelo nuevamente o contacte al administrador del sistema.", 
                     Alert.AlertType.ERROR);
             }
@@ -193,12 +215,7 @@ public class RegistroController {
         return telefono.matches("^[0-9]{10}$");
     }
 
-    private boolean guardarUsuario(Usuario usuario) {
-        // Aquí se implementaría la lógica para guardar en la base de datos
-        // Por ahora retornamos true para simular éxito
-        System.out.println("Guardando usuario: " + usuario.getNombre() + " " + usuario.getApellidos());
-        return true;
-    }
+
 
     private void volverAlLogin(MouseEvent event) {
         try {

@@ -1,5 +1,8 @@
 package com.gestorcitasmedicas.controller;
 
+import com.gestorcitasmedicas.model.Consulta;
+import com.gestorcitasmedicas.model.Medico;
+import com.gestorcitasmedicas.model.Paciente;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -236,18 +239,20 @@ public class AgendarCitaController {
     }
     
     private void cargarDatosIniciales() {
-        // Cargar pacientes simulados
-        pacientes = FXCollections.observableArrayList(
-            "María García", "Carlos Rodríguez", "Laura Martínez", "Miguel Torres",
-            "Carmen Vega", "Roberto Silva", "Ana López", "Fernando Díaz"
-        );
+        // Cargar pacientes reales desde la memoria
+        List<Paciente> listaPacientes = Paciente.obtenerTodos();
+        pacientes = FXCollections.observableArrayList();
+        for (Paciente paciente : listaPacientes) {
+            pacientes.add(paciente.getNombre() + " (" + paciente.getCorreo() + ")");
+        }
         comboPaciente.setItems(pacientes);
         
-        // Cargar médicos simulados
-        medicos = FXCollections.observableArrayList(
-            "Dr. Juan Pérez", "Dra. Ana López", "Dr. Roberto Silva", "Dra. Patricia Ruiz",
-            "Dr. Fernando Díaz", "Dra. Carmen Vega", "Dr. Miguel Torres", "Dra. Laura Martínez"
-        );
+        // Cargar médicos reales desde la memoria
+        List<Medico> listaMedicos = Medico.obtenerTodos();
+        medicos = FXCollections.observableArrayList();
+        for (Medico medico : listaMedicos) {
+            medicos.add(medico.getNombre() + " - " + medico.getEspecialidad());
+        }
         comboMedico.setItems(medicos);
         
         // Cargar horarios disponibles
@@ -257,14 +262,14 @@ public class AgendarCitaController {
         );
         comboHorario.setItems(horariosDisponibles);
         
-        // Generar disponibilidad simulada
-        generarDisponibilidadSimulada();
+        // Generar disponibilidad basada en consultas existentes
+        generarDisponibilidadReal();
         
         // Configurar fecha actual
         datePicker.setValue(LocalDate.now());
     }
     
-    private void generarDisponibilidadSimulada() {
+    private void generarDisponibilidadReal() {
         disponibilidadPorFecha = new HashMap<>();
         LocalDate fechaInicio = LocalDate.now();
         
@@ -273,14 +278,27 @@ public class AgendarCitaController {
             LocalDate fecha = fechaInicio.plusDays(i);
             List<String> horariosDisponibles = new ArrayList<>();
             
-            // Simular disponibilidad (algunos días más ocupados que otros)
-            if (fecha.getDayOfWeek().getValue() <= 5) { // Lunes a viernes
-                if (i % 3 != 0) { // Algunos días más ocupados
-                    // Agregar solo 8 horarios disponibles
-                    horariosDisponibles.addAll(this.horariosDisponibles.subList(0, 8));
-                } else {
-                    // Agregar todos los horarios disponibles
-                    horariosDisponibles.addAll(this.horariosDisponibles);
+            // Solo días laborables (lunes a viernes)
+            if (fecha.getDayOfWeek().getValue() <= 5) {
+                // Obtener consultas existentes para esta fecha
+                List<Consulta> consultasExistentes = Consulta.obtenerPorFecha(fecha);
+                
+                // Filtrar horarios ocupados
+                for (String horario : this.horariosDisponibles) {
+                    boolean horarioDisponible = true;
+                    
+                    // Verificar si algún médico tiene consulta en este horario
+                    for (Consulta consulta : consultasExistentes) {
+                        if (consulta.getHora().toString().equals(horario) && 
+                            !consulta.getEstado().equals("cancelada")) {
+                            horarioDisponible = false;
+                            break;
+                        }
+                    }
+                    
+                    if (horarioDisponible) {
+                        horariosDisponibles.add(horario);
+                    }
                 }
             }
             
@@ -410,20 +428,47 @@ public class AgendarCitaController {
     @FXML
     private void agendarCita() {
         if (validarCampos()) {
-            // Crear nueva cita
-            Cita nuevaCita = new Cita(
-                comboPaciente.getValue(),
-                comboMedico.getValue(),
-                datePicker.getValue(),
-                comboHorario.getValue(),
-                txtMotivo.getText()
-            );
-            
-            // Aquí se guardaría la cita en la base de datos
-            System.out.println("Cita agendada: " + nuevaCita.getPaciente() + " - " + nuevaCita.getMedico());
-            
-            mostrarAlerta("Éxito", "Cita agendada correctamente", Alert.AlertType.INFORMATION);
-            limpiarFormulario();
+            try {
+                // Obtener IDs de paciente y médico seleccionados
+                int idPaciente = obtenerIdPaciente(comboPaciente.getValue());
+                int idMedico = obtenerIdMedico(comboMedico.getValue());
+                
+                if (idPaciente == -1 || idMedico == -1) {
+                    mostrarAlerta("Error", "No se pudo identificar el paciente o médico seleccionado", Alert.AlertType.ERROR);
+                    return;
+                }
+                
+                // Verificar disponibilidad
+                LocalTime hora = LocalTime.parse(comboHorario.getValue());
+                if (!Consulta.verificarDisponibilidad(idMedico, datePicker.getValue(), hora)) {
+                    mostrarAlerta("Error", "El médico no está disponible en el horario seleccionado", Alert.AlertType.ERROR);
+                    return;
+                }
+                
+                // Crear nueva consulta
+                Consulta nuevaConsulta = new Consulta(
+                    idPaciente,
+                    idMedico,
+                    datePicker.getValue(),
+                    hora,
+                    txtMotivo.getText()
+                );
+                
+                // Guardar la consulta en memoria
+                if (nuevaConsulta.guardar()) {
+                    System.out.println("Consulta agendada exitosamente: " + nuevaConsulta.getId());
+                    mostrarAlerta("Éxito", "Cita agendada correctamente", Alert.AlertType.INFORMATION);
+                    limpiarFormulario();
+                    generarDisponibilidadReal(); // Actualizar disponibilidad
+                } else {
+                    mostrarAlerta("Error", "No se pudo agendar la cita", Alert.AlertType.ERROR);
+                }
+                
+            } catch (Exception e) {
+                System.err.println("Error al agendar cita: " + e.getMessage());
+                e.printStackTrace();
+                mostrarAlerta("Error", "Error inesperado al agendar la cita", Alert.AlertType.ERROR);
+            }
         }
     }
     
@@ -518,6 +563,36 @@ public class AgendarCitaController {
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
+    }
+    
+    private int obtenerIdPaciente(String pacienteSeleccionado) {
+        if (pacienteSeleccionado == null) return -1;
+        
+        // Extraer el correo del formato "Nombre (correo@test.com)"
+        String correo = pacienteSeleccionado.substring(pacienteSeleccionado.indexOf("(") + 1, pacienteSeleccionado.indexOf(")"));
+        
+        List<Paciente> pacientes = Paciente.obtenerTodos();
+        for (Paciente paciente : pacientes) {
+            if (paciente.getCorreo().equals(correo)) {
+                return paciente.getId();
+            }
+        }
+        return -1;
+    }
+    
+    private int obtenerIdMedico(String medicoSeleccionado) {
+        if (medicoSeleccionado == null) return -1;
+        
+        // Extraer el nombre del formato "Dr. Nombre - Especialidad"
+        String nombre = medicoSeleccionado.substring(0, medicoSeleccionado.indexOf(" - "));
+        
+        List<Medico> medicos = Medico.obtenerTodos();
+        for (Medico medico : medicos) {
+            if (medico.getNombre().equals(nombre)) {
+                return medico.getId();
+            }
+        }
+        return -1;
     }
     
     @FXML

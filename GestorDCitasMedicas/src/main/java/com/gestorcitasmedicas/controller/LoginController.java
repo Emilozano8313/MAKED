@@ -1,5 +1,8 @@
 package com.gestorcitasmedicas.controller;
 
+import com.gestorcitasmedicas.model.Medico;
+import com.gestorcitasmedicas.model.Paciente;
+import com.gestorcitasmedicas.utils.DatosPrueba;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -31,6 +34,11 @@ public class LoginController {
     @FXML
     private void initialize() {
         System.out.println("LoginController inicializado correctamente");
+        
+        // Inicializar datos de prueba si no están cargados
+        if (!DatosPrueba.datosCargados()) {
+            DatosPrueba.inicializarDatosPrueba();
+        }
         
         // Configurar eventos para los enlaces
         configurarEventos();
@@ -91,7 +99,7 @@ public class LoginController {
         
         System.out.println("Iniciando sesión con: " + correo);
         
-        // Simulación de autenticación para diferentes roles
+        // Verificar si es recepcionista
         if ("recepcionista@test.com".equals(correo) && "recepcionista123".equals(contra)) {
             // Autenticación como recepcionista
             try {
@@ -110,44 +118,55 @@ public class LoginController {
                 e.printStackTrace();
                 mostrarAlerta("Error", "No se pudo cargar el panel principal del recepcionista", Alert.AlertType.ERROR);
             }
-        } else if ("doctor@test.com".equals(correo) && "doctor123".equals(contra)) {
-            // Autenticación como médico
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/mainDoctor.fxml"));
-                Parent root = loader.load();
-                Stage stage = new Stage();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.setTitle("Panel Principal - Médico");
-                stage.setMaximized(true);
-                stage.show();
-
-                // Cerrar la ventana actual
-                ((Node) event.getSource()).getScene().getWindow().hide();
-            } catch (IOException e) {
-                e.printStackTrace();
-                mostrarAlerta("Error", "No se pudo cargar el panel principal del médico", Alert.AlertType.ERROR);
-            }
-        } else if ("paciente@test.com".equals(correo) && "paciente123".equals(contra)) {
-            // Autenticación como paciente
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/VistaPaciente.fxml"));
-                Parent root = loader.load();
-                Stage stage = new Stage();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.setTitle("Panel Principal - Paciente");
-                stage.setMaximized(true);
-                stage.show();
-
-                // Cerrar la ventana actual
-                ((Node) event.getSource()).getScene().getWindow().hide();
-            } catch (IOException e) {
-                e.printStackTrace();
-                mostrarAlerta("Error", "No se pudo cargar el panel principal del paciente", Alert.AlertType.ERROR);
-            }
         } else {
-            mostrarAlerta("Error", "Credenciales incorrectas", Alert.AlertType.ERROR);
+            // Intentar autenticar como médico
+            Medico medico = Medico.autenticar(correo, contra);
+            if (medico != null) {
+                // Autenticación como médico exitosa
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/mainDoctor.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = new Stage();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.setTitle("Panel Principal - " + medico.getNombre());
+                    stage.setMaximized(true);
+                    stage.show();
+
+                    // Cerrar la ventana actual
+                    ((Node) event.getSource()).getScene().getWindow().hide();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    mostrarAlerta("Error", "No se pudo cargar el panel principal del médico", Alert.AlertType.ERROR);
+                }
+                return;
+            }
+            
+            // Intentar autenticar como paciente
+            Paciente paciente = Paciente.autenticar(correo, contra);
+            if (paciente != null) {
+                // Autenticación como paciente exitosa
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/VistaPaciente.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = new Stage();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.setTitle("Panel Principal - " + paciente.getNombre());
+                    stage.setMaximized(true);
+                    stage.show();
+
+                    // Cerrar la ventana actual
+                    ((Node) event.getSource()).getScene().getWindow().hide();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    mostrarAlerta("Error", "No se pudo cargar el panel principal del paciente", Alert.AlertType.ERROR);
+                }
+                return;
+            }
+            
+            // Si no se pudo autenticar con ningún rol
+            mostrarAlerta("Error", "Credenciales incorrectas. Verifique su correo y contraseña.", Alert.AlertType.ERROR);
         }
     }
 

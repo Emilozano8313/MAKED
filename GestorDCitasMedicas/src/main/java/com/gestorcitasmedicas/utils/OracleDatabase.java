@@ -10,7 +10,7 @@ import oracle.ucp.jdbc.PoolDataSource;
 public class OracleDatabase {
     final static String WALLET = "C:/Users/guemi/Downloads/Wallet_MAKED";
     final static String DB_NAME = "MAKED";
-    final static String DB_URL = "jdbc:oracle:thin:@" + DB_NAME + "?TNS_ADMIN=" + WALLET;
+    final static String DB_URL = "jdbc:oracle:thin:@ge3645798609b17_maked_high.adb.oraclecloud.com";
     final static String DB_USER = "ADMIN";
     final static String DB_PASSWORD = "MAKEDproject123_";
     final static String CONN_FACTORY_CLASS_NAME = "oracle.jdbc.pool.OracleDataSource";

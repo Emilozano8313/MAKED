@@ -1,5 +1,6 @@
 package com.gestorcitasmedicas.controller;
 
+import com.gestorcitasmedicas.model.Paciente;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -103,28 +104,75 @@ public class RegPacientesController {
             return;
         }
         
-        // Simular registro exitoso
         try {
-            // Aquí se conectaría con la base de datos para registrar el paciente
-            System.out.println("Paciente registrado exitosamente:");
-            System.out.println("Nombre: " + txtNombre.getText());
-            System.out.println("CURP: " + txtCurp.getText());
-            System.out.println("Teléfono: " + txtTelefono.getText());
-            System.out.println("Matrícula: " + txtMatricula.getText());
-            System.out.println("Correo: " + txtCorreo.getText());
+            // Verificar si el correo ya existe
+            if (Paciente.correoExiste(txtCorreo.getText().trim())) {
+                mostrarAlerta("Error", "El correo electrónico ya está registrado en el sistema", Alert.AlertType.ERROR);
+                txtCorreo.requestFocus();
+                return;
+            }
             
-            // Mostrar mensaje de éxito
-            mostrarAlerta("Éxito", "Paciente registrado correctamente", Alert.AlertType.INFORMATION);
+            // Verificar si el CURP ya existe
+            if (Paciente.curpExiste(txtCurp.getText().trim())) {
+                mostrarAlerta("Error", "El CURP ya está registrado en el sistema", Alert.AlertType.ERROR);
+                txtCurp.requestFocus();
+                return;
+            }
             
-            // Limpiar campos
-            limpiarCampos();
+            // Verificar si la matrícula ya existe
+            if (Paciente.matriculaExiste(txtMatricula.getText().trim())) {
+                mostrarAlerta("Error", "La matrícula ya está registrada en el sistema", Alert.AlertType.ERROR);
+                txtMatricula.requestFocus();
+                return;
+            }
             
-            // Regresar al login
-            regresarAlLogin();
+            // Crear objeto paciente
+            Paciente paciente = new Paciente(
+                txtNombre.getText().trim(),
+                txtCurp.getText().trim(),
+                txtTelefono.getText().trim(),
+                txtMatricula.getText().trim(),
+                txtCorreo.getText().trim(),
+                txtContrasena.getText()
+            );
+            
+            // Guardar en la base de datos
+            boolean guardado = paciente.guardar();
+            
+            if (guardado) {
+                System.out.println("Paciente registrado exitosamente:");
+                System.out.println("Nombre: " + paciente.getNombre());
+                System.out.println("CURP: " + paciente.getCurp());
+                System.out.println("Teléfono: " + paciente.getTelefono());
+                System.out.println("Matrícula: " + paciente.getMatricula());
+                System.out.println("Correo: " + paciente.getCorreo());
+                
+                // Mostrar mensaje de éxito
+                mostrarAlerta("Éxito", 
+                    "Paciente registrado correctamente\n\n" +
+                    "Nombre: " + paciente.getNombre() + "\n" +
+                    "CURP: " + paciente.getCurp() + "\n" +
+                    "Matrícula: " + paciente.getMatricula() + "\n" +
+                    "Correo: " + paciente.getCorreo() + "\n\n" +
+                    "Ahora puede iniciar sesión con sus credenciales.", 
+                    Alert.AlertType.INFORMATION);
+                
+                // Limpiar campos
+                limpiarCampos();
+                
+                // Regresar al login
+                regresarAlLogin();
+            } else {
+                mostrarAlerta("Error", "No se pudo registrar el paciente. Por favor, inténtelo nuevamente.", Alert.AlertType.ERROR);
+            }
             
         } catch (Exception e) {
+            System.err.println("Error al registrar paciente: " + e.getMessage());
             e.printStackTrace();
-            mostrarAlerta("Error", "Error al registrar el paciente: " + e.getMessage(), Alert.AlertType.ERROR);
+            mostrarAlerta("Error del Sistema", 
+                "Ocurrió un error inesperado durante el registro:\n\n" + e.getMessage() + "\n\n" +
+                "Por favor, verifique su conexión e inténtelo nuevamente.", 
+                Alert.AlertType.ERROR);
         }
     }
     

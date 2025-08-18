@@ -1,5 +1,6 @@
 package com.gestorcitasmedicas.controller;
 
+import com.gestorcitasmedicas.model.Medico;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -184,9 +185,57 @@ public class RegMedicosController {
     @FXML
     private void registrarMedico() {
         if (validarFormulario()) {
-            // Aquí se implementaría la lógica para guardar el médico en la base de datos
-            mostrarAlerta("Éxito", "Médico registrado correctamente", Alert.AlertType.INFORMATION);
-            limpiarFormulario();
+            try {
+                // Verificar si el correo ya existe
+                if (Medico.correoExiste(correoField.getText().trim())) {
+                    mostrarAlerta("Error", "El correo electrónico ya está registrado en el sistema", Alert.AlertType.ERROR);
+                    correoField.requestFocus();
+                    return;
+                }
+                
+                // Verificar si la cédula ya existe
+                if (Medico.cedulaExiste(cedulaField.getText().trim())) {
+                    mostrarAlerta("Error", "La cédula profesional ya está registrada en el sistema", Alert.AlertType.ERROR);
+                    cedulaField.requestFocus();
+                    return;
+                }
+                
+                // Crear objeto médico
+                Medico medico = new Medico(
+                    nombreField.getText().trim(),
+                    especialidadField.getText().trim(),
+                    cedulaField.getText().trim(),
+                    correoField.getText().trim(),
+                    telefonoField.getText().trim(),
+                    horarioField.getText().trim(),
+                    consultorioField.getText().trim(),
+                    passwordField.getText()
+                );
+                
+                // Guardar en la base de datos
+                boolean guardado = medico.guardar();
+                
+                if (guardado) {
+                    mostrarAlerta("Éxito", 
+                        "Médico registrado correctamente\n\n" +
+                        "Nombre: " + medico.getNombre() + "\n" +
+                        "Especialidad: " + medico.getEspecialidad() + "\n" +
+                        "Cédula: " + medico.getCedula() + "\n" +
+                        "Correo: " + medico.getCorreo(), 
+                        Alert.AlertType.INFORMATION);
+                    limpiarFormulario();
+                } else {
+                    mostrarAlerta("Error", "No se pudo registrar el médico. Por favor, inténtelo nuevamente.", Alert.AlertType.ERROR);
+                }
+                
+            } catch (Exception e) {
+                System.err.println("Error al registrar médico: " + e.getMessage());
+                e.printStackTrace();
+                mostrarAlerta("Error del Sistema", 
+                    "Ocurrió un error inesperado durante el registro:\n\n" + e.getMessage() + "\n\n" +
+                    "Por favor, verifique su conexión e inténtelo nuevamente.", 
+                    Alert.AlertType.ERROR);
+            }
         }
     }
     
