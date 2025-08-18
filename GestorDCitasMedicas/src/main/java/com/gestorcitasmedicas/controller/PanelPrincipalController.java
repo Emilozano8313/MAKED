@@ -256,12 +256,14 @@ public class PanelPrincipalController {
             controller.cargarCitaParaEditar(citaParaEditar);
             
             // Crear nueva escena
-            Scene nuevaEscena = new Scene(agendarCitaRoot, 1200, 800);
+            Scene nuevaEscena = new Scene(agendarCitaRoot);
             
             // Obtener la ventana actual y reemplazarla
             Stage currentStage = (Stage) calendario.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Actualizar Cita Médica - Gestor de Citas Médicas");
+            currentStage.setMaximized(true);
+            currentStage.show();
             currentStage.centerOnScreen();
             
         } catch (IOException e) {
@@ -286,12 +288,14 @@ public class PanelPrincipalController {
             Parent agendarCitaRoot = loader.load();
             
             // Crear nueva escena
-            Scene nuevaEscena = new Scene(agendarCitaRoot, 1200, 800);
+            Scene nuevaEscena = new Scene(agendarCitaRoot);
             
             // Obtener la ventana actual y reemplazarla
             Stage currentStage = (Stage) calendario.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Agendar Cita Médica - Gestor de Citas Médicas");
+            currentStage.setMaximized(true);
+            currentStage.show();
             currentStage.centerOnScreen();
             
         } catch (IOException e) {

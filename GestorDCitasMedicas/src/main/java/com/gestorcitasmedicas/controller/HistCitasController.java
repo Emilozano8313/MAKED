@@ -244,10 +244,12 @@ public class HistCitasController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/EditarInformacion.fxml"));
             Parent perfilRoot = loader.load();
             
-            Scene nuevaEscena = new Scene(perfilRoot, 1024, 768);
+            Scene nuevaEscena = new Scene(perfilRoot);
             Stage currentStage = (Stage) btnMiPerfilMenu.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Mi Perfil - Paciente");
+            currentStage.setMaximized(true);
+            currentStage.show();
             currentStage.centerOnScreen();
             
         } catch (IOException e) {
@@ -270,10 +272,12 @@ public class HistCitasController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/EditarInformacion.fxml"));
             Parent editarRoot = loader.load();
             
-            Scene nuevaEscena = new Scene(editarRoot, 1024, 768);
+            Scene nuevaEscena = new Scene(editarRoot);
             Stage currentStage = (Stage) btnEditarInformacion.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Editar Información - Paciente");
+            currentStage.setMaximized(true);
+            currentStage.show();
             currentStage.centerOnScreen();
             
         } catch (IOException e) {
@@ -290,10 +294,12 @@ public class HistCitasController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/CancelarCita.fxml"));
             Parent cancelarRoot = loader.load();
             
-            Scene nuevaEscena = new Scene(cancelarRoot, 1024, 768);
+            Scene nuevaEscena = new Scene(cancelarRoot);
             Stage currentStage = (Stage) btnCancelarCita.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Cancelar Cita - Paciente");
+            currentStage.setMaximized(true);
+            currentStage.show();
             currentStage.centerOnScreen();
             
         } catch (IOException e) {
@@ -310,10 +316,12 @@ public class HistCitasController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/ReprogramarCita.fxml"));
             Parent reprogramarRoot = loader.load();
             
-            Scene nuevaEscena = new Scene(reprogramarRoot, 1024, 768);
+            Scene nuevaEscena = new Scene(reprogramarRoot);
             Stage currentStage = (Stage) btnReprogramarCita.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Reprogramar Cita - Paciente");
+            currentStage.setMaximized(true);
+            currentStage.show();
             currentStage.centerOnScreen();
             
         } catch (IOException e) {
@@ -330,10 +338,12 @@ public class HistCitasController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/VistaPaciente.fxml"));
             Parent pacienteRoot = loader.load();
             
-            Scene nuevaEscena = new Scene(pacienteRoot, 1024, 768);
+            Scene nuevaEscena = new Scene(pacienteRoot);
             Stage currentStage = (Stage) btnRegresar.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Panel Principal - Paciente");
+            currentStage.setMaximized(true);
+            currentStage.show();
             currentStage.centerOnScreen();
             
         } catch (IOException e) {
@@ -355,8 +365,9 @@ public class HistCitasController {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/login.fxml"));
                     Parent root = loader.load();
                     Stage stage = new Stage();
-                    stage.setScene(new Scene(root, 800, 600));
+                    stage.setScene(new Scene(root));
                     stage.setTitle("Bienvenido a tu gestor de citas medicas");
+                    stage.setMaximized(true);
                     stage.show();
 
                     Stage currentStage = (Stage) btnSalir.getScene().getWindow();
