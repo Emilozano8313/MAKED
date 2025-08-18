@@ -1,5 +1,6 @@
 package com.gestorcitasmedicas.controller;
 
+import com.gestorcitasmedicas.model.Medico;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -62,7 +63,7 @@ public class GestMedicosController {
     private TableColumn<Medico, String> colGenero;
     
     @FXML
-    private TableColumn<Medico, Integer> colEdad;
+    private TableColumn<Medico, String> colEdad;
     
     @FXML
     private TableColumn<Medico, String> colTelefono;
@@ -107,32 +108,33 @@ public class GestMedicosController {
             new SimpleStringProperty(cellData.getValue().getCedula()));
         
         colGenero.setCellValueFactory(cellData -> 
-            new SimpleStringProperty(cellData.getValue().getGenero()));
+            new SimpleStringProperty("N/A")); // Campo no disponible en el modelo
         
         colEdad.setCellValueFactory(cellData -> 
-            new SimpleIntegerProperty(cellData.getValue().getEdad()).asObject());
+            new SimpleStringProperty("N/A")); // Campo no disponible en el modelo
         
         colTelefono.setCellValueFactory(cellData -> 
             new SimpleStringProperty(cellData.getValue().getTelefono()));
         
         colEstatus.setCellValueFactory(cellData -> 
-            new SimpleStringProperty(cellData.getValue().getEstatus()));
+            new SimpleStringProperty("Activo")); // Por defecto activo
     }
     
     private void cargarDatosSimulados() {
         medicos = FXCollections.observableArrayList();
         
-        // Agregar médicos simulados
-        medicos.add(new Medico("Dr. Juan Carlos Pérez", "Cardiología", "CARD001", "Masculino", 45, "555-0101", "Activo"));
-        medicos.add(new Medico("Dra. Ana María López", "Dermatología", "DERM002", "Femenino", 38, "555-0102", "Activo"));
-        medicos.add(new Medico("Dr. Roberto Silva", "Ortopedia", "ORT003", "Masculino", 52, "555-0103", "Activo"));
-        medicos.add(new Medico("Dra. Patricia Ruiz", "Pediatría", "PED004", "Femenino", 41, "555-0104", "Activo"));
-        medicos.add(new Medico("Dr. Fernando Díaz", "Neurología", "NEU005", "Masculino", 48, "555-0105", "Inactivo"));
-        medicos.add(new Medico("Dra. Carmen Vega", "Ginecología", "GIN006", "Femenino", 44, "555-0106", "Activo"));
-        medicos.add(new Medico("Dr. Miguel Torres", "Psiquiatría", "PSI007", "Masculino", 39, "555-0107", "Activo"));
-        medicos.add(new Medico("Dra. Laura Martínez", "Oftalmología", "OFT008", "Femenino", 36, "555-0108", "Activo"));
+        // Cargar médicos reales desde la memoria
+        List<Medico> listaMedicos = Medico.obtenerTodos();
+        medicos.addAll(listaMedicos);
         
         tablaMedicos.setItems(medicos);
+    }
+    
+    // Método para refrescar la tabla
+    public void refrescarTabla() {
+        medicos.clear();
+        List<Medico> listaMedicos = Medico.obtenerTodos();
+        medicos.addAll(listaMedicos);
     }
     
     private void configurarMenuExpandible() {
@@ -336,34 +338,5 @@ public class GestMedicosController {
         alert.showAndWait();
     }
     
-    // Clase interna para representar un médico
-    public static class Medico {
-        private String nombre;
-        private String especialidad;
-        private String cedula;
-        private String genero;
-        private int edad;
-        private String telefono;
-        private String estatus;
-        
-        public Medico(String nombre, String especialidad, String cedula, String genero, 
-                     int edad, String telefono, String estatus) {
-            this.nombre = nombre;
-            this.especialidad = especialidad;
-            this.cedula = cedula;
-            this.genero = genero;
-            this.edad = edad;
-            this.telefono = telefono;
-            this.estatus = estatus;
-        }
-        
-        // Getters
-        public String getNombre() { return nombre; }
-        public String getEspecialidad() { return especialidad; }
-        public String getCedula() { return cedula; }
-        public String getGenero() { return genero; }
-        public int getEdad() { return edad; }
-        public String getTelefono() { return telefono; }
-        public String getEstatus() { return estatus; }
-    }
+
 }

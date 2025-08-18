@@ -344,18 +344,24 @@ public class RegMedicosController {
     @FXML
     private void regresar() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/mainRecepcionista.fxml"));
-            Parent mainRecepcionistaRoot = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/gestMedicos.fxml"));
+            Parent gestMedicosRoot = loader.load();
             
-            Scene nuevaEscena = new Scene(mainRecepcionistaRoot, 1024, 768);
+            // Obtener el controlador y refrescar la tabla
+            GestMedicosController controller = loader.getController();
+            if (controller != null) {
+                controller.refrescarTabla();
+            }
+            
+            Scene nuevaEscena = new Scene(gestMedicosRoot, 1024, 768);
             Stage currentStage = (Stage) btnRegresar.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
-            currentStage.setTitle("Panel Principal - Recepcionista");
+            currentStage.setTitle("Gestión de Médicos - Gestor de Citas Médicas");
             currentStage.centerOnScreen();
             
         } catch (IOException e) {
             e.printStackTrace();
-            mostrarAlerta("Error", "No se pudo regresar al panel principal", Alert.AlertType.ERROR);
+            mostrarAlerta("Error", "No se pudo regresar a la gestión de médicos", Alert.AlertType.ERROR);
         }
     }
     
