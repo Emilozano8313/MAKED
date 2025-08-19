@@ -187,10 +187,12 @@ public class AgendarCitaController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/gestUsuarios.fxml"));
             Parent gestUsuariosRoot = loader.load();
             
-            Scene nuevaEscena = new Scene(gestUsuariosRoot, 1200, 800);
+            Scene nuevaEscena = new Scene(gestUsuariosRoot);
             Stage currentStage = (Stage) menuLateral.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Gestión de Usuarios - Gestor de Citas Médicas");
+            currentStage.setMaximized(true);
+            currentStage.show();
             currentStage.centerOnScreen();
             
         } catch (IOException e) {
@@ -204,10 +206,12 @@ public class AgendarCitaController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/gestMedicos.fxml"));
             Parent gestMedicosRoot = loader.load();
             
-            Scene nuevaEscena = new Scene(gestMedicosRoot, 1200, 800);
+            Scene nuevaEscena = new Scene(gestMedicosRoot);
             Stage currentStage = (Stage) menuLateral.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Gestión de Médicos - Gestor de Citas Médicas");
+            currentStage.setMaximized(true);
+            currentStage.show();
             currentStage.centerOnScreen();
             
         } catch (IOException e) {
@@ -226,10 +230,12 @@ public class AgendarCitaController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/login.fxml"));
             Parent loginRoot = loader.load();
             
-            Scene nuevaEscena = new Scene(loginRoot, 759, 422);
+            Scene nuevaEscena = new Scene(loginRoot);
             Stage currentStage = (Stage) menuLateral.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Bienvenido a tu gestor de citas medicas");
+            currentStage.setMaximized(true);
+            currentStage.show();
             currentStage.centerOnScreen();
             
         } catch (IOException e) {
@@ -610,10 +616,12 @@ public class AgendarCitaController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/mainRecepcionista.fxml"));
             Parent mainRoot = loader.load();
             
-            Scene nuevaEscena = new Scene(mainRoot, 1080, 720);
+            Scene nuevaEscena = new Scene(mainRoot);
             Stage currentStage = (Stage) btnAgendar.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Panel Principal - Recepcionista");
+            currentStage.setMaximized(true);
+            currentStage.show();
             currentStage.centerOnScreen();
             
         } catch (IOException e) {
