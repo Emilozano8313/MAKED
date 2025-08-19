@@ -36,9 +36,12 @@ public class LoginController {
         System.out.println("LoginController inicializado correctamente");
         
         // Inicializar datos de prueba si no están cargados
+        // TEMPORALMENTE DESHABILITADO PARA EVITAR ERRORES DE BASE DE DATOS
+        /*
         if (!DatosPrueba.datosCargados()) {
             DatosPrueba.inicializarDatosPrueba();
         }
+        */
         
         // Configurar eventos para los enlaces
         configurarEventos();
