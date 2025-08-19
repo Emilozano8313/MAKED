@@ -530,12 +530,14 @@ public class MainRecepcionistaController {
             System.out.println("FXML cargado exitosamente");
             
             // Crear nueva escena
-            Scene nuevaEscena = new Scene(gestMedicosRoot, 1200, 800);
+            Scene nuevaEscena = new Scene(gestMedicosRoot);
             
             // Obtener la ventana actual y reemplazarla
             Stage currentStage = (Stage) menuLateral.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Gestión de Médicos - Gestor de Citas Médicas");
+            currentStage.setMaximized(true);
+            currentStage.show();
             currentStage.centerOnScreen();
             
             System.out.println("Ventana de gestión de médicos abierta exitosamente");
@@ -574,12 +576,14 @@ public class MainRecepcionistaController {
             System.out.println("FXML cargado exitosamente");
             
             // Crear nueva escena
-            Scene nuevaEscena = new Scene(agendarCitaRoot, 1200, 800);
+            Scene nuevaEscena = new Scene(agendarCitaRoot);
             
             // Obtener la ventana actual y reemplazarla
             Stage currentStage = (Stage) menuLateral.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Agendar Cita Médica - Gestor de Citas Médicas");
+            currentStage.setMaximized(true);
+            currentStage.show();
             currentStage.centerOnScreen();
             
             System.out.println("Ventana de agendar citas abierta exitosamente");
