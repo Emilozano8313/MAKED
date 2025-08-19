@@ -320,9 +320,7 @@ public class GestUsuariosController {
     }
     
     private void editarUsuario(Usuario usuario) {
-        mostrarAlerta("Editar Usuario", 
-            "Editando usuario: " + usuario.getNombreCompleto() + "\n\nFunción en desarrollo", 
-            Alert.AlertType.INFORMATION);
+        // Función no implementada
     }
     
     @FXML

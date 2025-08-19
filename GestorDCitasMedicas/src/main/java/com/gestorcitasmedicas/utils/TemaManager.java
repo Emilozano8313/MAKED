@@ -1,6 +1,7 @@
 package com.gestorcitasmedicas.utils;
 
 import javafx.scene.Scene;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -397,39 +398,36 @@ public class TemaManager {
      * Aplica estilos específicos a componentes
      */
     public static void aplicarEstilosComponentes(Scene scene) {
-        // Aplicar clases CSS a componentes específicos
-        scene.lookupAll(".button").forEach(node -> {
-            if (node instanceof Button) {
-                Button button = (Button) node;
-                String text = button.getText();
-                
-                if (text.contains("Completar") || text.contains("Guardar") || text.contains("Generar")) {
-                    button.getStyleClass().add("button-primary");
-                } else if (text.contains("Cancelar") || text.contains("Eliminar")) {
-                    button.getStyleClass().add("button-danger");
-                } else {
-                    button.getStyleClass().add("button-secondary");
-                }
+        // Aplicar clases CSS a componentes específicos usando lookup
+        Node buttonNode = scene.lookup(".button");
+        if (buttonNode instanceof Button) {
+            Button button = (Button) buttonNode;
+            String text = button.getText();
+            
+            if (text.contains("Completar") || text.contains("Guardar") || text.contains("Generar")) {
+                button.getStyleClass().add("button-primary");
+            } else if (text.contains("Cancelar") || text.contains("Eliminar")) {
+                button.getStyleClass().add("button-danger");
+            } else {
+                button.getStyleClass().add("button-secondary");
             }
-        });
+        }
         
-        scene.lookupAll(".label").forEach(node -> {
-            if (node instanceof Label) {
-                Label label = (Label) node;
-                String text = label.getText();
-                
-                if (text.contains("Reporte") || text.contains("Estadísticas") || text.contains("Historial")) {
-                    label.getStyleClass().add("label-title");
-                } else if (text.contains("Información") || text.contains("Detalles")) {
-                    label.getStyleClass().add("label-subtitle");
-                }
+        Node labelNode = scene.lookup(".label");
+        if (labelNode instanceof Label) {
+            Label label = (Label) labelNode;
+            String text = label.getText();
+            
+            if (text.contains("Reporte") || text.contains("Estadísticas") || text.contains("Historial")) {
+                label.getStyleClass().add("label-title");
+            } else if (text.contains("Información") || text.contains("Detalles")) {
+                label.getStyleClass().add("label-subtitle");
             }
-        });
+        }
         
-        scene.lookupAll(".text-field").forEach(node -> {
-            if (node instanceof TextField) {
-                node.getStyleClass().add("text-field");
-            }
-        });
+        Node textFieldNode = scene.lookup(".text-field");
+        if (textFieldNode instanceof TextField) {
+            textFieldNode.getStyleClass().add("text-field");
+        }
     }
 }

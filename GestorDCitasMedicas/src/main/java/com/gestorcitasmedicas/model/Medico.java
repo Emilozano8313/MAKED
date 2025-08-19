@@ -1,5 +1,7 @@
 package com.gestorcitasmedicas.model;
 
+import com.gestorcitasmedicas.utils.OracleDatabase;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,50 +65,126 @@ public class Medico {
     public String getRol() { return rol; }
     public void setRol(String rol) { this.rol = rol; }
 
-    // Lista estática para almacenar médicos en memoria
-    private static List<Medico> medicos = new ArrayList<>();
-    private static int nextId = 1;
-
-    // Método para guardar médico en memoria
+    // Método para guardar médico en Oracle
     public boolean guardar() {
-        try {
-            this.id = nextId++;
-            medicos.add(this);
-            System.out.println("Médico guardado en memoria: " + this.nombre);
-            return true;
-        } catch (Exception e) {
-            System.err.println("Error al guardar médico: " + e.getMessage());
+        String sql = "INSERT INTO medicos (nombre, especialidad, cedula, correo, telefono, horario, consultorio, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        
+        try (Connection conn = OracleDatabase.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            
+            pstmt.setString(1, this.nombre);
+            pstmt.setString(2, this.especialidad);
+            pstmt.setString(3, this.cedula);
+            pstmt.setString(4, this.correo);
+            pstmt.setString(5, this.telefono);
+            pstmt.setString(6, this.horario);
+            pstmt.setString(7, this.consultorio);
+            pstmt.setString(8, this.contrasena);
+            
+            int affectedRows = pstmt.executeUpdate();
+            
+            if (affectedRows > 0) {
+                try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        this.id = rs.getInt(1);
+                    }
+                }
+                System.out.println("Médico guardado en Oracle: " + this.nombre);
+                return true;
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Error al guardar médico en Oracle: " + e.getMessage());
             e.printStackTrace();
-            return false;
         }
+        return false;
     }
 
     // Método para verificar si el correo ya existe
     public static boolean correoExiste(String correo) {
-        return medicos.stream().anyMatch(m -> m.getCorreo().equals(correo));
+        String sql = "SELECT COUNT(*) FROM medicos WHERE correo = ?";
+        try (Connection conn = OracleDatabase.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, correo);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error verificando correo: " + e.getMessage());
+        }
+        return false;
     }
 
     // Método para verificar si la cédula ya existe
     public static boolean cedulaExiste(String cedula) {
-        return medicos.stream().anyMatch(m -> m.getCedula().equals(cedula));
+        String sql = "SELECT COUNT(*) FROM medicos WHERE cedula = ?";
+        try (Connection conn = OracleDatabase.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, cedula);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error verificando cédula: " + e.getMessage());
+        }
+        return false;
     }
 
     // Método para autenticar médico
     public static Medico autenticar(String correo, String contrasena) {
-        return medicos.stream()
-                .filter(m -> m.getCorreo().equals(correo) && m.getContrasena().equals(contrasena))
-                .findFirst()
-                .orElse(null);
+        String sql = "SELECT * FROM medicos WHERE correo = ? AND contrasena = ?";
+        try (Connection conn = OracleDatabase.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, correo);
+            pstmt.setString(2, contrasena);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                Medico medico = new Medico();
+                medico.setId(rs.getInt("id"));
+                medico.setNombre(rs.getString("nombre"));
+                medico.setEspecialidad(rs.getString("especialidad"));
+                medico.setCedula(rs.getString("cedula"));
+                medico.setCorreo(rs.getString("correo"));
+                medico.setTelefono(rs.getString("telefono"));
+                medico.setHorario(rs.getString("horario"));
+                medico.setConsultorio(rs.getString("consultorio"));
+                medico.setContrasena(rs.getString("contrasena"));
+                medico.setRol(rs.getString("rol"));
+                return medico;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error autenticando médico: " + e.getMessage());
+        }
+        return null;
     }
 
     // Método para obtener todos los médicos
     public static List<Medico> obtenerTodos() {
-        return new ArrayList<>(medicos);
-    }
-
-    // Método para limpiar la lista (útil para testing)
-    public static void limpiarLista() {
-        medicos.clear();
-        nextId = 1;
+        List<Medico> medicos = new ArrayList<>();
+        String sql = "SELECT * FROM medicos ORDER BY nombre";
+        try (Connection conn = OracleDatabase.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+            
+            while (rs.next()) {
+                Medico medico = new Medico();
+                medico.setId(rs.getInt("id"));
+                medico.setNombre(rs.getString("nombre"));
+                medico.setEspecialidad(rs.getString("especialidad"));
+                medico.setCedula(rs.getString("cedula"));
+                medico.setCorreo(rs.getString("correo"));
+                medico.setTelefono(rs.getString("telefono"));
+                medico.setHorario(rs.getString("horario"));
+                medico.setConsultorio(rs.getString("consultorio"));
+                medico.setContrasena(rs.getString("contrasena"));
+                medico.setRol(rs.getString("rol"));
+                medicos.add(medico);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error obteniendo médicos: " + e.getMessage());
+        }
+        return medicos;
     }
 }
