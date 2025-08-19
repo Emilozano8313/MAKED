@@ -491,12 +491,14 @@ public class MainRecepcionistaController {
             Parent gestUsuariosRoot = loader.load();
             
             // Crear nueva escena
-            Scene nuevaEscena = new Scene(gestUsuariosRoot, 1200, 800);
+            Scene nuevaEscena = new Scene(gestUsuariosRoot);
             
             // Obtener la ventana actual y reemplazarla
             Stage currentStage = (Stage) menuLateral.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
             currentStage.setTitle("Gestión de Usuarios - Gestor de Citas Médicas");
+            currentStage.setMaximized(true);
+            currentStage.show();
             currentStage.centerOnScreen();
             
         } catch (IOException e) {
