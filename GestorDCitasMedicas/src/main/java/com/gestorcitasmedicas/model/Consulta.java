@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Consulta {
     private int id;
@@ -82,11 +83,12 @@ public class Consulta {
         }
     }
 
-    // Método para obtener consultas por paciente
+    // Método para obtener consultas por paciente (actualizado y optimizado)
     public static List<Consulta> obtenerPorPaciente(int idPaciente) {
         return consultas.stream()
                 .filter(c -> c.getIdPaciente() == idPaciente)
-                .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+                .sorted((c1, c2) -> c2.getFecha().compareTo(c1.getFecha()))
+                .collect(Collectors.toList());
     }
 
     // Método para obtener consultas por médico
@@ -141,6 +143,57 @@ public class Consulta {
                 })
                 .orElse(false);
     }
+    
+    // Método para cancelar consulta
+    public static boolean cancelarConsulta(int idConsulta, String motivoCancelacion) {
+        return consultas.stream()
+                .filter(c -> c.getId() == idConsulta)
+                .findFirst()
+                .map(c -> {
+                    c.setEstado("cancelada");
+                    c.setObservaciones("CANCELADA - Motivo: " + motivoCancelacion);
+                    return true;
+                })
+                .orElse(false);
+    }
+    
+    // Método para reprogramar consulta
+    public static boolean reprogramarConsulta(int idConsulta, LocalDate nuevaFecha, LocalTime nuevaHora) {
+        return consultas.stream()
+                .filter(c -> c.getId() == idConsulta)
+                .findFirst()
+                .map(c -> {
+                    c.setFecha(nuevaFecha);
+                    c.setHora(nuevaHora);
+                    c.setObservaciones("REPROGRAMADA - Fecha original: " + c.getFecha() + " " + c.getHora());
+                    return true;
+                })
+                .orElse(false);
+    }
+    
+
+    
+    // Método para obtener consultas activas de un paciente (no canceladas)
+    public static List<Consulta> obtenerActivasPorPaciente(int idPaciente) {
+        return consultas.stream()
+                .filter(c -> c.getIdPaciente() == idPaciente && 
+                           !c.getEstado().equals("cancelada"))
+                .sorted((c1, c2) -> c2.getFecha().compareTo(c1.getFecha()))
+                .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+    }
+    
+    // Método para verificar si una cita se puede cancelar (24h antes)
+    public static boolean sePuedeCancelar(int idConsulta) {
+        return consultas.stream()
+                .filter(c -> c.getId() == idConsulta)
+                .findFirst()
+                .map(c -> {
+                    LocalDate hoy = LocalDate.now();
+                    LocalDate fechaCita = c.getFecha();
+                    return fechaCita.isAfter(hoy) || fechaCita.isEqual(hoy);
+                })
+                .orElse(false);
+    }
 
     // Método para verificar disponibilidad de horario
     public static boolean verificarDisponibilidad(int idMedico, LocalDate fecha, LocalTime hora) {
@@ -149,6 +202,23 @@ public class Consulta {
                                c.getFecha().equals(fecha) && 
                                c.getHora().equals(hora) &&
                                !c.getEstado().equals("cancelada"));
+    }
+
+    // Método para obtener estadísticas optimizado
+    public static java.util.Map<String, Long> obtenerEstadisticas() {
+        return consultas.stream()
+                .collect(Collectors.groupingBy(
+                    Consulta::getEstado,
+                    Collectors.counting()
+                ));
+    }
+    
+    // Método para obtener consultas por rango de fechas optimizado
+    public static List<Consulta> obtenerPorRangoFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
+        return consultas.stream()
+                .filter(c -> !c.getFecha().isBefore(fechaDesde) && !c.getFecha().isAfter(fechaHasta))
+                .sorted((c1, c2) -> c1.getFecha().compareTo(c2.getFecha()))
+                .collect(Collectors.toList());
     }
 
     // Método para limpiar la lista (útil para testing)

@@ -1,5 +1,8 @@
 package com.gestorcitasmedicas.controller;
 
+import com.gestorcitasmedicas.model.Consulta;
+import com.gestorcitasmedicas.model.Medico;
+import com.gestorcitasmedicas.model.Paciente;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,237 +10,345 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.event.ActionEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.animation.Timeline;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.util.Duration;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.beans.property.SimpleStringProperty;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class ReprogramarCitaController {
 
-    @FXML private ComboBox<String> cmbHora;
-    @FXML private ComboBox<String> cmbFecha;
-    @FXML private TextArea txtMotivo;
-    @FXML private Button btnCancelar;
-    @FXML private Button btnAceptar;
+    @FXML private TableView<Consulta> tablaCitas;
+    @FXML private TableColumn<Consulta, Integer> colId;
+    @FXML private TableColumn<Consulta, String> colDoctor;
+    @FXML private TableColumn<Consulta, String> colEspecialidad;
+    @FXML private TableColumn<Consulta, String> colFecha;
+    @FXML private TableColumn<Consulta, String> colHora;
+    @FXML private TableColumn<Consulta, String> colMotivo;
+    @FXML private TableColumn<Consulta, String> colEstado;
     
-    // Elementos del menú expandible
-    @FXML private VBox menuLateral;
-    @FXML private VBox menuItemMiPerfil;
-    @FXML private VBox menuItemHistorialCitas;
-    @FXML private VBox menuItemEditarInformacion;
-    @FXML private VBox menuItemCancelarCita;
-    @FXML private VBox menuItemReprogramarCita;
-    @FXML private VBox menuItemSalir;
+    @FXML private VBox infoCitaSeleccionada;
+    @FXML private Label lblDoctorSeleccionado;
+    @FXML private Label lblEspecialidadSeleccionada;
+    @FXML private Label lblFechaActual;
+    @FXML private Label lblHoraActual;
+    @FXML private Label lblConsultorioSeleccionado;
     
-    // Botones del menú
-    @FXML private Button btnMiPerfil;
-    @FXML private Button btnHistorialCitas;
-    @FXML private Button btnEditarInformacion;
-    @FXML private Button btnCancelarCita;
+    @FXML private VBox formularioReprogramacion;
+    @FXML private DatePicker datePickerNueva;
+    @FXML private ComboBox<String> comboHoraNueva;
+    @FXML private TextArea txtMotivoReprogramacion;
+    
+    @FXML private Button btnRegresar;
     @FXML private Button btnReprogramarCita;
-    @FXML private Button btnSalir;
     
-    // Variables para el menú expandible
-    private Timeline timelineExpansion;
-    private boolean menuExpandido = false;
+    private ObservableList<Consulta> citasActivas = FXCollections.observableArrayList();
+    private ObservableList<String> horasDisponibles = FXCollections.observableArrayList();
+    private Consulta citaSeleccionada = null;
+    private Paciente pacienteActual = null;
 
     @FXML
     private void initialize() {
         System.out.println("ReprogramarCitaController inicializando...");
         
-        // Configurar menú expandible
-        configurarMenuExpandible();
-        
-        // Cargar opciones de hora y fecha
-        cargarOpcionesHora();
-        cargarOpcionesFecha();
-        
-        // Configurar efectos hover para los botones
-        configurarEfectosHover();
+        configurarTabla();
+        configurarComponentes();
+        cargarCitasActivas();
+        configurarEventos();
         
         System.out.println("ReprogramarCitaController inicializado correctamente");
     }
     
-    private void cargarOpcionesHora() {
-        ObservableList<String> horas = FXCollections.observableArrayList(
-            "08:00", "08:30", "09:00", "09:30", "10:00", "10:30",
-            "11:00", "11:30", "12:00", "12:30", "13:00", "13:30",
-            "14:00", "14:30", "15:00", "15:30", "16:00", "16:30",
-            "17:00", "17:30", "18:00", "18:30", "19:00", "19:30"
-        );
-        cmbHora.setItems(horas);
+    private void configurarTabla() {
+        // Configurar columnas
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colDoctor.setCellValueFactory(cellData -> {
+            Consulta consulta = cellData.getValue();
+            Medico medico = obtenerMedicoPorId(consulta.getIdMedico());
+            return new SimpleStringProperty(medico != null ? medico.getNombre() : "N/A");
+        });
+        colEspecialidad.setCellValueFactory(cellData -> {
+            Consulta consulta = cellData.getValue();
+            Medico medico = obtenerMedicoPorId(consulta.getIdMedico());
+            return new SimpleStringProperty(medico != null ? medico.getEspecialidad() : "N/A");
+        });
+        colFecha.setCellValueFactory(cellData -> {
+            Consulta consulta = cellData.getValue();
+            return new SimpleStringProperty(consulta.getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        });
+        colHora.setCellValueFactory(cellData -> {
+            Consulta consulta = cellData.getValue();
+            return new SimpleStringProperty(consulta.getHora().format(DateTimeFormatter.ofPattern("HH:mm")));
+        });
+        colMotivo.setCellValueFactory(new PropertyValueFactory<>("motivo"));
+        colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
+        
+        // Configurar tabla
+        tablaCitas.setItems(citasActivas);
     }
     
-    private void cargarOpcionesFecha() {
-        ObservableList<String> fechas = FXCollections.observableArrayList();
-        LocalDate hoy = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        
-        // Generar fechas para los próximos 30 días
-        for (int i = 1; i <= 30; i++) {
-            LocalDate fecha = hoy.plusDays(i);
-            fechas.add(fecha.format(formatter));
-        }
-        
-        cmbFecha.setItems(fechas);
-    }
-    
-    private void configurarEfectosHover() {
-        // Efecto hover para el botón Cancelar
-        btnCancelar.setOnMouseEntered(e -> {
-            btnCancelar.setStyle("-fx-background-color: #666666; -fx-cursor: hand;");
-        });
-        
-        btnCancelar.setOnMouseExited(e -> {
-            btnCancelar.setStyle("-fx-background-color: #787a7d; -fx-cursor: hand;");
-        });
-        
-        // Efecto hover para el botón Aceptar
-        btnAceptar.setOnMouseEntered(e -> {
-            btnAceptar.setStyle("-fx-background-color: #2C5A7A; -fx-cursor: hand;");
-        });
-        
-        btnAceptar.setOnMouseExited(e -> {
-            btnAceptar.setStyle("-fx-background-color: #3b6f89; -fx-cursor: hand;");
-        });
-        
-        // Efectos hover para los botones del menú lateral
-        Button[] botonesMenu = {btnMiPerfil, btnHistorialCitas, btnEditarInformacion, 
-                               btnCancelarCita, btnReprogramarCita, btnSalir};
-        
-        for (Button boton : botonesMenu) {
-            if (boton != null) {
-                boton.setOnMouseEntered(e -> {
-                    boton.setStyle("-fx-background-color: rgba(255, 255, 255, 0.2); -fx-background-radius: 20;");
-                });
-                
-                boton.setOnMouseExited(e -> {
-                    boton.setStyle("-fx-background-color: transparent;");
-                });
-            }
-        }
-    }
-
-    @FXML
-    private void aceptar(ActionEvent event) {
-        System.out.println("Aceptando reprogramación de cita...");
-        
-        // Validar campos
-        if (!validarCampos()) {
-            return;
-        }
-        
-        // Mostrar confirmación
-        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmacion.setTitle("Confirmar Reprogramación");
-        confirmacion.setHeaderText(null);
-        confirmacion.setContentText(
-            "¿Está seguro de que desea reprogramar su cita?\n\n" +
-            "Nueva fecha: " + cmbFecha.getValue() + "\n" +
-            "Nueva hora: " + cmbHora.getValue() + "\n" +
-            "Motivo: " + txtMotivo.getText()
-        );
-        
-        confirmacion.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                // Simular reprogramación exitosa
-                try {
-                    System.out.println("Cita reprogramada exitosamente");
-                    System.out.println("Nueva fecha: " + cmbFecha.getValue());
-                    System.out.println("Nueva hora: " + cmbHora.getValue());
-                    System.out.println("Motivo: " + txtMotivo.getText());
-                    
-                    // Mostrar ventana de confirmación exitosa
-                    mostrarConfirmacionExitosa();
-                    
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    mostrarAlerta("Error", "Error al reprogramar la cita: " + e.getMessage(), Alert.AlertType.ERROR);
+    private void configurarComponentes() {
+        // Configurar DatePicker para solo permitir fechas futuras
+        datePickerNueva.setDayCellFactory(picker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                if (date != null && empty) {
+                    setDisable(date.isBefore(LocalDate.now()) || date.getDayOfWeek().getValue() > 5); // Solo lunes a viernes
                 }
             }
         });
+        
+        // Configurar ComboBox de horas
+        comboHoraNueva.setItems(horasDisponibles);
+        comboHoraNueva.setDisable(true);
+    }
+    
+    private void cargarCitasActivas() {
+        try {
+            // Obtener el paciente actual (por ahora usamos el primer paciente como ejemplo)
+            List<Paciente> pacientes = Paciente.obtenerTodos();
+            if (pacientes.isEmpty()) {
+                mostrarAlerta("Error", "No hay pacientes registrados", Alert.AlertType.ERROR);
+                return;
+            }
+            pacienteActual = pacientes.get(0); // Usar el primer paciente como ejemplo
+            
+            // Cargar citas activas del paciente
+            List<Consulta> citas = Consulta.obtenerActivasPorPaciente(pacienteActual.getId());
+            citasActivas.clear();
+            citasActivas.addAll(citas);
+            
+            if (citas.isEmpty()) {
+                mostrarAlerta("Información", "No tienes citas activas para reprogramar", Alert.AlertType.INFORMATION);
+            }
+            
+        } catch (Exception e) {
+            System.err.println("Error al cargar citas activas: " + e.getMessage());
+            e.printStackTrace();
+            mostrarAlerta("Error", "No se pudieron cargar las citas activas", Alert.AlertType.ERROR);
+        }
+    }
+    
+    private void configurarEventos() {
+        // Evento de selección en la tabla
+        tablaCitas.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                citaSeleccionada = newValue;
+                mostrarInformacionCita(newValue);
+                validarPuedeReprogramar();
+            } else {
+                citaSeleccionada = null;
+                ocultarInformacionCita();
+            }
+        });
+        
+        // Evento cuando se selecciona una nueva fecha
+        datePickerNueva.setOnAction(event -> {
+            if (datePickerNueva.getValue() != null && citaSeleccionada != null) {
+                generarHorariosDisponibles();
+            }
+        });
+        
+        // Evento cuando se selecciona una nueva hora
+        comboHoraNueva.setOnAction(event -> {
+            validarFormularioCompleto();
+        });
+        
+        // Evento de cambio en el motivo de reprogramación
+        txtMotivoReprogramacion.textProperty().addListener((observable, oldValue, newValue) -> {
+            validarFormularioCompleto();
+        });
+    }
+    
+    private void mostrarInformacionCita(Consulta consulta) {
+        Medico medico = obtenerMedicoPorId(consulta.getIdMedico());
+        
+        if (medico != null) {
+            lblDoctorSeleccionado.setText(medico.getNombre());
+            lblEspecialidadSeleccionada.setText(medico.getEspecialidad());
+            lblConsultorioSeleccionado.setText(medico.getConsultorio());
+        } else {
+            lblDoctorSeleccionado.setText("N/A");
+            lblEspecialidadSeleccionada.setText("N/A");
+            lblConsultorioSeleccionado.setText("N/A");
+        }
+        
+        lblFechaActual.setText(consulta.getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        lblHoraActual.setText(consulta.getHora().format(DateTimeFormatter.ofPattern("HH:mm")));
+        
+        infoCitaSeleccionada.setVisible(true);
+        formularioReprogramacion.setVisible(true);
+    }
+    
+    private void ocultarInformacionCita() {
+        infoCitaSeleccionada.setVisible(false);
+        formularioReprogramacion.setVisible(false);
+        btnReprogramarCita.setDisable(true);
+    }
+    
+    private void validarPuedeReprogramar() {
+        if (citaSeleccionada != null) {
+            boolean puedeReprogramar = Consulta.sePuedeCancelar(citaSeleccionada.getId());
+            if (!puedeReprogramar) {
+                mostrarAlerta("Advertencia", "Esta cita no se puede reprogramar porque ya pasó la fecha", Alert.AlertType.WARNING);
+                btnReprogramarCita.setDisable(true);
+            } else {
+                btnReprogramarCita.setDisable(false);
+            }
+        }
+    }
+    
+    private void generarHorariosDisponibles() {
+        if (citaSeleccionada == null || datePickerNueva.getValue() == null) {
+            return;
+        }
+        
+        LocalDate nuevaFecha = datePickerNueva.getValue();
+        horasDisponibles.clear();
+        
+        // Generar horarios de 8:00 AM a 5:00 PM con intervalos de 30 minutos
+        LocalTime horaInicio = LocalTime.of(8, 0);
+        LocalTime horaFin = LocalTime.of(17, 0);
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        
+        while (horaInicio.isBefore(horaFin)) {
+            String horaFormateada = horaInicio.format(formatter);
+            
+            // Verificar si la hora está disponible (excluyendo la cita actual)
+            if (!Consulta.verificarDisponibilidad(citaSeleccionada.getIdMedico(), nuevaFecha, horaInicio)) {
+                horasDisponibles.add(horaFormateada);
+            }
+            
+            horaInicio = horaInicio.plusMinutes(30);
+        }
+        
+        // Habilitar ComboBox de horas si hay horarios disponibles
+        comboHoraNueva.setDisable(horasDisponibles.isEmpty());
+        
+        if (horasDisponibles.isEmpty()) {
+            mostrarAlerta("Información", "No hay horarios disponibles para la fecha seleccionada", Alert.AlertType.INFORMATION);
+        }
+    }
+    
+    private void validarFormularioCompleto() {
+        boolean formularioCompleto = citaSeleccionada != null && 
+                                   datePickerNueva.getValue() != null && 
+                                   comboHoraNueva.getValue() != null && 
+                                   !txtMotivoReprogramacion.getText().trim().isEmpty();
+        
+        btnReprogramarCita.setDisable(!formularioCompleto);
     }
     
     @FXML
-    private void cancelar(ActionEvent event) {
-        System.out.println("Cancelando operación...");
-        
-        // Regresar al panel principal del paciente
-        regresarAlPanelPrincipal();
+    private void reprogramarCita() {
+        if (validarCampos()) {
+            try {
+                LocalDate nuevaFecha = datePickerNueva.getValue();
+                LocalTime nuevaHora = LocalTime.parse(comboHoraNueva.getValue(), DateTimeFormatter.ofPattern("HH:mm"));
+                String motivoReprogramacion = txtMotivoReprogramacion.getText().trim();
+                
+                if (Consulta.reprogramarConsulta(citaSeleccionada.getId(), nuevaFecha, nuevaHora)) {
+                    mostrarAlerta("Éxito", 
+                        "Cita reprogramada correctamente\n\n" +
+                        "ID de cita: " + citaSeleccionada.getId() + "\n" +
+                        "Nueva fecha: " + nuevaFecha.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n" +
+                        "Nueva hora: " + nuevaHora.format(DateTimeFormatter.ofPattern("HH:mm")) + "\n" +
+                        "Motivo: " + motivoReprogramacion, 
+                        Alert.AlertType.INFORMATION);
+                    
+                    // Limpiar formulario y recargar tabla
+                    limpiarFormulario();
+                    cargarCitasActivas();
+                } else {
+                    mostrarAlerta("Error", "No se pudo reprogramar la cita. Por favor, inténtelo nuevamente.", Alert.AlertType.ERROR);
+                }
+                
+            } catch (Exception e) {
+                System.err.println("Error al reprogramar cita: " + e.getMessage());
+                e.printStackTrace();
+                mostrarAlerta("Error del Sistema", 
+                    "Ocurrió un error inesperado durante la reprogramación:\n\n" + e.getMessage(), 
+                    Alert.AlertType.ERROR);
+            }
+        }
     }
     
     private boolean validarCampos() {
-        // Validar hora seleccionada
-        if (cmbHora.getValue() == null || cmbHora.getValue().isEmpty()) {
-            mostrarAlerta("Error", "Debe seleccionar una hora", Alert.AlertType.ERROR);
-            cmbHora.requestFocus();
+        if (citaSeleccionada == null) {
+            mostrarAlerta("Error", "Debe seleccionar una cita para reprogramar", Alert.AlertType.ERROR);
             return false;
         }
         
-        // Validar fecha seleccionada
-        if (cmbFecha.getValue() == null || cmbFecha.getValue().isEmpty()) {
-            mostrarAlerta("Error", "Debe seleccionar una fecha", Alert.AlertType.ERROR);
-            cmbFecha.requestFocus();
+        if (datePickerNueva.getValue() == null) {
+            mostrarAlerta("Error", "Debe seleccionar una nueva fecha", Alert.AlertType.ERROR);
+            datePickerNueva.requestFocus();
             return false;
         }
         
-        // Validar motivo
-        if (txtMotivo.getText().trim().isEmpty()) {
-            mostrarAlerta("Error", "Debe ingresar un motivo para la reprogramación", Alert.AlertType.ERROR);
-            txtMotivo.requestFocus();
+        if (comboHoraNueva.getValue() == null) {
+            mostrarAlerta("Error", "Debe seleccionar una nueva hora", Alert.AlertType.ERROR);
+            comboHoraNueva.requestFocus();
             return false;
         }
         
-        if (txtMotivo.getText().trim().length() < 10) {
-            mostrarAlerta("Error", "El motivo debe tener al menos 10 caracteres", Alert.AlertType.ERROR);
-            txtMotivo.requestFocus();
+        if (txtMotivoReprogramacion.getText().trim().isEmpty()) {
+            mostrarAlerta("Error", "Debe ingresar el motivo de la reprogramación", Alert.AlertType.ERROR);
+            txtMotivoReprogramacion.requestFocus();
+            return false;
+        }
+        
+        if (!Consulta.sePuedeCancelar(citaSeleccionada.getId())) {
+            mostrarAlerta("Error", "Esta cita no se puede reprogramar", Alert.AlertType.ERROR);
             return false;
         }
         
         return true;
     }
     
-    private void mostrarConfirmacionExitosa() {
+    private void limpiarFormulario() {
+        datePickerNueva.setValue(null);
+        comboHoraNueva.getSelectionModel().clearSelection();
+        comboHoraNueva.setDisable(true);
+        txtMotivoReprogramacion.clear();
+        citaSeleccionada = null;
+        ocultarInformacionCita();
+        tablaCitas.getSelectionModel().clearSelection();
+        horasDisponibles.clear();
+    }
+    
+    @FXML
+    private void regresar() {
         try {
-            // Cargar la ventana de confirmación exitosa
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/ReprogramarCitaExitosa.fxml"));
-            Parent exitosaRoot = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/VistaPaciente.fxml"));
+            Parent vistaPacienteRoot = loader.load();
             
-            Scene nuevaEscena = new Scene(exitosaRoot, 400, 200);
-            Stage currentStage = (Stage) btnAceptar.getScene().getWindow();
+            Scene nuevaEscena = new Scene(vistaPacienteRoot);
+            Stage currentStage = (Stage) btnRegresar.getScene().getWindow();
             currentStage.setScene(nuevaEscena);
-            currentStage.setTitle("Cita Reprogramada Exitosamente");
+            currentStage.setTitle("Vista Paciente - Gestor de Citas Médicas");
+            currentStage.setMaximized(true);
+            currentStage.show();
             currentStage.centerOnScreen();
             
         } catch (IOException e) {
             e.printStackTrace();
-            mostrarAlerta("Éxito", "Su cita ha sido reprogramada exitosamente", Alert.AlertType.INFORMATION);
-            regresarAlPanelPrincipal();
+            mostrarAlerta("Error", "No se pudo regresar a la vista del paciente", Alert.AlertType.ERROR);
         }
     }
     
-    private void regresarAlPanelPrincipal() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/VistaPaciente.fxml"));
-            Parent pacienteRoot = loader.load();
-            
-            Scene nuevaEscena = new Scene(pacienteRoot, 1024, 768);
-            Stage currentStage = (Stage) btnCancelar.getScene().getWindow();
-            currentStage.setScene(nuevaEscena);
-            currentStage.setTitle("Panel Principal - Paciente");
-            currentStage.centerOnScreen();
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-            mostrarAlerta("Error", "No se pudo regresar al panel principal", Alert.AlertType.ERROR);
-        }
+    private Medico obtenerMedicoPorId(int idMedico) {
+        List<Medico> medicos = Medico.obtenerTodos();
+        return medicos.stream()
+                .filter(m -> m.getId() == idMedico)
+                .findFirst()
+                .orElse(null);
     }
     
     private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
@@ -246,207 +357,5 @@ public class ReprogramarCitaController {
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
-    }
-    
-    // Métodos del menú expandible
-    private void configurarMenuExpandible() {
-        // Configurar animación del menú
-        timelineExpansion = new Timeline();
-
-        // Verificar que los elementos del menú no sean null antes de configurar eventos
-        if (menuLateral != null) {
-            // Eventos del menú lateral
-            menuLateral.setOnMouseEntered(e -> expandirMenu());
-            menuLateral.setOnMouseExited(e -> contraerMenu());
-
-            // Mostrar etiquetas inicialmente
-            mostrarEtiquetasMenu(false);
-        }
-    }
-
-    private void expandirMenu() {
-        if (!menuExpandido && menuLateral != null && timelineExpansion != null) {
-            menuExpandido = true;
-
-            // Detener animación anterior si está en curso
-            timelineExpansion.stop();
-
-            // Hacer que el menú aparezca por encima del contenido
-            menuLateral.toFront();
-
-            // Animación de expansión
-            KeyValue keyValue = new KeyValue(menuLateral.prefWidthProperty(), 200);
-            KeyFrame keyFrame = new KeyFrame(Duration.millis(300), keyValue);
-            timelineExpansion.getKeyFrames().clear();
-            timelineExpansion.getKeyFrames().add(keyFrame);
-
-            // Mostrar etiquetas durante la expansión
-            mostrarEtiquetasMenu(true);
-
-            timelineExpansion.play();
-        }
-    }
-
-    private void contraerMenu() {
-        if (menuExpandido && menuLateral != null && timelineExpansion != null) {
-            menuExpandido = false;
-
-            // Detener animación anterior si está en curso
-            timelineExpansion.stop();
-
-            // Animación de contracción
-            KeyValue keyValue = new KeyValue(menuLateral.prefWidthProperty(), 60);
-            KeyFrame keyFrame = new KeyFrame(Duration.millis(300), keyValue);
-            timelineExpansion.getKeyFrames().clear();
-            timelineExpansion.getKeyFrames().add(keyFrame);
-
-            // Ocultar etiquetas durante la contracción
-            mostrarEtiquetasMenu(false);
-
-            timelineExpansion.play();
-        }
-    }
-
-    private void mostrarEtiquetasMenu(boolean mostrar) {
-        // Mostrar u ocultar etiquetas de texto en los elementos del menú
-        if (menuItemMiPerfil != null) {
-            menuItemMiPerfil.getChildren().stream()
-                .filter(node -> node instanceof Label)
-                .forEach(node -> node.setVisible(mostrar));
-        }
-        if (menuItemHistorialCitas != null) {
-            menuItemHistorialCitas.getChildren().stream()
-                .filter(node -> node instanceof Label)
-                .forEach(node -> node.setVisible(mostrar));
-        }
-        if (menuItemEditarInformacion != null) {
-            menuItemEditarInformacion.getChildren().stream()
-                .filter(node -> node instanceof Label)
-                .forEach(node -> node.setVisible(mostrar));
-        }
-        if (menuItemCancelarCita != null) {
-            menuItemCancelarCita.getChildren().stream()
-                .filter(node -> node instanceof Label)
-                .forEach(node -> node.setVisible(mostrar));
-        }
-        if (menuItemReprogramarCita != null) {
-            menuItemReprogramarCita.getChildren().stream()
-                .filter(node -> node instanceof Label)
-                .forEach(node -> node.setVisible(mostrar));
-        }
-        if (menuItemSalir != null) {
-            menuItemSalir.getChildren().stream()
-                .filter(node -> node instanceof Label)
-                .forEach(node -> node.setVisible(mostrar));
-        }
-    }
-    
-    // Métodos de navegación del menú
-    @FXML
-    private void abrirMiPerfil() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/VistaPaciente.fxml"));
-            Parent pacienteRoot = loader.load();
-            
-            Scene nuevaEscena = new Scene(pacienteRoot, 1366, 768);
-            Stage currentStage = (Stage) btnMiPerfil.getScene().getWindow();
-            currentStage.setScene(nuevaEscena);
-            currentStage.setTitle("Panel Principal - Paciente");
-            currentStage.centerOnScreen();
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-            mostrarAlerta("Error", "No se pudo abrir Mi Perfil", Alert.AlertType.ERROR);
-        }
-    }
-    
-    @FXML
-    private void abrirHistorialCitas() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/HISTCITAS.fxml"));
-            Parent historialRoot = loader.load();
-            
-            Scene nuevaEscena = new Scene(historialRoot, 1366, 768);
-            Stage currentStage = (Stage) btnHistorialCitas.getScene().getWindow();
-            currentStage.setScene(nuevaEscena);
-            currentStage.setTitle("Historial de Citas - Paciente");
-            currentStage.centerOnScreen();
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-            mostrarAlerta("Error", "No se pudo abrir el Historial de Citas", Alert.AlertType.ERROR);
-        }
-    }
-    
-    @FXML
-    private void abrirEditarInformacion() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/EditarInformacion.fxml"));
-            Parent editarRoot = loader.load();
-            
-            Scene nuevaEscena = new Scene(editarRoot, 1366, 768);
-            Stage currentStage = (Stage) btnEditarInformacion.getScene().getWindow();
-            currentStage.setScene(nuevaEscena);
-            currentStage.setTitle("Editar Información - Paciente");
-            currentStage.centerOnScreen();
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-            mostrarAlerta("Error", "No se pudo abrir Editar Información", Alert.AlertType.ERROR);
-        }
-    }
-    
-    @FXML
-    private void abrirCancelarCita() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/CancelarCita.fxml"));
-            Parent cancelarRoot = loader.load();
-            
-            Scene nuevaEscena = new Scene(cancelarRoot, 1366, 768);
-            Stage currentStage = (Stage) btnCancelarCita.getScene().getWindow();
-            currentStage.setScene(nuevaEscena);
-            currentStage.setTitle("Cancelar Cita - Paciente");
-            currentStage.centerOnScreen();
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-            mostrarAlerta("Error", "No se pudo abrir Cancelar Cita", Alert.AlertType.ERROR);
-        }
-    }
-    
-    @FXML
-    private void abrirReprogramarCita() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/ReprogramarCita.fxml"));
-            Parent reprogramarRoot = loader.load();
-            
-            Scene nuevaEscena = new Scene(reprogramarRoot, 1366, 768);
-            Stage currentStage = (Stage) btnReprogramarCita.getScene().getWindow();
-            currentStage.setScene(nuevaEscena);
-            currentStage.setTitle("Reprogramar Cita - Paciente");
-            currentStage.centerOnScreen();
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-            mostrarAlerta("Error", "No se pudo abrir Reprogramar Cita", Alert.AlertType.ERROR);
-        }
-    }
-    
-    @FXML
-    private void salir() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/login.fxml"));
-            Parent loginRoot = loader.load();
-            
-            Scene nuevaEscena = new Scene(loginRoot, 1366, 768);
-            Stage currentStage = (Stage) btnSalir.getScene().getWindow();
-            currentStage.setScene(nuevaEscena);
-            currentStage.setTitle("Inicio de Sesión");
-            currentStage.centerOnScreen();
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-            mostrarAlerta("Error", "No se pudo cerrar sesión", Alert.AlertType.ERROR);
-        }
     }
 }

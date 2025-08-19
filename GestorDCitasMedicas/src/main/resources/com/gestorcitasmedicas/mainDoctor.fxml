@@ -70,7 +70,18 @@
                               <Insets top="30.0" />
                            </VBox.margin>
                         </Button>
-                        <Button fx:id="btnExpedientes" mnemonicParsing="false" onAction="#abrirExpedientes" prefHeight="13.0" prefWidth="1.0" style="-fx-background-color: #3b6f89;">
+                        <Button fx:id="btnExpedientes" mnemonicParsing="false" onAction="#abrirExpedientes" prefHeight="34.0" prefWidth="36.0" style="-fx-background-color: #3b6f89;">
+                           <graphic>
+                              <ImageView fitHeight="26.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/exp.png" />
+                                 </image></ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets top="30.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="btnConfiguracion" mnemonicParsing="false" onAction="#abrirConfiguracion" prefHeight="34.0" prefWidth="36.0" style="-fx-background-color: #3b6f89;">
                            <graphic>
                               <ImageView fitHeight="26.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
