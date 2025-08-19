@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class DatabaseConnection {
     
     // Configuración de la base de datos (simulada)
-    private static final String URL = "jdbc:oracle:thin:@ge3645798609b17_maked_high.adb.oraclecloud.com";
+    private static final String URL = "jdbc:oracle:thin:@MAKED_HIGH?TNS_ADMIN=C:/Users/Daniel/Downloads/Wallet_MAKED";
     private static final String USER = "ADMIN";
     private static final String PASSWORD = "MAKEDproject123_";
     
@@ -23,20 +23,16 @@ public class DatabaseConnection {
     public static Connection getConnection() throws SQLException {
         try {
             // Cargar el driver de Oracle
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            
+            Class.forName("oracle.jdbc.OracleDriver");
+
             // Crear y retornar la conexión
             return DriverManager.getConnection(URL, USER, PASSWORD);
-            
+
         } catch (ClassNotFoundException e) {
             throw new SQLException("Driver de Oracle no encontrado", e);
         }
     }
-    
-    /**
-     * Cierra la conexión de manera segura
-     * @param connection conexión a cerrar
-     */
+
     public static void closeConnection(Connection connection) {
         if (connection != null) {
             try {
@@ -46,11 +42,7 @@ public class DatabaseConnection {
             }
         }
     }
-    
-    /**
-     * Verifica si la conexión está disponible
-     * @return true si la conexión funciona, false en caso contrario
-     */
+
     public static boolean testConnection() {
         try (Connection conn = getConnection()) {
             return conn != null && !conn.isClosed();
