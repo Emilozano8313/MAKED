@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600" minWidth="1000" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #F5F7FA;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.CompletarCitaController">
+   <top>
+      <HBox prefHeight="107.0" style="-fx-background-color: #FFFFFF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" alignment="CENTER_LEFT" spacing="20">
+         <padding>
+            <Insets top="20" right="20" bottom="20" left="20" />
+         </padding>
+         <children>
+            <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/icon3.png" />
+               </image>
+            </ImageView>
+            <Label text="Completar Cita Médica" textFill="#3B6F89">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox spacing="20" style="-fx-background-color: #FFFFFF;">
+         <padding>
+            <Insets top="20" right="20" bottom="20" left="20" />
+         </padding>
+         <children>
+            <!-- Información de la cita -->
+            <VBox spacing="10" style="-fx-background-color: #E8F4FD; -fx-background-radius: 10; -fx-padding: 20;">
+               <children>
+                  <Label text="Información de la Cita" style="-fx-font-weight: bold; -fx-font-size: 20; -fx-text-fill: #2C5AA0;" />
+                  <GridPane hgap="30" vgap="10">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="200" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="300" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="200" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="300" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10" prefHeight="30" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10" prefHeight="30" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10" prefHeight="30" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     
+                     <Label text="Paciente:" style="-fx-font-weight: bold; -fx-font-size: 14;" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                     <Label fx:id="lblPaciente" text="" style="-fx-font-size: 14;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                     
+                     <Label text="Fecha y Hora:" style="-fx-font-weight: bold; -fx-font-size: 14;" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                     <Label fx:id="lblFechaHora" text="" style="-fx-font-size: 14;" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                     
+                     <Label text="Motivo:" style="-fx-font-weight: bold; -fx-font-size: 14;" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                     <Label fx:id="lblMotivo" text="" style="-fx-font-size: 14;" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.columnSpan="3" />
+                     
+                     <Label text="Matrícula:" style="-fx-font-weight: bold; -fx-font-size: 14;" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                     <Label fx:id="lblMatricula" text="" style="-fx-font-size: 14;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                     
+                     <Label text="Teléfono:" style="-fx-font-weight: bold; -fx-font-size: 14;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                     <Label fx:id="lblTelefono" text="" style="-fx-font-size: 14;" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  </GridPane>
+               </children>
+            </VBox>
+            
+            <!-- Formulario de diagnóstico y tratamiento -->
+            <VBox spacing="15" style="-fx-background-color: #F8F9FA; -fx-background-radius: 10; -fx-padding: 20;">
+               <children>
+                  <Label text="Diagnóstico y Tratamiento" style="-fx-font-weight: bold; -fx-font-size: 20; -fx-text-fill: #3B6F89;" />
+                  
+                  <VBox spacing="8">
+                     <Label text="Diagnóstico:" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #3B6F89;" />
+                     <TextArea fx:id="txtDiagnostico" promptText="Ingrese el diagnóstico del paciente..." prefHeight="100" wrapText="true" />
+                  </VBox>
+                  
+                  <VBox spacing="8">
+                     <Label text="Tratamiento:" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #3B6F89;" />
+                     <TextArea fx:id="txtTratamiento" promptText="Ingrese el tratamiento prescrito..." prefHeight="100" wrapText="true" />
+                  </VBox>
+                  
+                  <VBox spacing="8">
+                     <Label text="Observaciones adicionales:" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #3B6F89;" />
+                     <TextArea fx:id="txtObservaciones" promptText="Ingrese observaciones adicionales (opcional)..." prefHeight="80" wrapText="true" />
+                  </VBox>
+               </children>
+            </VBox>
+            
+            <!-- Botones de acción -->
+            <HBox spacing="20" alignment="CENTER_RIGHT">
+               <Button fx:id="btnRegresar" text="Regresar" style="-fx-background-color: #787A7D; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14; -fx-background-radius: 5;" onAction="#regresar" />
+               <Button fx:id="btnCompletar" text="Completar Cita" style="-fx-background-color: #28A745; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14; -fx-background-radius: 5;" onAction="#completarCita" />
+            </HBox>
+            
+            <!-- Información adicional -->
+            <VBox spacing="10" style="-fx-background-color: #E8F4FD; -fx-background-radius: 8; -fx-padding: 20;">
+               <children>
+                  <Label text="Información importante:" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #2C5AA0;" />
+                  <VBox spacing="5">
+                     <Label text="• El diagnóstico y tratamiento son obligatorios para completar la cita" style="-fx-font-size: 14; -fx-text-fill: #2C5AA0;" />
+                     <Label text="• Una vez completada, la cita cambiará a estado 'completada'" style="-fx-font-size: 14; -fx-text-fill: #2C5AA0;" />
+                     <Label text="• Las observaciones son opcionales pero recomendadas" style="-fx-font-size: 14; -fx-text-fill: #2C5AA0;" />
+                     <Label text="• Esta información quedará registrada en el historial médico del paciente" style="-fx-font-size: 14; -fx-text-fill: #2C5AA0;" />
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

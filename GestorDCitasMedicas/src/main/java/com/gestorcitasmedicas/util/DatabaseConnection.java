@@ -11,9 +11,9 @@ import java.sql.SQLException;
 public class DatabaseConnection {
     
     // Configuración de la base de datos (simulada)
-    private static final String URL = "jdbc:oracle:thin:@localhost:1521:XE";
-    private static final String USER = "system";
-    private static final String PASSWORD = "oracle";
+    private static final String URL = "jdbc:oracle:thin:@ge3645798609b17_maked_high.adb.oraclecloud.com";
+    private static final String USER = "ADMIN";
+    private static final String PASSWORD = "MAKEDproject123_";
     
     /**
      * Obtiene una conexión a la base de datos

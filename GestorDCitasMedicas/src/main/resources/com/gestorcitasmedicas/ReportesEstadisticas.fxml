@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600" minWidth="1000" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #F5F7FA;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gestorcitasmedicas.controller.ReportesEstadisticasController">
+   <top>
+      <HBox prefHeight="107.0" style="-fx-background-color: #FFFFFF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" alignment="CENTER_LEFT" spacing="20">
+         <padding>
+            <Insets top="20" right="20" bottom="20" left="20" />
+         </padding>
+         <children>
+            <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/icon4.png" />
+               </image>
+            </ImageView>
+            <Label text="Reportes y Estadísticas" textFill="#3B6F89">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox spacing="20" style="-fx-background-color: #FFFFFF;">
+         <padding>
+            <Insets top="20" right="20" bottom="20" left="20" />
+         </padding>
+         <children>
+            <!-- Filtros de fecha -->
+            <HBox spacing="20" alignment="CENTER_LEFT">
+               <VBox spacing="8">
+                  <Label text="Fecha desde:" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #3B6F89;" />
+                  <DatePicker fx:id="datePickerDesde" promptText="Selecciona fecha" />
+               </VBox>
+               
+               <VBox spacing="8">
+                  <Label text="Fecha hasta:" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #3B6F89;" />
+                  <DatePicker fx:id="datePickerHasta" promptText="Selecciona fecha" />
+               </VBox>
+               
+                                          <VBox spacing="8">
+                              <Label text="&nbsp;" style="-fx-font-size: 16;" />
+                              <Button fx:id="btnGenerarReporte" text="Generar Reporte" style="-fx-background-color: #28A745; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14; -fx-background-radius: 5;" onAction="#generarReporte" />
+                           </VBox>
+                           <VBox spacing="8">
+                              <Label text="&nbsp;" style="-fx-font-size: 16;" />
+                              <Button fx:id="btnExportarPDF" text="Exportar PDF" style="-fx-background-color: #DC3545; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14; -fx-background-radius: 5;" onAction="#exportarPDF" />
+                           </VBox>
+               
+               <Region HBox.hgrow="ALWAYS" />
+               
+               <VBox spacing="8">
+                  <Label text="&nbsp;" style="-fx-font-size: 16;" />
+                  <Button fx:id="btnRegresar" text="Regresar" style="-fx-background-color: #787A7D; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14; -fx-background-radius: 5;" onAction="#regresar" />
+               </VBox>
+            </HBox>
+            
+            <!-- Estadísticas generales -->
+            <VBox spacing="15" style="-fx-background-color: #E8F4FD; -fx-background-radius: 10; -fx-padding: 20;">
+               <children>
+                  <Label text="Estadísticas Generales" style="-fx-font-weight: bold; -fx-font-size: 20; -fx-text-fill: #2C5AA0;" />
+                  <GridPane hgap="30" vgap="15">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="200" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="200" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="200" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="200" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10" prefHeight="40" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10" prefHeight="40" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     
+                     <VBox spacing="5" style="-fx-background-color: #FFFFFF; -fx-background-radius: 8; -fx-padding: 15;" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <children>
+                           <Label text="Total de Citas" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #3B6F89;" />
+                           <Label fx:id="lblTotalCitas" text="0" style="-fx-font-size: 24; -fx-text-fill: #28A745; -fx-font-weight: bold;" />
+                        </children>
+                     </VBox>
+                     
+                     <VBox spacing="5" style="-fx-background-color: #FFFFFF; -fx-background-radius: 8; -fx-padding: 15;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <children>
+                           <Label text="Citas Completadas" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #3B6F89;" />
+                           <Label fx:id="lblCitasCompletadas" text="0" style="-fx-font-size: 24; -fx-text-fill: #28A745; -fx-font-weight: bold;" />
+                        </children>
+                     </VBox>
+                     
+                     <VBox spacing="5" style="-fx-background-color: #FFFFFF; -fx-background-radius: 8; -fx-padding: 15;" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                        <children>
+                           <Label text="Citas Canceladas" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #3B6F89;" />
+                           <Label fx:id="lblCitasCanceladas" text="0" style="-fx-font-size: 24; -fx-text-fill: #DC3545; -fx-font-weight: bold;" />
+                        </children>
+                     </VBox>
+                     
+                     <VBox spacing="5" style="-fx-background-color: #FFFFFF; -fx-background-radius: 8; -fx-padding: 15;" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                        <children>
+                           <Label text="Citas Pendientes" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #3B6F89;" />
+                           <Label fx:id="lblCitasPendientes" text="0" style="-fx-font-size: 24; -fx-text-fill: #FFC107; -fx-font-weight: bold;" />
+                        </children>
+                     </VBox>
+                     
+                     <VBox spacing="5" style="-fx-background-color: #FFFFFF; -fx-background-radius: 8; -fx-padding: 15;" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                        <children>
+                           <Label text="Total de Pacientes" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #3B6F89;" />
+                           <Label fx:id="lblTotalPacientes" text="0" style="-fx-font-size: 24; -fx-text-fill: #17A2B8; -fx-font-weight: bold;" />
+                        </children>
+                     </VBox>
+                     
+                     <VBox spacing="5" style="-fx-background-color: #FFFFFF; -fx-background-radius: 8; -fx-padding: 15;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <children>
+                           <Label text="Total de Médicos" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #3B6F89;" />
+                           <Label fx:id="lblTotalMedicos" text="0" style="-fx-font-size: 24; -fx-text-fill: #6F42C1; -fx-font-weight: bold;" />
+                        </children>
+                     </VBox>
+                     
+                     <VBox spacing="5" style="-fx-background-color: #FFFFFF; -fx-background-radius: 8; -fx-padding: 15;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <children>
+                           <Label text="Tasa de Asistencia" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #3B6F89;" />
+                           <Label fx:id="lblTasaAsistencia" text="0%" style="-fx-font-size: 24; -fx-text-fill: #20C997; -fx-font-weight: bold;" />
+                        </children>
+                     </VBox>
+                     
+                     <VBox spacing="5" style="-fx-background-color: #FFFFFF; -fx-background-radius: 8; -fx-padding: 15;" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                        <children>
+                           <Label text="Promedio Diario" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #3B6F89;" />
+                           <Label fx:id="lblPromedioDiario" text="0" style="-fx-font-size: 24; -fx-text-fill: #FD7E14; -fx-font-weight: bold;" />
+                        </children>
+                     </VBox>
+                  </GridPane>
+               </children>
+            </VBox>
+            
+            <!-- Tabla de reporte detallado -->
+            <VBox spacing="10" style="-fx-background-color: #F8F9FA; -fx-background-radius: 10; -fx-padding: 20;">
+               <children>
+                  <HBox spacing="15" alignment="CENTER_LEFT">
+                     <Label text="Reporte Detallado de Citas" style="-fx-font-weight: bold; -fx-font-size: 20; -fx-text-fill: #3B6F89;" />
+                     <Label fx:id="lblContadorReporte" text="" style="-fx-font-size: 16; -fx-text-fill: #6C757D;" />
+                  </HBox>
+                  
+                  <TableView fx:id="tablaReporte" prefHeight="300" VBox.vgrow="ALWAYS">
+                     <columns>
+                        <TableColumn fx:id="colId" text="ID" prefWidth="50" />
+                        <TableColumn fx:id="colFecha" text="Fecha" prefWidth="120" />
+                        <TableColumn fx:id="colHora" text="Hora" prefWidth="100" />
+                        <TableColumn fx:id="colPaciente" text="Paciente" prefWidth="200" />
+                        <TableColumn fx:id="colMedico" text="Médico" prefWidth="200" />
+                        <TableColumn fx:id="colEspecialidad" text="Especialidad" prefWidth="150" />
+                        <TableColumn fx:id="colMotivo" text="Motivo" prefWidth="200" />
+                        <TableColumn fx:id="colEstado" text="Estado" prefWidth="100" />
+                     </columns>
+                  </TableView>
+               </children>
+            </VBox>
+            
+            <!-- Información adicional -->
+            <VBox spacing="10" style="-fx-background-color: #E8F4FD; -fx-background-radius: 8; -fx-padding: 20;">
+               <children>
+                  <Label text="Información del Reporte:" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #2C5AA0;" />
+                  <VBox spacing="5">
+                     <Label text="• Seleccione un rango de fechas para generar el reporte" style="-fx-font-size: 14; -fx-text-fill: #2C5AA0;" />
+                     <Label text="• Las estadísticas se calculan automáticamente según el período seleccionado" style="-fx-font-size: 14; -fx-text-fill: #2C5AA0;" />
+                     <Label text="• La tasa de asistencia se calcula como: (completadas / total) * 100" style="-fx-font-size: 14; -fx-text-fill: #2C5AA0;" />
+                     <Label text="• El promedio diario se calcula dividiendo el total de citas entre los días del período" style="-fx-font-size: 14; -fx-text-fill: #2C5AA0;" />
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

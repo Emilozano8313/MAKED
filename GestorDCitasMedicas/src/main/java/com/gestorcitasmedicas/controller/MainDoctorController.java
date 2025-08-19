@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.cell.PropertyValueFactory;
+import com.gestorcitasmedicas.controller.ConfiguracionAvanzadaController;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -187,6 +188,30 @@ public class MainDoctorController {
         } catch (IOException e) {
             e.printStackTrace();
             mostrarAlerta("Error", "No se pudo cargar los expedientes médicos", Alert.AlertType.ERROR);
+        }
+    }
+    
+    @FXML
+    private void abrirConfiguracion(ActionEvent event) {
+        try {
+            System.out.println("Abriendo configuración avanzada...");
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/ConfiguracionAvanzada.fxml"));
+            Parent configuracionRoot = loader.load();
+            
+            // Obtener el controlador y establecer las referencias
+            ConfiguracionAvanzadaController controller = loader.getController();
+            Stage currentStage = (Stage) btnExpedientes.getScene().getWindow();
+            controller.setStageAndScene(currentStage, new Scene(configuracionRoot, 1200, 800));
+            
+            Scene nuevaEscena = new Scene(configuracionRoot, 1200, 800);
+            currentStage.setScene(nuevaEscena);
+            currentStage.setTitle("Configuración Avanzada");
+            currentStage.centerOnScreen();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+            mostrarAlerta("Error", "No se pudo cargar la configuración avanzada", Alert.AlertType.ERROR);
         }
     }
     

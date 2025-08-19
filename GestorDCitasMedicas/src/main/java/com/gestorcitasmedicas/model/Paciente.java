@@ -1,5 +1,7 @@
 package com.gestorcitasmedicas.model;
 
+import com.gestorcitasmedicas.utils.OracleDatabase;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,55 +55,138 @@ public class Paciente {
     public String getRol() { return rol; }
     public void setRol(String rol) { this.rol = rol; }
 
-    // Lista estática para almacenar pacientes en memoria
-    private static List<Paciente> pacientes = new ArrayList<>();
-    private static int nextId = 1;
-
-    // Método para guardar paciente en memoria
+    // Método para guardar paciente en Oracle
     public boolean guardar() {
-        try {
-            this.id = nextId++;
-            pacientes.add(this);
-            System.out.println("Paciente guardado en memoria: " + this.nombre);
-            return true;
-        } catch (Exception e) {
-            System.err.println("Error al guardar paciente: " + e.getMessage());
+        String sql = "INSERT INTO pacientes (nombre, curp, telefono, matricula, correo, contrasena) VALUES (?, ?, ?, ?, ?, ?)";
+        
+        try (Connection conn = OracleDatabase.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            
+            pstmt.setString(1, this.nombre);
+            pstmt.setString(2, this.curp);
+            pstmt.setString(3, this.telefono);
+            pstmt.setString(4, this.matricula);
+            pstmt.setString(5, this.correo);
+            pstmt.setString(6, this.contrasena);
+            
+            int affectedRows = pstmt.executeUpdate();
+            
+            if (affectedRows > 0) {
+                try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        this.id = rs.getInt(1);
+                    }
+                }
+                System.out.println("Paciente guardado en Oracle: " + this.nombre);
+                return true;
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Error al guardar paciente en Oracle: " + e.getMessage());
             e.printStackTrace();
-            return false;
         }
+        return false;
     }
 
     // Método para verificar si el correo ya existe
     public static boolean correoExiste(String correo) {
-        return pacientes.stream().anyMatch(p -> p.getCorreo().equals(correo));
+        String sql = "SELECT COUNT(*) FROM pacientes WHERE correo = ?";
+        try (Connection conn = OracleDatabase.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, correo);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error verificando correo: " + e.getMessage());
+        }
+        return false;
     }
 
     // Método para verificar si el CURP ya existe
     public static boolean curpExiste(String curp) {
-        return pacientes.stream().anyMatch(p -> p.getCurp().equals(curp));
+        String sql = "SELECT COUNT(*) FROM pacientes WHERE curp = ?";
+        try (Connection conn = OracleDatabase.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, curp);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error verificando CURP: " + e.getMessage());
+        }
+        return false;
     }
 
     // Método para verificar si la matrícula ya existe
     public static boolean matriculaExiste(String matricula) {
-        return pacientes.stream().anyMatch(p -> p.getMatricula().equals(matricula));
+        String sql = "SELECT COUNT(*) FROM pacientes WHERE matricula = ?";
+        try (Connection conn = OracleDatabase.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, matricula);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error verificando matrícula: " + e.getMessage());
+        }
+        return false;
     }
 
     // Método para autenticar paciente
     public static Paciente autenticar(String correo, String contrasena) {
-        return pacientes.stream()
-                .filter(p -> p.getCorreo().equals(correo) && p.getContrasena().equals(contrasena))
-                .findFirst()
-                .orElse(null);
+        String sql = "SELECT * FROM pacientes WHERE correo = ? AND contrasena = ?";
+        try (Connection conn = OracleDatabase.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, correo);
+            pstmt.setString(2, contrasena);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                Paciente paciente = new Paciente();
+                paciente.setId(rs.getInt("id"));
+                paciente.setNombre(rs.getString("nombre"));
+                paciente.setCurp(rs.getString("curp"));
+                paciente.setTelefono(rs.getString("telefono"));
+                paciente.setMatricula(rs.getString("matricula"));
+                paciente.setCorreo(rs.getString("correo"));
+                paciente.setContrasena(rs.getString("contrasena"));
+                paciente.setRol(rs.getString("rol"));
+                return paciente;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error autenticando paciente: " + e.getMessage());
+        }
+        return null;
     }
 
     // Método para obtener todos los pacientes
     public static List<Paciente> obtenerTodos() {
-        return new ArrayList<>(pacientes);
+        List<Paciente> pacientes = new ArrayList<>();
+        String sql = "SELECT * FROM pacientes ORDER BY nombre";
+        try (Connection conn = OracleDatabase.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+            
+            while (rs.next()) {
+                Paciente paciente = new Paciente();
+                paciente.setId(rs.getInt("id"));
+                paciente.setNombre(rs.getString("nombre"));
+                paciente.setCurp(rs.getString("curp"));
+                paciente.setTelefono(rs.getString("telefono"));
+                paciente.setMatricula(rs.getString("matricula"));
+                paciente.setCorreo(rs.getString("correo"));
+                paciente.setContrasena(rs.getString("contrasena"));
+                paciente.setRol(rs.getString("rol"));
+                pacientes.add(paciente);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error obteniendo pacientes: " + e.getMessage());
+        }
+        return pacientes;
     }
 
-    // Método para limpiar la lista (útil para testing)
-    public static void limpiarLista() {
-        pacientes.clear();
-        nextId = 1;
-    }
+
 }

@@ -26,6 +26,9 @@ public class VistaPacienteController {
     private Button btnHistorialCitas;
     
     @FXML
+    private Button btnAgendarCita;
+    
+    @FXML
     private Button btnEditarInformacion;
     
     @FXML
@@ -41,6 +44,7 @@ public class VistaPacienteController {
     @FXML private VBox menuLateral;
     @FXML private VBox menuItemMiPerfil;
     @FXML private VBox menuItemHistorialCitas;
+    @FXML private VBox menuItemAgendarCita;
     @FXML private VBox menuItemEditarInformacion;
     @FXML private VBox menuItemCancelarCita;
     @FXML private VBox menuItemReprogramarCita;
@@ -133,6 +137,11 @@ public class VistaPacienteController {
                 .filter(node -> node instanceof Label)
                 .forEach(node -> node.setVisible(mostrar));
         }
+        if (menuItemAgendarCita != null) {
+            menuItemAgendarCita.getChildren().stream()
+                .filter(node -> node instanceof Label)
+                .forEach(node -> node.setVisible(mostrar));
+        }
         if (menuItemEditarInformacion != null) {
             menuItemEditarInformacion.getChildren().stream()
                 .filter(node -> node instanceof Label)
@@ -157,7 +166,7 @@ public class VistaPacienteController {
     
     private void configurarEfectosHover() {
         // Agregar efectos hover a los botones del menú lateral
-        Button[] botonesMenu = {btnMiPerfil, btnHistorialCitas, btnEditarInformacion, 
+        Button[] botonesMenu = {btnMiPerfil, btnHistorialCitas, btnAgendarCita, btnEditarInformacion, 
                                btnCancelarCita, btnReprogramarCita, btnSalir};
         
         for (Button boton : botonesMenu) {
@@ -214,6 +223,28 @@ public class VistaPacienteController {
         } catch (IOException e) {
             e.printStackTrace();
             mostrarAlerta("Error", "No se pudo cargar el historial de citas", Alert.AlertType.ERROR);
+        }
+    }
+    
+    @FXML
+    private void abrirAgendarCita(ActionEvent event) {
+        try {
+            System.out.println("Abriendo agendar cita...");
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gestorcitasmedicas/AgendarCitaPaciente.fxml"));
+            Parent agendarRoot = loader.load();
+            
+            Scene nuevaEscena = new Scene(agendarRoot);
+            Stage currentStage = (Stage) btnAgendarCita.getScene().getWindow();
+            currentStage.setScene(nuevaEscena);
+            currentStage.setTitle("Agendar Cita - Paciente");
+            currentStage.setMaximized(true);
+            currentStage.show();
+            currentStage.centerOnScreen();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+            mostrarAlerta("Error", "No se pudo cargar la ventana de agendar cita", Alert.AlertType.ERROR);
         }
     }
     

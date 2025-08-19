@@ -14,7 +14,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
-import com.gestorcitasmedicas.util.DatabaseConnection;
 
 public class RecuperarContraController {
 
