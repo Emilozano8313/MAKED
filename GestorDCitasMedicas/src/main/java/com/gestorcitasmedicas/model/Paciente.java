@@ -191,5 +191,11 @@ public class Paciente {
         return pacientes;
     }
 
+    // Método para limpiar la lista (útil para testing)
+    public static void limpiarLista() {
+        // Este método no es necesario para Oracle ya que los datos se almacenan en la base de datos
+        // Se mantiene por compatibilidad con el código de prueba
+        System.out.println("Método limpiarLista() llamado en Paciente - no es necesario para Oracle");
+    }
 
 }
